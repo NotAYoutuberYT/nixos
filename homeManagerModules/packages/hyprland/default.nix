@@ -1,4 +1,10 @@
-{ pkgs, lib, inputs, config, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}:
 
 let
   cfg = config.homeManagerConfig.hyprland;
@@ -50,7 +56,7 @@ in
         monitor = cfg.monitors;
         exec-once = "${startupScript}/bin/start";
 
-        general = { 
+        general = {
           gaps_in = "4";
           gaps_out = "16";
 
@@ -110,7 +116,7 @@ in
           new_status = "master";
         };
 
-        misc = { 
+        misc = {
           force_default_wallpaper = "-1";
           disable_hyprland_logo = "true";
         };
@@ -178,7 +184,7 @@ in
           "$mainMod, mouse_up, workspace, e-1"
         ];
 
-        windowrulev2 = "suppressevent maximize, class:.*";  # You'll probably like this.
+        windowrulev2 = "suppressevent maximize, class:.*"; # You'll probably like this.
       };
     };
   };

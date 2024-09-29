@@ -1,8 +1,17 @@
-{ lib, config, inputs, outputs, customLib, pkgs, ... }:
+{
+  lib,
+  config,
+  inputs,
+  outputs,
+  customLib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.nixosConfig;
-in {
+in
+{
   options.nixosConfig = {
     userName = lib.mkOption {
       default = "bryce";
@@ -19,7 +28,7 @@ in {
     };
 
     userNixosSettings = lib.mkOption {
-      default = {};
+      default = { };
       description = ''
         NixOS user settings
       '';
@@ -38,20 +47,25 @@ in {
       };
 
       users = {
-        ${cfg.userName} = {...}: {
-          imports = [
-            (import cfg.userConfig)
-            outputs.homeManagerModules.default
-          ];
-        };
+        ${cfg.userName} =
+          { ... }:
+          {
+            imports = [
+              (import cfg.userConfig)
+              outputs.homeManagerModules.default
+            ];
+          };
       };
     };
 
     users.users.${cfg.userName} = {
       isNormalUser = true;
       description = cfg.userName;
-      extraGroups = [ "networkmanager" "storage" "wheel" ];
-    }
-    // cfg.userNixosSettings;
+      extraGroups = [
+        "networkmanager"
+        "storage"
+        "wheel"
+      ];
+    } // cfg.userNixosSettings;
   };
 }

@@ -8,7 +8,7 @@
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,10 +20,13 @@
     };
   };
 
-  outputs = { ... } @ inputs: let
-    customLib = import ./customLib/default.nix { inherit inputs; };
-  in
-    with customLib; {
+  outputs =
+    { nixpkgs, ... }@inputs:
+    let
+      customLib = import ./customLib/default.nix { inherit inputs; };
+    in
+    with customLib;
+    {
       nixosConfigurations = {
         desktop = mkSystem ./hosts/desktop/configuration.nix;
         portable = mkSystem ./hosts/portable/configuration.nix;
@@ -32,5 +35,8 @@
 
       homeManagerModules.default = ./homeManagerModules;
       nixosModules.default = ./nixosModules;
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixfmt-rfc-style;
     };
 }

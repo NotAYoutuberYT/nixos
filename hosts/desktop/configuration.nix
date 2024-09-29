@@ -1,10 +1,9 @@
 { ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   nixosConfig = {
     bundles.system.enable = true;

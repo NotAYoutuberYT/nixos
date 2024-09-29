@@ -1,4 +1,10 @@
-{ config, lib, options, pkgs, ... }:
+{
+  config,
+  lib,
+  options,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.nixosConfig.networking;
@@ -11,7 +17,7 @@ in
       description = "install nm-connection-manager/applet";
     };
   };
-  
+
   config = {
     networking.networkmanager.enable = true;
     networking.enableIPv6 = false;
