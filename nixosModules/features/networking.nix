@@ -20,7 +20,7 @@ in
 
   config = {
     networking.networkmanager.enable = true;
-    networking.enableIPv6 = false;
+    networking.enableIPv6 = lib.mkDefault false;
 
     environment.systemPackages = lib.mkIf cfg.gui [
       pkgs.networkmanagerapplet

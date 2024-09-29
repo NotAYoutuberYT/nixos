@@ -16,5 +16,7 @@
     userConfig = "${./home.nix}";
   };
 
+  boot.loader.grub.useOSProber = true;
+
   system.name = "desktop-nixos";
 }
