@@ -90,24 +90,24 @@
         "hyprlang": "hyprlang",
         "hyprutils": "hyprutils",
         "hyprwayland-scanner": "hyprwayland-scanner",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "systems": "systems",
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1727484580,
-        "narHash": "sha256-mnsHdcJdvc2ZDl5xRSztvXfNxvLQ2EGsDEAbxnKYl9A=",
-        "ref": "refs/heads/main",
-        "rev": "2cf6e7862a844ad96aa060d63f6774df7e2234a6",
-        "revCount": 5273,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/hyprwm/Hyprland"
+        "lastModified": 1727621787,
+        "narHash": "sha256-Nt+lxQJRfkO675/HkFcz80V47F2Vzx+scYNvJHdHxfc=",
+        "owner": "hyprwm",
+        "repo": "Hyprland",
+        "rev": "6649255d54f45a7e2fedd9b4be85fe5d11229c04",
+        "type": "github"
       },
       "original": {
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/hyprwm/Hyprland"
+        "owner": "hyprwm",
+        "repo": "Hyprland",
+        "type": "github"
       }
     },
     "hyprland-protocols": {
@@ -265,22 +265,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1727122398,
-        "narHash": "sha256-o8VBeCWHBxGd4kVMceIayf5GApqTavJbTa44Xcg5Rrk=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "30439d93eb8b19861ccbe3e581abf97bdc91b093",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
         "lastModified": 1727348695,
         "narHash": "sha256-J+PeFKSDV+pHL7ukkfpVzCOO7mBSrrpJ3svwBFABbhI=",
         "owner": "nixos",
@@ -295,48 +279,34 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1710272261,
-        "narHash": "sha256-g0bDwXFmTE7uGDOs9HcJsfLFhH7fOsASbAuOzDC+fhQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "0ad13a6833440b8e238947e47bea7f11071dc2b2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "rose-pine-hyprcursor": "rose-pine-hyprcursor"
       }
     },
     "rose-pine-hyprcursor": {
       "inputs": {
         "hyprlang": "hyprlang_2",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "utils": "utils"
       },
       "locked": {
         "lastModified": 1718180692,
         "narHash": "sha256-J5IYvKcdGRL/sBuST5WaoESEIl7KPv8aJK8aLY6C91E=",
-        "ref": "refs/heads/main",
+        "owner": "ndom91",
+        "repo": "rose-pine-hyprcursor",
         "rev": "40ce26cb29206722ff73839ead0d871d94751e90",
-        "revCount": 33,
-        "type": "git",
-        "url": "https://github.com/ndom91/rose-pine-hyprcursor"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/ndom91/rose-pine-hyprcursor"
+        "owner": "ndom91",
+        "repo": "rose-pine-hyprcursor",
+        "type": "github"
       }
     },
     "systems": {

@@ -4,8 +4,15 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    rose-pine-hyprcursor.url = "git+https://github.com/ndom91/rose-pine-hyprcursor";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    rose-pine-hyprcursor = {
+      url = "github:ndom91/rose-pine-hyprcursor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -21,12 +28,6 @@
         desktop = mkSystem ./hosts/desktop/configuration.nix;
         portable = mkSystem ./hosts/portable/configuration.nix;
         envy = mkSystem ./hosts/envy/configuration.nix;
-      };
-
-      homeConfigurations = {
-       "bryce@desktop" = mkHome "x86_64-linux" ./hosts/desktop/home.nix;
-       "bryce@portable" = mkHome "x86_64-linux" ./hosts/portable/home.nix;
-       "bryce@envy" = mkHome "x86_64-linux" ./hosts/envy/home.nix;
       };
 
       homeManagerModules.default = ./homeManagerModules;
