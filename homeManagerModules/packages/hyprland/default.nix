@@ -44,6 +44,10 @@ in
     };
   };
 
+  imports = [
+    ./hyprlock.nix
+  ];
+
   config = {
     wayland.windowManager.hyprland = {
       enable = true;
@@ -52,6 +56,7 @@ in
         "$terminal" = "alacritty";
         "$fileManager" = "thunar";
         "$menu" = "rofi -show drun -show-icons";
+        "$lock" = "hyprlock";
 
         monitor = cfg.monitors;
         exec-once = "${startupScript}/bin/start";
@@ -144,10 +149,8 @@ in
           "$mainMod SHIFT, Q, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, $fileManager"
-          "$mainMod, V, togglefloating,"
           "$mainMod, D, exec, $menu"
-          "$mainMod, P, pseudo,"
-          "$mainMod, J, togglesplit,"
+          "$mainMod, L, exec, $lock"
 
           "$mainMod, left, movefocus, l"
           "$mainMod, right, movefocus, r"

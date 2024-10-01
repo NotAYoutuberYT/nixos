@@ -32,4 +32,6 @@
     swww
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
   ];
+
+  programs.hyprlock.enable = true;
 }
