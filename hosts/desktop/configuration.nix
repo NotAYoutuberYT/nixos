@@ -12,11 +12,11 @@
     nvidia.enable = true;
 
     piper.enable = true;
-
-    userConfig = "${./home.nix}";
   };
 
   boot.loader.grub.useOSProber = true;
 
   system.name = "desktop-nixos";
+
+  nixosConfig.homeConfigModule = ./home.nix;
 }

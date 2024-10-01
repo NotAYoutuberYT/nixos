@@ -29,7 +29,6 @@
     {
       nixosConfigurations = {
         desktop = mkSystem ./hosts/desktop/configuration.nix;
-        portable = mkSystem ./hosts/portable/configuration.nix;
         envy = mkSystem ./hosts/envy/configuration.nix;
       };
 

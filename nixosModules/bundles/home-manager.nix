@@ -13,17 +13,24 @@ let
 in
 {
   options.nixosConfig = {
-    userName = lib.mkOption {
+    homeConfigModule = lib.mkOption {
+      type = lib.types.path;
+      description = ''
+        home module location  
+      '';
+    };
+
+    username = lib.mkOption {
       default = "bryce";
       description = ''
         username
       '';
     };
 
-    userConfig = lib.mkOption {
-      type = lib.types.str;
+    homeDirectory = lib.mkOption {
+      default = /home/${cfg.username};
       description = ''
-        home-manager config path
+        username
       '';
     };
 
@@ -46,21 +53,15 @@ in
         outputs = inputs.self.outputs;
       };
 
-      users = {
-        ${cfg.userName} =
-          { ... }:
-          {
-            imports = [
-              (import cfg.userConfig)
-              outputs.homeManagerModules.default
-            ];
-          };
-      };
+      users.${cfg.username}.imports = [
+        cfg.homeConfigModule
+        outputs.homeManagerModules.default
+      ];
     };
 
-    users.users.${cfg.userName} = {
+    users.users.${cfg.username} = {
       isNormalUser = true;
-      description = cfg.userName;
+      description = cfg.username;
       extraGroups = [
         "networkmanager"
         "storage"

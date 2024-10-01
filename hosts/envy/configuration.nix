@@ -13,9 +13,9 @@
       enable = true;
       gui = true;
     };
-
-    userConfig = "${./home.nix}";
   };
 
-  system.name = "portable-nixos";
+  system.name = "envy-nixos";
+
+  nixosConfig.homeConfigModule = ./home.nix;
 }
