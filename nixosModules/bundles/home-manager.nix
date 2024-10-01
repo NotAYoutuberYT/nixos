@@ -22,6 +22,7 @@ in
 
     username = lib.mkOption {
       default = "bryce";
+      type = lib.types.str;
       description = ''
         username
       '';
@@ -29,8 +30,17 @@ in
 
     homeDirectory = lib.mkOption {
       default = /home/${cfg.username};
+      type = lib.types.path;
       description = ''
         username
+      '';
+    };
+
+    shell = lib.mkOption {
+      default = pkgs.bash;
+      type = lib.types.package;
+      description = ''
+        user's default shell
       '';
     };
 
@@ -61,6 +71,7 @@ in
 
     users.users.${cfg.username} = {
       isNormalUser = true;
+      shell = cfg.shell;
       description = cfg.username;
       extraGroups = [
         "networkmanager"

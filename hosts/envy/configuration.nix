@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -13,9 +13,14 @@
       enable = true;
       gui = true;
     };
+
+    shell = pkgs.zsh;
+
+    homeConfigModule = ./home.nix;
   };
 
-  system.name = "envy-nixos";
+  programs.zsh.enable = true;
 
-  nixosConfig.homeConfigModule = ./home.nix;
+  system.name = "envy";
+  networking.hostName = "envy";
 }

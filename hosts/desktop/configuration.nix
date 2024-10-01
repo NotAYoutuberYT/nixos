@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -10,13 +10,16 @@
     bundles.desktop.enable = true;
     bundles.home-manager.enable = true;
     nvidia.enable = true;
-
     piper.enable = true;
+
+    shell = pkgs.zsh;
+
+    homeConfigModule = ./home.nix;
   };
 
+  programs.zsh.enable = true;
   boot.loader.grub.useOSProber = true;
 
-  system.name = "desktop-nixos";
-
-  nixosConfig.homeConfigModule = ./home.nix;
+  system.name = "desktop";
+  networking.hostName = "desktop";
 }

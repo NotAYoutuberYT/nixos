@@ -35,5 +35,7 @@ in
   config.homeManagerConfig = {
     hyprland.enable = ocfg.hyprland.enable;
     waybar.enable = ocfg.hyprland.enable;
+
+    zsh.enable = (ocfg.shell == pkgs.zsh);
   };
 }
