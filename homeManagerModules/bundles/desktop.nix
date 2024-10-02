@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  homeManagerConfig.vscodium.enable = true;
+}

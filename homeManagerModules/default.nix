@@ -20,9 +20,17 @@ let
 
     configExtension = config: (lib.mkIf cfg.${name}.enable config);
   }) (customLib.filesIn ./packages);
+
+  bundles = customLib.extendModules (name: {
+    extraOptions = {
+      homeManagerConfig.bundles.${name}.enable = lib.mkEnableOption "enable ${name} configuration";
+    };
+
+    configExtension = config: (lib.mkIf cfg.bundles.${name}.enable config);
+  }) (customLib.filesIn ./bundles);
 in
 {
-  imports = packages;
+  imports = [ ] ++ packages ++ bundles;
 
   config = {
     home.username = ocfg.username;

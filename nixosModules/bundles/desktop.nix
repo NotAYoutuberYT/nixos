@@ -10,7 +10,6 @@
   nixosConfig.alacritty.enable = lib.mkDefault true;
   nixosConfig.thunar.enable = lib.mkDefault true;
   nixosConfig.firefox.enable = lib.mkDefault true;
-  nixosConfig.vscodium.enable = lib.mkDefault true;
   nixosConfig.keepassxc.enable = lib.mkDefault true;
   nixosConfig.pavucontrol.enable = lib.mkDefault true;
   nixosConfig.okular.enable = lib.mkDefault true;
