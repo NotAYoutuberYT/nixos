@@ -28,7 +28,13 @@ in
     monitors = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ", preferred, auto, 1" ];
-      description = "monitors for hyperland";
+      description = "monitors for hyprland";
+    };
+
+    workspaces = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "hyprland workspaces";
     };
 
     sensitivity = lib.mkOption {
@@ -59,6 +65,7 @@ in
         "$lock" = "hyprlock";
 
         monitor = cfg.monitors;
+        workspace = cfg.workspaces;
         exec-once = "${startupScript}/bin/start";
 
         general = {
