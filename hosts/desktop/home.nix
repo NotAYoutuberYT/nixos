@@ -13,6 +13,7 @@
     ];
 
     bundles.desktop.enable = true;
+    bundles.system.enable = true;
   };
 
   home.sessionVariables = {

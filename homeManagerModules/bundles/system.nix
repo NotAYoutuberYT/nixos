@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  homeManagerConfig.git.enable = true;
+}
