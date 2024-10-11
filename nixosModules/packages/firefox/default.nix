@@ -42,7 +42,7 @@ in
         Locked = true;
       };
 
-      DownloadDirectory = "\${home}/downloads";
+      DownloadDirectory = "\${home}/Downloads";
 
       OverrideFirstRunPage = "";
       OverridePostUpdatePage = "";

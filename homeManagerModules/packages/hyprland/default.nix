@@ -157,7 +157,7 @@ in
           "$mainMod, M, exit,"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, D, exec, $menu"
-          "$mainMod, L, exec, $lock"
+          "$mainMod CONTROL, L, exec, $lock"
 
           "$mainMod, left, movefocus, l"
           "$mainMod, right, movefocus, r"
@@ -167,6 +167,15 @@ in
           "$mainMod, j, movefocus, d"
           "$mainMod, k, movefocus, u"
           "$mainMod, l, movefocus, r"
+
+          "$mainMod SHIFT, left, movewindow, l"
+          "$mainMod SHIFT, right, movewindow, r"
+          "$mainMod SHIFT, up, movewindow, u"
+          "$mainMod SHIFT, down, movewindow, d"
+          "$mainMod SHIFT, h, movewindow, l"
+          "$mainMod SHIFT, j, movewindow, d"
+          "$mainMod SHIFT, k, movewindow, u"
+          "$mainMod SHIFT, l, movewindow, r"
 
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"

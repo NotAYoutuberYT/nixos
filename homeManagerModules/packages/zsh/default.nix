@@ -4,15 +4,32 @@
   programs.zsh = {
     enable = true;
 
-    history = {
-      size = 5000;
-      path = "${config.xdg.dataHome}/.zsh/history";
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+
+    shellAliases = {
+      ls = "ls --color";
+      c = "clear";
     };
 
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "gitfast" ];
+    history = {
+      size = 1000;
+      path = "${config.xdg.dataHome}/.zsh/history";
+
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      share = true;
+
+      ignorePatterns = [
+        "clear"
+        "c"
+      ];
     };
+
+    initExtra = lib.concatStringsSep "\n" [
+      "zstyle 'completion:*' matcher-list 'm:{a-z}={A-Za-z}'"
+    ];
   };
 
   programs.starship = {
@@ -27,10 +44,15 @@
         "$directory"
         "$git_branch"
         "$git_state"
+        "$rust"
+        "$nix_shell"
         "$character"
       ];
 
-      git_branch.symbol = "";
+      nix_shell = {
+        format = "via [$symbol]($style) ";
+        symbol = "❄️";
+      };
 
       character = {
         success_symbol = "➜";
