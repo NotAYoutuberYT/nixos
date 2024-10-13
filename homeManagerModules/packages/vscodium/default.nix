@@ -11,7 +11,20 @@
       rust-lang.rust-analyzer
       tamasfe.even-better-toml
       james-yu.latex-workshop
-      ecmel.vscode-html-css
     ];
+
+    userSettings = {
+      "workbench.iconTheme" = "vscode-icons";
+      "editor.fontFamily" = "JetBrainsMono NF";
+      "files.autoSave" = "afterDelay";
+      "[nix]"."editor.tabSize" = 2;
+
+      "terminal.integrated.enablePersistentSessions" = false;
+      "terminal.integrated.enableImages" = true;
+      "terminal.integrated.customGlyphs" = true;
+      "terminal.integrated.gpuAcceleration" = "on";
+
+      "vsicons.dontShowNewVersionMessage" = true;
+    };
   };
 }

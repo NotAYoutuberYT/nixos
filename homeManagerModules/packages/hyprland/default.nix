@@ -68,6 +68,8 @@ in
         workspace = cfg.workspaces;
         exec-once = "${startupScript}/bin/start";
 
+        cursor.no_hardware_cursors = "true";
+
         general = {
           gaps_in = "4";
           gaps_out = "16";
@@ -131,6 +133,7 @@ in
         misc = {
           force_default_wallpaper = "-1";
           disable_hyprland_logo = "true";
+          vfr = "true";
         };
 
         input = {
