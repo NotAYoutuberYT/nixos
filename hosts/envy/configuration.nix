@@ -9,6 +9,7 @@
     bundles.system.enable = true;
     bundles.desktop.enable = true;
     bundles.home-manager.enable = true;
+    steam.enable = true;
     networking = {
       enable = true;
       gui = true;

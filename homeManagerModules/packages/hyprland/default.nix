@@ -48,6 +48,11 @@ in
       default = "flat";
       description = "mouse acceleration";
     };
+
+    no-hardware-cursor = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   imports = [
@@ -68,7 +73,7 @@ in
         workspace = cfg.workspaces;
         exec-once = "${startupScript}/bin/start";
 
-        cursor.no_hardware_cursors = "true";
+        cursor.no_hardware_cursors = cfg.no-hardware-cursor;
 
         general = {
           gaps_in = "4";

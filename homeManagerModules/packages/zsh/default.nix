@@ -39,9 +39,7 @@ in
         ];
       };
 
-      initExtra = lib.concatStringsSep "\n" [
-        "zstyle 'completion:*' matcher-list 'm:{a-z}={A-Za-z}'"
-      ];
+      initExtra = lib.concatStringsSep "\n" [ ];
     };
 
     programs.starship = {
