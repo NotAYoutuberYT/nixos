@@ -30,7 +30,7 @@ let
   }) (customLib.filesIn ./bundles);
 in
 {
-  imports = [ ] ++ packages ++ bundles;
+  imports = [ inputs.nix-colors.homeManagerModules.default ] ++ packages ++ bundles;
 
   config = {
     home.username = ocfg.username;
@@ -38,6 +38,10 @@ in
 
     programs.home-manager.enable = true;
     home.stateVersion = "24.05";
+
+    # essentially everything relies on nix-colors, so
+    # it really makes sense to just set a scheme here
+    colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
   };
 
   config.homeManagerConfig = {

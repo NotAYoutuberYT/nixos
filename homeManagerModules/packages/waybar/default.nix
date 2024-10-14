@@ -45,35 +45,46 @@ let
     };
   };
 
-  css = ''
+  css = with config.colorScheme.palette; ''
         * {
           font-size: 20px;
     	    font-family: monospace;
         }
 
         window#waybar {
-    	    background: #292b2e;
-    	    color: #fdf6e3;
+    	    background: #${base01};
+    	    color: #${base04};
+          padding: 1px 0;
         }
 
-        #clock,
+        #battery {
+          padding: 0 6px;
+        }
+
+        #clock {
+          padding: 0 6px;
+          border-radius: 8px;
+          background: #${base00};
+        }
+
         #workspaces {
-    	    background: #1a1a1a;
+          padding: 0 6px;
+          background-color: #${base01};
         }
 
-        #clock,
-        #battery,
         #workspaces button {
-    	    padding: 0 2px;
-    	    color: #e0e0e0;
+          padding: 0 2px;
+          color: #${base04};
+          border-radius: 8px;
         }
 
         #workspaces button.visible {
-    	    background-color: #2783ab;
+    	    background-color: #${base02};
         }
 
         #workspaces button.active {
-    	    background-color: #27ab51;
+    	    background-color: #${base04};
+          color: #${base00};
         }
   '';
 in

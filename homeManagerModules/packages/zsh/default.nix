@@ -13,12 +13,16 @@ in
   };
 
   config = {
-    programs.zsh = {
+    programs.zsh = with config.colorScheme.palette; {
       enable = true;
 
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      autosuggestion.enable = true;
+
+      autosuggestion = {
+        enable = true;
+        highlight = "fg=#${base04},bold";
+      };
 
       shellAliases = {
         ls = "ls --color";
@@ -42,7 +46,7 @@ in
       initExtra = lib.concatStringsSep "\n" [ ];
     };
 
-    programs.starship = {
+    programs.starship = with config.colorScheme.palette; {
       enable = true;
       enableZshIntegration = true;
 
@@ -59,14 +63,20 @@ in
           "$character"
         ];
 
+        directory.style = "bold #${base0D}";
+        git_branch.style = "bold #${base0E}";
+        git_state.style = "bold #${base0A}";
+        rust.style = "bold #${base08}";
+
         nix_shell = {
+          style = "bold #${base0C}";
           format = "via [$symbol]($style) ";
           symbol = "❄️";
         };
 
         character = {
-          success_symbol = "➜";
-          error_symbol = "➜";
+          success_symbol = "[➜](bold #${base0B})";
+          error_symbol = "[➜](bold #${base08})";
         };
       };
     };

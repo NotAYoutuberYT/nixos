@@ -17,6 +17,9 @@ let
 
     ${pkgs.swww}/bin/swww img --transition-type wipe ${./wallpaper.png}
   '';
+
+  rgb = color: "rgb(${color})";
+  rgba = color: alpha: "rgba(${color}${alpha})";
 in
 {
   options.homeManagerConfig.hyprland = {
@@ -55,7 +58,7 @@ in
   ];
 
   config = {
-    wayland.windowManager.hyprland = {
+    wayland.windowManager.hyprland = with config.colorScheme.palette; {
       enable = true;
 
       settings = {
@@ -76,14 +79,28 @@ in
 
           border_size = "2";
 
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          "col.active_border" = lib.concatStringsSep " " [
+            (rgb base0D)
+            (rgb base0E)
+            "60deg"
+          ];
+          "col.inactive_border" = rgb base03;
 
           resize_on_border = "false";
-
           allow_tearing = "false";
-
           layout = "dwindle";
+        };
+
+        group = {
+          "col.border_inactive" = rgb base03;
+          "col.border_active" = rgb base0D;
+          "col.border_locked_active" = rgb base0C;
+
+          groupbar = {
+            text_color = rgb base05;
+            "col.active" = rgb base0D;
+            "col.inactive" = rgb base03;
+          };
         };
 
         decoration = {
@@ -95,7 +112,7 @@ in
           drop_shadow = "true";
           shadow_range = "4";
           shadow_render_power = "3";
-          "col.shadow" = "rgba(1a1a1aee)";
+          "col.shadow" = rgba base00 "99";
 
           blur = {
             enabled = "true";
@@ -131,6 +148,7 @@ in
         };
 
         misc = {
+          background_color = rgb base00;
           force_default_wallpaper = "-1";
           disable_hyprland_logo = "true";
           vfr = "true";
