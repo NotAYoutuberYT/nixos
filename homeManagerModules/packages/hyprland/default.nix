@@ -10,17 +10,12 @@ let
   cfg = config.homeManagerConfig.hyprland;
 
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
+    ${pkgs.waybar}/bin/waybar &
     ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
+    sleep 1
 
-    sleep 0.5
-
-    wallpapers=("${./wallpapers}"/*)
-    wallpaperIndex=$(( RANDOM % ''${''\#wallpapers[@]} ))
-    selectedWallpaper="''${wallpapers[$wallpaperIndex]}"
-
-    ${pkgs.swww}/bin/swww img --transition-type none "$selectedWallpaper"
+    ${pkgs.swww}/bin/swww img --transition-type wipe ${./wallpaper.png}
   '';
 in
 {
@@ -64,8 +59,8 @@ in
       enable = true;
 
       settings = {
-        "$terminal" = "alacritty";
-        "$fileManager" = "thunar";
+        "$terminal" = "${pkgs.alacritty}/bin/alacritty";
+        "$fileManager" = "${pkgs.alacritty}/bin/alacritty --command ${pkgs.lf}/bin/lf";
         "$menu" = "rofi -show drun -show-icons";
         "$lock" = "hyprlock";
 

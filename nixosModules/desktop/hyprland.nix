@@ -25,11 +25,9 @@
 
   security.polkit.enable = true;
   environment.systemPackages = with pkgs; [
-    polkit_gnome
-    waybar
     mako
-    rofi-wayland
     swww
+    rofi-wayland
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
   ];
 
