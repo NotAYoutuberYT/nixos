@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 
 {
   programs.vscode = {
@@ -11,6 +16,7 @@
       rust-lang.rust-analyzer
       tamasfe.even-better-toml
       james-yu.latex-workshop
+      tintedtheming.base16-tinted-themes
     ];
 
     userSettings = {
@@ -25,6 +31,8 @@
       "terminal.integrated.gpuAcceleration" = "on";
 
       "vsicons.dontShowNewVersionMessage" = true;
+
+      "workbench.colorTheme" = "base16-${config.homeManagerConfig.colorScheme}";
     };
   };
 }

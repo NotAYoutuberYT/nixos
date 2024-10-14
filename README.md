@@ -3,7 +3,6 @@
 - properly rice hyprland & apps using [nix-colors](https://github.com/Misterio77/nix-colors)
     - [stylix](https://github.com/danth/stylix/tree/master/modules) has many pre-written rices for many applications
     - hyprland has had *some* work done, but is still awaiting proper configuration
-    - make the color a configurable option
     - maybe get a better wallpaper in the process
 - add a widget system
     - astal should be coming out relatively soon...

@@ -32,6 +32,21 @@ in
 {
   imports = [ inputs.nix-colors.homeManagerModules.default ] ++ packages ++ bundles;
 
+  options.homeManagerConfig = {
+    colorScheme = lib.mkOption {
+      type = lib.types.str;
+      default = "default-dark";
+      # "default-dark"
+      # "gruvbox-material-dark-hard"
+      # "catppuccin-macchiato"
+
+      description = ''
+        base16 color scheme to be used in program configs.
+        options can be found at https://tinted-theming.github.io/base16-gallery/
+      '';
+    };
+  };
+
   config = {
     home.username = ocfg.username;
     home.homeDirectory = lib.mkForce ocfg.homeDirectory;
@@ -41,7 +56,7 @@ in
 
     # essentially everything relies on nix-colors, so
     # it really makes sense to just set a scheme here
-    colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+    colorScheme = inputs.nix-colors.colorSchemes.${cfg.colorScheme};
   };
 
   config.homeManagerConfig = {
