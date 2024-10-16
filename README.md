@@ -1,8 +1,10 @@
 ## TODO
 
 - properly rice hyprland & apps using [nix-colors](https://github.com/Misterio77/nix-colors)
-    - [stylix](https://github.com/danth/stylix/tree/master/modules) has many pre-written rices for many applications
-    - hyprland has had *some* work done, but is still awaiting proper configuration
+    - some pre-written rices can be found using [stylix](https://github.com/danth/stylix/tree/master/modules)
+    - [hyprland](https://wiki.hyprland.org/0.41.2/Configuring/Variables/)
+    - [lf](https://github.com/gokcehan/lf/blob/master/etc/colors.example)
+    - [rofi](https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown)
     - maybe get a better wallpaper in the process
 - add a widget system
     - astal should be coming out relatively soon...
@@ -11,6 +13,7 @@
     - make swapping in/out fonts easier
     - only configure programs for use in hyprland if those programs are enabled
 - fix steam on desktop
+- get (and configure?) vesktop
 - declaratively manage firefox toolbar and bookmarks
 
 ## Initial Setup
