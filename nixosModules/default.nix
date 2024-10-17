@@ -27,6 +27,14 @@ let
     configExtension = config: (lib.mkIf cfg.${name}.enable config);
   }) (customLib.filesIn ./packages);
 
+  development = customLib.extendModules (name: {
+    extraOptions = {
+      nixosConfig.${name}.enable = lib.mkEnableOption "enable ${name} configuration";
+    };
+
+    configExtension = config: (lib.mkIf cfg.${name}.enable config);
+  }) (customLib.filesIn ./development);
+
   desktop = customLib.extendModules (name: {
     extraOptions = {
       nixosConfig.${name}.enable = lib.mkEnableOption "enable ${name} configuration";
@@ -46,7 +54,7 @@ in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-  ] ++ features ++ packages ++ desktop ++ bundles;
+  ] ++ features ++ packages ++ development ++ desktop ++ bundles;
 
   config = {
     nix.settings.experimental-features = [

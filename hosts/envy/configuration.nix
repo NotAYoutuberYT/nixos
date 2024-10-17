@@ -8,6 +8,7 @@
   nixosConfig = {
     bundles.system.enable = true;
     bundles.desktop.enable = true;
+    bundles.development.enable = true;
     bundles.home-manager.enable = true;
     steam.enable = true;
     networking = {
