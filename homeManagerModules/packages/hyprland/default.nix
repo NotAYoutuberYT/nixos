@@ -10,9 +10,13 @@ let
   cfg = config.homeManagerConfig.hyprland;
 
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.swww}/bin/swww init &
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
+    ${pkgs.hyprlock}/bin/hyprlock --immediate
+  '';
+
+  wallpaperInit = pkgs.pkgs.writeShellScriptBin "wallpaper" ''
+    ${pkgs.swww}/bin/swww init
     sleep 1
 
     ${pkgs.swww}/bin/swww img --transition-type wipe ${./wallpaper.png}
@@ -58,18 +62,21 @@ in
   ];
 
   config = {
-    wayland.windowManager.hyprland = with config.colorScheme.palette; {
+    wayland.windowManager.hyprland = {
       enable = true;
 
-      settings = {
+      settings = with config.colorScheme.palette; {
         "$terminal" = "${pkgs.alacritty}/bin/alacritty";
         "$fileManager" = "${pkgs.alacritty}/bin/alacritty --command ${pkgs.lf}/bin/lf";
         "$menu" = "rofi -show drun -show-icons";
-        "$lock" = "hyprlock";
+        "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
 
         monitor = cfg.monitors;
         workspace = cfg.workspaces;
-        exec-once = "${startupScript}/bin/start";
+        exec-once = [
+          "${startupScript}/bin/start"
+          "${wallpaperInit}/bin/wallpaper"
+        ];
 
         cursor.no_hardware_cursors = cfg.no-hardware-cursor;
 

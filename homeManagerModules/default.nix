@@ -36,6 +36,7 @@ in
     colorScheme = lib.mkOption {
       type = lib.types.str;
       default = "default-dark";
+      # "tokyo-night-dark"
       # "default-dark"
       # "gruvbox-material-dark-hard"
       # "catppuccin-macchiato"

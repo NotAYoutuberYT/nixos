@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  nixosConfig.sddm.enable = lib.mkDefault true;
+  nixosConfig.autologin.enable = lib.mkDefault true;
   nixosConfig.sound.enable = lib.mkDefault true;
   nixosConfig.tex.enable = lib.mkDefault true;
   nixosConfig.auto-mount.enable = lib.mkDefault true;
