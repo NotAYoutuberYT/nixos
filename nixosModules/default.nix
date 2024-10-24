@@ -63,6 +63,7 @@ in
     ];
     programs.nix-ld.enable = true;
     nixpkgs.config.allowUnfree = true;
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
     system.stateVersion = "24.05";
   };
