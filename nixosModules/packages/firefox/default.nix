@@ -1,4 +1,4 @@
-{ pkgs, customLib, ... }:
+{ ... }:
 
 let
   lock-false = {

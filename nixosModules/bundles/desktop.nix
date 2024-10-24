@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 
 {
   nixosConfig.autologin.enable = lib.mkDefault true;

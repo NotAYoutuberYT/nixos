@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{  lib, ... }:
 
 {
   nixosConfig.bootloader.enable = lib.mkDefault true;
