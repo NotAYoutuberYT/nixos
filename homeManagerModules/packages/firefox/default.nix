@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, osConfig, ... }:
 
 let
   lock-false = {
@@ -10,6 +10,8 @@ let
     Value = true;
     Status = "locked";
   };
+
+  ocfg = osConfig.nixosConfig;
 in
 {
   programs.firefox = {
@@ -17,6 +19,130 @@ in
     languagePacks = [
       "en-US"
     ];
+
+    profiles.${ocfg.username} = {
+      id = 0;
+      isDefault = true;
+
+      search.default = "DuckDuckGo";
+      search.force = true;
+      search.engines = {
+        "Nix Packages" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@np" ];
+        };
+
+        "Nix Options" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/options";
+              params = [
+                {
+                  name = "type";
+                  value = "options";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@no" ];
+        };
+
+        "Home Manager Options" = {
+          urls = [
+            {
+              template = "https://home-manager-options.extranix.com/";
+              params = [
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@ho" ];
+        };
+
+        "Bing".metaData.hidden = true;
+        "DuckDuckGo".metaData.alias = "@d";
+        "Google".metaData.alias = "@g";
+      };
+
+      bookmarks = [
+        {
+          name = "University of Utah";
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "Canvas";
+              url = "https://utah.instructure.com/";
+            }
+            {
+              name = "Gradescope";
+              url = "https://gradescope.com/";
+            }
+          ];
+        }
+        {
+          name = "AMES";
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "Canvas";
+              url = "https://ames.instructure.com/";
+            }
+            {
+              name = "Aspire";
+              url = "https://ames.usoe-dcs.org/Login/";
+            }
+          ];
+        }
+        {
+          name = "Google";
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "Gmail";
+              url = "https://gmail.com/";
+            }
+            {
+              name = "Drive";
+              url = "https://drive.google.com/";
+            }
+          ];
+        }
+      ];
+
+      userChrome = ''
+        #personal-toolbar-empty {
+          visibility: hidden !important;
+          display: none !important;
+        }
+      '';
+    };
 
     # ---- POLICIES ----
     # Check https://mozilla.github.io/policy-templates/ for options.
@@ -65,10 +191,6 @@ in
         Locked = true;
       };
 
-      SearchEngines = {
-        Default = "DuckDuckGo";
-      };
-
       # ---- EXTENSIONS ----
       # Check about:support for extension/add-on ID strings.
       # Valid strings for installation_mode are "allowed", "blocked",
@@ -83,7 +205,7 @@ in
 
         "keepassxc-browser@keepassxc.org" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
-          installation_mode = "normal_installed";
+          installation_mode = "force_installed";
         };
       };
 

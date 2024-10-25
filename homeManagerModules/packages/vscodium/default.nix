@@ -60,7 +60,7 @@
 
           "home_manager" = {
             # see comment under "nixos"
-            "expr" = "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").homeManagerModules.default.options";
+            "expr" = "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").homeConfigurations.\"bryce@desktop\".options";
           };
         };
       };

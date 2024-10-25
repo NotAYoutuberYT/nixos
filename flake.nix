@@ -39,6 +39,10 @@
         envy = mkSystem ./hosts/envy/configuration.nix;
       };
 
+      homeConfigurations = {
+        "bryce@desktop" = mkHome "x86_64-linux" ./hosts/desktop/home.nix;
+      };
+
       homeManagerModules.default = ./homeManagerModules;
       nixosModules.default = ./nixosModules;
 
