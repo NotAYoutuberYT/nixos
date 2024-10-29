@@ -52,6 +52,7 @@ in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.nur.nixosModules.nur
   ] ++ features ++ packages ++ development ++ desktop ++ bundles;
 
   config = {

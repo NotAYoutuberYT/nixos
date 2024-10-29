@@ -1,4 +1,9 @@
-{ pkgs, osConfig, ... }:
+{
+  pkgs,
+  osConfig,
+  config,
+  ...
+}:
 
 let
   lock-false = {
@@ -91,6 +96,11 @@ in
         "Google".metaData.alias = "@g";
       };
 
+      extensions = with config.nur.repos.rycee.firefox-addons; [
+        ublock-origin
+        keepassxc-browser
+      ];
+
       bookmarks = [
         {
           name = "University of Utah";
@@ -136,12 +146,9 @@ in
         }
       ];
 
-      userChrome = ''
-        #personal-toolbar-empty {
-          visibility: hidden !important;
-          display: none !important;
-        }
-      '';
+      settings = {
+        "extensions.autoDisableScopes" = 0;
+      };
     };
 
     # ---- POLICIES ----
@@ -189,24 +196,6 @@ in
         SiteSettings = false;
         OfflineApps = true;
         Locked = true;
-      };
-
-      # ---- EXTENSIONS ----
-      # Check about:support for extension/add-on ID strings.
-      # Valid strings for installation_mode are "allowed", "blocked",
-      # "force_installed" and "normal_installed".
-      ExtensionSettings = {
-        "*".installation_mode = "blocked";
-
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-        };
-
-        "keepassxc-browser@keepassxc.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
-          installation_mode = "force_installed";
-        };
       };
 
       # ---- PREFERENCES ----

@@ -413,6 +413,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1730174925,
+        "narHash": "sha256-ORBZBPrR1ebSHlbsrhZsNqnGmeEbv4m+VYTlrMcPNmU=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "fdc130ab85beee841dd929d41e68509fc806c75e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -444,6 +459,7 @@
         "nix-colors": "nix-colors",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs",
+        "nur": "nur",
         "rose-pine-hyprcursor": "rose-pine-hyprcursor"
       }
     },

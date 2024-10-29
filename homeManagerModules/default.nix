@@ -29,7 +29,10 @@ let
   }) (customLib.filesIn ./bundles);
 in
 {
-  imports = [ inputs.nix-colors.homeManagerModules.default ] ++ packages ++ bundles;
+  imports = [
+    inputs.nix-colors.homeManagerModules.default
+    inputs.nur.nixosModules.nur
+  ] ++ packages ++ bundles;
 
   options.homeManagerConfig = {
     colorScheme = lib.mkOption {
