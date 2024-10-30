@@ -20,6 +20,14 @@ let
     configExtension = config: (lib.mkIf cfg.${name}.enable config);
   }) (customLib.filesIn ./packages);
 
+  features = customLib.extendModules (name: {
+    extraOptions = {
+      homeManagerConfig.${name}.enable = lib.mkEnableOption "enable ${name} configuration";
+    };
+
+    configExtension = config: (lib.mkIf cfg.${name}.enable config);
+  }) (customLib.filesIn ./features);
+
   bundles = customLib.extendModules (name: {
     extraOptions = {
       homeManagerConfig.bundles.${name}.enable = lib.mkEnableOption "enable ${name} configuration";
@@ -32,7 +40,7 @@ in
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.nur.nixosModules.nur
-  ] ++ packages ++ bundles;
+  ] ++ packages ++ features ++ bundles;
 
   options.homeManagerConfig = {
     colorScheme = lib.mkOption {
