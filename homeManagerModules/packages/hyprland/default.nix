@@ -230,7 +230,7 @@ in
           "$mainMod, mouse_up, workspace, e-1"
         ];
 
-        windowrulev2 = "suppressevent maximize, class:.*"; # You'll probably like this.
+        windowrulev2 = "suppressevent maximize, class:.*";
       };
     };
   };
