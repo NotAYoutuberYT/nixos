@@ -57,11 +57,6 @@
             # will always be active, available, and as up to date as I need
             "expr" = "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").nixosConfigurations.desktop.options";
           };
-
-          "home_manager" = {
-            # see comment under "nixos"
-            "expr" = "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").homeConfigurations.\"bryce@desktop\".options";
-          };
         };
       };
     };
