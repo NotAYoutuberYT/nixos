@@ -11,6 +11,7 @@
     - find a way to pass nixos parameters (most importantly monitor names) into a widget configuration
 - improve modularity of various things
     - make swapping in/out fonts easier
+    - make swapping in/out cursors easier
     - only configure programs for use in hyprland if those programs are enabled
 - fix steam on desktop
 - get (and configure?) vesktop
