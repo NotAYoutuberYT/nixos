@@ -1,6 +1,6 @@
-{ ... }:
+{ lib, ... }:
 
 {
-  homeManagerConfig.git.enable = true;
-  homeManagerConfig.xdg.enable = true;
+  homeManagerConfig.git.enable = lib.mkDefault true;
+  homeManagerConfig.xdg.enable = lib.mkDefault true;
 }
