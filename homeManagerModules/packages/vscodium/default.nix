@@ -33,7 +33,7 @@
 
       "vsicons.dontShowNewVersionMessage" = true;
 
-      "workbench.colorTheme" = "base16-${config.homeManagerConfig.colorScheme}";
+      "workbench.colorTheme" = "base16-${config.colorScheme.slug}";
 
       "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
       "nix.enableLanguageServer" = true;

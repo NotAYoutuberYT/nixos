@@ -44,8 +44,7 @@ in
 
   options.homeManagerConfig = {
     colorScheme = lib.mkOption {
-      type = lib.types.str;
-      default = "default-dark";
+      default = inputs.nix-colors.colorSchemes.default-dark;
       # "tokyo-night-dark"
       # "default-dark"
       # "gruvbox-material-dark-hard"
@@ -67,7 +66,7 @@ in
 
     # essentially everything relies on nix-colors, so
     # it really makes sense to just set a scheme here
-    colorScheme = inputs.nix-colors.colorSchemes.${cfg.colorScheme};
+    colorScheme = cfg.colorScheme;
   };
 
   config.homeManagerConfig = {
