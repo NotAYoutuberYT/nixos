@@ -1,7 +1,14 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   cfg = config.homeManagerConfig.zsh;
+  nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
 in
 {
   options.homeManagerConfig.zsh = {
@@ -13,16 +20,13 @@ in
   };
 
   config = {
-    programs.zsh = with config.colorScheme.palette; {
+    programs.zsh = {
       enable = true;
 
       enableCompletion = true;
       syntaxHighlighting.enable = true;
 
-      autosuggestion = {
-        enable = true;
-        highlight = "fg=#${base04},bold";
-      };
+      autosuggestion.enable = true;
 
       shellAliases = {
         ls = "ls --color";
@@ -43,7 +47,9 @@ in
         ];
       };
 
-      initExtra = lib.concatStringsSep "\n" [ ];
+      initExtra = lib.concatStringsSep "\n" [
+        "${nix-colors-lib.shellThemeFromScheme { scheme = config.colorScheme; }}"
+      ];
     };
 
     programs.starship = with config.colorScheme.palette; {
