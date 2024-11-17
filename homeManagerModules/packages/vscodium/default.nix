@@ -18,6 +18,8 @@
       tamasfe.even-better-toml
       james-yu.latex-workshop
       tintedtheming.base16-tinted-themes
+      bradlc.vscode-tailwindcss
+      dioxuslabs.dioxus
     ];
 
     userSettings = {
@@ -34,6 +36,11 @@
       "vsicons.dontShowNewVersionMessage" = true;
 
       "workbench.colorTheme" = "base16-${config.colorScheme.slug}";
+
+      "tailwindCSS.experimental.classRegex" = [ "class\\s*:\\s*\"([^\"]*)" ];
+      "tailwindCSS.includeLanguages" = {
+        "rust" = "html";
+      };
 
       "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
       "nix.enableLanguageServer" = true;
