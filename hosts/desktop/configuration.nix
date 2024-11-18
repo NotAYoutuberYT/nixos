@@ -12,6 +12,7 @@
     bundles.home-manager.enable = true;
     nvidia.enable = true;
     piper.enable = true;
+    steam.enable = true;
 
     shell = pkgs.zsh;
 

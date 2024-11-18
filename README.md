@@ -13,7 +13,6 @@
     - make swapping in/out fonts easier
     - make swapping in/out cursors easier
     - only configure programs for use in hyprland if those programs are enabled
-- fix steam on desktop
 - get (and configure?) vesktop
 - declaratively manage firefox toolbar and bookmarks
 - don't assume hyprland is the active compositor for autologin
