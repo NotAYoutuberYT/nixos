@@ -4,11 +4,7 @@
   fonts.enableDefaultPackages = true;
 
   fonts.packages = with pkgs; [
-    (pkgs.nerdfonts.override {
-      fonts = [
-        "JetBrainsMono"
-      ];
-    })
+    nerd-fonts.jetbrains-mono
     cm_unicode
     corefonts
   ];
