@@ -43,6 +43,9 @@
         "rust" = "html";
       };
 
+      "typst-lsp.exportPdf" = "never";
+      "typst-lsp.experimentalFormatterMode" = "on";
+
       "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
       "nix.enableLanguageServer" = true;
       "nix.serverSettings" = {
