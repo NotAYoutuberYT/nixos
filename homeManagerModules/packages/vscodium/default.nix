@@ -33,6 +33,9 @@
       "terminal.integrated.enableImages" = true;
       "terminal.integrated.customGlyphs" = true;
       "terminal.integrated.gpuAcceleration" = "on";
+      "terminal.integrated.sendKeybindingsToShell" = true;
+
+      "files.autoSaveDelay" = "50";
 
       "vsicons.dontShowNewVersionMessage" = true;
 
