@@ -35,7 +35,7 @@
       "terminal.integrated.gpuAcceleration" = "on";
       "terminal.integrated.sendKeybindingsToShell" = true;
 
-      "files.autoSaveDelay" = "50";
+      "files.autoSaveDelay" = 50;
 
       "vsicons.dontShowNewVersionMessage" = true;
 
