@@ -3,7 +3,6 @@
 {
   nixosConfig.autologin.enable = lib.mkDefault true;
   nixosConfig.sound.enable = lib.mkDefault true;
-  nixosConfig.tex.enable = lib.mkDefault true;
   nixosConfig.auto-mount.enable = lib.mkDefault true;
   nixosConfig.bluetooth.enable = lib.mkDefault true;
   nixosConfig.keepassxc.enable = lib.mkDefault true;

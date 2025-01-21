@@ -11,15 +11,16 @@
     package = pkgs.vscodium;
     mutableExtensionsDir = false;
 
-    extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
-      vscode-icons-team.vscode-icons
-      jnoortheen.nix-ide
-      rust-lang.rust-analyzer
-      tamasfe.even-better-toml
-      james-yu.latex-workshop
-      tintedtheming.base16-tinted-themes
-      bradlc.vscode-tailwindcss
-      dioxuslabs.dioxus
+    extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}; [
+      vscode-marketplace.vscode-icons-team.vscode-icons
+      vscode-marketplace.jnoortheen.nix-ide
+      vscode-marketplace.rust-lang.rust-analyzer
+      vscode-marketplace.tamasfe.even-better-toml
+      vscode-marketplace.james-yu.latex-workshop
+      vscode-marketplace.tintedtheming.base16-tinted-themes
+      vscode-marketplace.bradlc.vscode-tailwindcss
+      vscode-marketplace.dioxuslabs.dioxus
+      open-vsx.nvarner.typst-lsp
     ];
 
     userSettings = {
