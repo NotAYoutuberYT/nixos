@@ -50,10 +50,16 @@ let
   }) (customLib.filesIn ./bundles);
 in
 {
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    inputs.nur.nixosModules.nur
-  ] ++ features ++ packages ++ development ++ desktop ++ bundles;
+  imports =
+    [
+      inputs.home-manager.nixosModules.home-manager
+      inputs.nur.modules.nixos.default
+    ]
+    ++ features
+    ++ packages
+    ++ development
+    ++ desktop
+    ++ bundles;
 
   config = {
     nix.settings.experimental-features = [
