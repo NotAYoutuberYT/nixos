@@ -151,7 +151,7 @@ in
             bookmarks = [
               {
                 name = "Gmail";
-                url = "https://gmail.com/";
+                url = "https://mail.google.com/";
               }
               {
                 name = "Drive";

@@ -21,7 +21,7 @@ in
     };
 
     username = lib.mkOption {
-      default = "bryce";
+      default = "equi";
       type = lib.types.str;
       description = ''
         username

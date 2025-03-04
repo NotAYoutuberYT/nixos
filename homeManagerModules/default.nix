@@ -49,14 +49,10 @@ in
   options.homeManagerConfig = {
     colorScheme = lib.mkOption {
       default = inputs.nix-colors.colorSchemes.default-dark;
-      # "tokyo-night-dark"
-      # "default-dark"
-      # "gruvbox-material-dark-hard"
-      # "catppuccin-macchiato"
 
       description = ''
         base16 color scheme to be used in program configs.
-        options can be found at https://tinted-theming.github.io/base16-gallery/
+        options can be found at https://tinted-theming.github.io/tinted-gallery/
       '';
     };
   };
