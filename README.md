@@ -1,21 +1,20 @@
 ## TODO
 
-- properly rice hyprland & apps using [nix-colors](https://github.com/Misterio77/nix-colors)
+- properly handle dependencies/improve modularity
+    - unify the home manager and nixos modules that correspond to the same thing (i.e. hyprland)
+    - make things such as notification daemons, terminals a bit more modular
+    - this will probably involve slightly reworking hyprland
+    - make a "controled" or "modular" directory in home manager modules that doesn't turn into configurable options but is instead *only* controlled by looking at nix options?
+- rice hyprland & apps
+    - make everything (fonts, cursors, etc.) a bit more modular and configurable
+    - get cursors working in X11
+    - get a proper file manager
     - some pre-written rices can be found using [stylix](https://github.com/danth/stylix/tree/master/modules)
-    - [hyprland](https://wiki.hyprland.org/0.41.2/Configuring/Variables/)
-    - [lf](https://github.com/gokcehan/lf/blob/master/etc/colors.example)
-    - [rofi](https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown)
-    - maybe get a better wallpaper in the process
-- add a widget system
-    - astal should be coming out relatively soon...
-    - find a way to pass nixos parameters (most importantly monitor names) into a widget configuration
-- improve modularity of various things
-    - make swapping in/out fonts easier
-    - make swapping in/out cursors easier
-    - only configure programs for use in hyprland if those programs are enabled
-- get (and configure?) vesktop
-- declaratively manage firefox toolbar and bookmarks
-- don't assume hyprland is the active compositor for autologin
+- configure astal
+- get a proper display manager (don't assume hyprland is the active compositor/desktop environment!)
+- get proper secret management
+    - see [sops-nix](https://github.com/Mic92/sops-nix)
+    - I don't really need this right now, but it could be handy (user passwords?)
 
 ## Initial Setup
 
@@ -25,4 +24,4 @@
 - Configure system (optional)
     - Copy secret keys (password manager, ssh, etc.) from another machine
     - Use gh to authenticate with github (`gh auth login`) *after* copying password manager files
-    - Configure firefox bookmarks & toolbar (and link keepassxc to its firefox extension)
+    - Link keepassxc to its firefox extension

@@ -74,8 +74,6 @@ in
       shell = cfg.shell;
       description = cfg.username;
       extraGroups = [
-        "networkmanager"
-        "storage"
         "wheel"
       ];
     } // cfg.userNixosSettings;
