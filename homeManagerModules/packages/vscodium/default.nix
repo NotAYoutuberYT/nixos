@@ -21,7 +21,7 @@
         vscode-marketplace.tintedtheming.base16-tinted-themes
         vscode-marketplace.bradlc.vscode-tailwindcss
         vscode-marketplace.dioxuslabs.dioxus
-        open-vsx.nvarner.typst-lsp
+        vscode-marketplace.myriad-dreamin.tinymist
       ];
 
       userSettings = {
@@ -47,8 +47,10 @@
           "rust" = "html";
         };
 
-        "typst-lsp.exportPdf" = "never";
-        "typst-lsp.experimentalFormatterMode" = "on";
+        "tinymist.formatterMode" = "typstyle";
+        "[typst]" = {
+          "editor.formatOnSave" = true;
+        };
 
         "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
         "nix.enableLanguageServer" = true;

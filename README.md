@@ -5,6 +5,8 @@
     - make things such as notification daemons, terminals a bit more modular
     - this will probably involve slightly reworking hyprland
     - make a "controled" or "modular" directory in home manager modules that doesn't turn into configurable options but is instead *only* controlled by looking at nix options?
+- configure editor/install extensions from nix shells? (this would really de-pollute my environment)
+    - this would require somehow specifying the editor when launching the shell
 - rice hyprland & apps
     - make everything (fonts, cursors, etc.) a bit more modular and configurable
     - get cursors working in X11
