@@ -10,4 +10,5 @@
   nixosConfig.okular.enable = lib.mkDefault true;
   nixosConfig.spotify.enable = lib.mkDefault true;
   nixosConfig.hyprland.enable = lib.mkDefault true;
+  nixosConfig.gopass.enable = lib.mkDefault true;
 }
