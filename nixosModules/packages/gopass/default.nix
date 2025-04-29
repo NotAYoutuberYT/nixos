@@ -2,7 +2,7 @@
 
 let
   pinentry-flavor = pkgs.pinentry-curses;
-in 
+in
 {
   environment.systemPackages = with pkgs; [
     gopass
