@@ -21,7 +21,7 @@
 
 ## Initial Setup
 
-- Clone this repository (`nix run --extra-experimental-features 'nix-command' nixpkgs#git -- clone https://github.com/NotAYoutuberYT/nixos`)
+- Clone this repository (`nix run --extra-experimental-features 'nix-command flakes' nixpkgs#git -- clone https://github.com/NotAYoutuberYT/nixos`)
 - Create a new host as needed (copy a pre-existing host, move hardware-configuration into new host, edit configuration.nix and home.nix as needed)
 - Rebuild and reboot (`nixos-rebuild boot --flake /path/to/flake#hostname`)
 - Configure system (optional)
