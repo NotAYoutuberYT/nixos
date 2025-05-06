@@ -4,7 +4,7 @@
   config,
   inputs,
   outputs,
-  customUtils,
+  customLib,
   pkgs,
   ...
 }:
@@ -29,7 +29,8 @@ in
 
     passwordAttrset = lib.mkOption {
       default = {
-        hashedPasswordFile = config.sops.secrets.hashed-password.path;
+        hashedPassword = "$y$j9T$kL9VThKqR8iN8LZpb.8.m/$MD.2YUPUjdycoUKFQuJoqt1PjepZKcWjgi2HWr3HUs0";
+        #hashedPasswordFile = config.sops.secrets.hashed-password.path;
       };
       description = "user password settings";
     };
@@ -56,12 +57,12 @@ in
       useUserPackages = true;
 
       extraSpecialArgs = {
-        inherit inputs customUtils;
+        inherit inputs customLib;
         outputs = inputs.self.outputs;
       };
 
       users.${cfg.username}.imports = [
-        cfg.homeConfigModule
+        #cfg.homeConfigModule
         outputs.homeManagerModules.default
       ];
     };

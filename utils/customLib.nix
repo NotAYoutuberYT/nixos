@@ -34,7 +34,10 @@ rec {
     in
     if (contents ? "default.nix") then
       [
-        (import (fullPath "default.nix") ({ inherit customModules; } // { name = headName; }))
+        (import (fullPath "default.nix") {
+          inherit customModules;
+          name = headName;
+        })
       ]
     else
       lib.flatten (

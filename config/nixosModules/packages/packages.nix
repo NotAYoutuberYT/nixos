@@ -5,7 +5,6 @@ customModules.optionalPackages { inherit config; } (
   with pkgs;
   [
     alacritty
-    git
     lf
     pavucontrol
     spotify

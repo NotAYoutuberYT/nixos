@@ -11,7 +11,7 @@ customModules.withNixosEnableOption { inherit config name; } {
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      jack.enable = config.nixosConfig.sound.jack;
+      jack.enable = config.nixosConfig.${name}.jack;
     };
   };
 }

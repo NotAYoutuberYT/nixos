@@ -38,7 +38,7 @@
       {
         formatter.${system} = pkgs.nixfmt-tree;
 
-        #homeManagerModules.default = ./config/baseHomeManager;
+        homeManagerModules.default = ./config/baseHomeManager.nix;
         nixosModules.default = ./config/baseNixos.nix;
 
         nixosConfigurations = with customLib; {

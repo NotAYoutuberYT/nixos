@@ -1,10 +1,6 @@
 { lib, customLib }:
 
 rec {
-  # custom modules take in a base module (or a function which produces one) and a name and return
-  # the custom module (which is itself a function of the module arguments, or margs, which include
-  # pkgs, config, lib, and such).
-
   # only enables the config of a module if true is passed in
   enableIf =
     enable: module:
@@ -21,7 +17,7 @@ rec {
     module:
     let
       cleanedModule = customLib.cleanModule module;
-      withOption = cleanedModule // {
+      withOption = lib.recursiveUpdate cleanedModule {
         options.nixosConfig.${name}.enable = lib.mkEnableOption name;
       };
     in
@@ -33,11 +29,39 @@ rec {
     module:
     let
       cleanedModule = customLib.cleanModule module;
-      withOption = cleanedModule // {
+      withOption = lib.recursiveUpdate cleanedModule {
         options.homeManagerConfig.${name}.enable = lib.mkEnableOption name;
       };
     in
     enableIf config.homeManagerConfig.${name}.enable withOption;
+
+  # enables a home manager module only if a corresponding module is enabled in nixos
+  ifEnabledInNixos =
+    { name, osConfig }: module: enableIf (osConfig.nixosConfig.${name}.enable or false) module;
+
+  # adds an enable option under config.nixosConfig.bundles
+  nixosBundle =
+    { name, config }:
+    module:
+    let
+      cleanedModule = customLib.cleanModule module;
+      withOption = lib.recursiveUpdate cleanedModule {
+        options.nixosConfig.bundles.${name}.enable = lib.mkEnableOption name;
+      };
+    in
+    enableIf config.nixosConfig.bundles.${name}.enable withOption;
+
+  # adds an enable option under config.homeManagerConfig.bundles
+  homeManagerBundle =
+    { name, config }:
+    module:
+    let
+      cleanedModule = customLib.cleanModule module;
+      withOption = lib.recursiveUpdate cleanedModule {
+        options.homeManagerConfig.bundles.${name}.enable = lib.mkEnableOption name;
+      };
+    in
+    enableIf config.homeManagerConfig.bundles.${name}.enable withOption;
 
   # creates options to toggle each package on and off
   optionalPackages =
