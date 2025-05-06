@@ -1,7 +1,5 @@
-{
-  lib,
-  customLib,
-}:
+{ lib, customLib }:
+
 rec {
   # custom modules take in a base module (or a function which produces one) and a name and return
   # the custom module (which is itself a function of the module arguments, or margs, which include

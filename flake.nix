@@ -28,11 +28,7 @@
   };
 
   outputs =
-    {
-      nixpkgs,
-      flake-utils,
-      ...
-    }@inputs:
+    { nixpkgs, flake-utils, ... }@inputs:
     flake-utils.lib.eachDefaultSystemPassThrough (
       system:
       let
