@@ -16,5 +16,4 @@ customModules.nixosBundle { inherit name config; } {
   nixosConfig.lf.enable = lib.mkDefault true;
   nixosConfig.git.enable = lib.mkDefault true;
   nixosConfig.fonts.enable = lib.mkDefault true;
-  nixosConfig.thunar.enable = lib.mkDefault true;
 }
