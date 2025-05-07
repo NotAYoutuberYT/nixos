@@ -27,7 +27,7 @@ let
   rgba = color: alpha: "rgba(${color}${alpha})";
 in
 customModules.ifEnabledInNixos { inherit name osConfig; } {
-  options.homeManagerConfig.hyprland = {
+  options.homeManagerConfig.${name} = {
     monitors = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ", preferred, auto, 1" ];

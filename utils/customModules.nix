@@ -11,26 +11,46 @@ rec {
     in
     withoutConfig // { config = lib.mkIf enable baseConfig; };
 
-  # adds an enable option to a module under config.nixosConfig
+  # adds an enable option to a module under config.nixosConfig. the enable option
+  # defaults to the value of enable (or false if not present)
   withNixosEnableOption =
-    { name, config }:
+    {
+      name,
+      config,
+      enable ? false,
+    }:
     module:
     let
       cleanedModule = customLib.cleanModule module;
       withOption = lib.recursiveUpdate cleanedModule {
-        options.nixosConfig.${name}.enable = lib.mkEnableOption name;
+        options.nixosConfig.${name}.enable = lib.mkOption {
+          default = enable;
+          example = !enable;
+          description = "Whether to enable ${name}.";
+          type = lib.types.bool;
+        };
       };
     in
     enableIf config.nixosConfig.${name}.enable withOption;
 
-  # adds an enable option to a module under config.homeManagerConfig
+  # adds an enable option to a module under config.homeManagerConfig. the enable option
+  # defaults to the value of enable (or false if not present)
   withHomeManagerEnableOption =
-    { name, config }:
+    {
+      name,
+      config,
+      enable ? false,
+    }:
     module:
     let
       cleanedModule = customLib.cleanModule module;
       withOption = lib.recursiveUpdate cleanedModule {
-        options.homeManagerConfig.${name}.enable = lib.mkEnableOption name;
+        options.homeManagerConfig.${name}.enable = lib.mkOption {
+          default = enable;
+          example = !enable;
+          description = "Whether to enable ${name}.";
+          type = lib.types.bool;
+        };
       };
     in
     enableIf config.homeManagerConfig.${name}.enable withOption;

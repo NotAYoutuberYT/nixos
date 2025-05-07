@@ -1,6 +1,11 @@
-{ customModules, ... }:
+{ customModules, name }:
 { config, pkgs, ... }:
 
-customModules.enableIf (config.nixosConfig.shell == pkgs.zsh) {
-  programs.zsh.enable = true;
-}
+customModules.withNixosEnableOption
+  {
+    inherit name config;
+    enable = config.nixosConfig.shell == pkgs.zsh;
+  }
+  {
+    programs.zsh.enable = true;
+  }

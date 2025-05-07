@@ -29,8 +29,7 @@ in
 
     passwordAttrset = lib.mkOption {
       default = {
-        hashedPassword = "$y$j9T$kL9VThKqR8iN8LZpb.8.m/$MD.2YUPUjdycoUKFQuJoqt1PjepZKcWjgi2HWr3HUs0";
-        #hashedPasswordFile = config.sops.secrets.hashed-password.path;
+        hashedPasswordFile = config.sops.secrets.hashed-password.path;
       };
       description = "user password settings";
     };
@@ -62,7 +61,7 @@ in
       };
 
       users.${cfg.username}.imports = [
-        #cfg.homeConfigModule
+        cfg.homeConfigModule
         outputs.homeManagerModules.default
       ];
     };
