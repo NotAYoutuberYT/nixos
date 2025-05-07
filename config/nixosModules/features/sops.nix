@@ -9,7 +9,7 @@
 
     sops = {
       defaultSopsFile = ../../../secrets/primary.yaml;
-      age.keyFile = "../../../secrets/keys.txt";
+      age.keyFile = "/var/lib/sops-nix/key.txt";
 
       secrets.hashed-password.neededForUsers = true;
     };
