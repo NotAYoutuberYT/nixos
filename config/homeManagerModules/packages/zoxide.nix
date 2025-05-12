@@ -1,10 +1,9 @@
-{ customModules, name }:
-{ osConfig, ... }:
+{ customModules, osConfig, ... }:
 
 let
   ocfg = osConfig.nixosConfig;
 in
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   programs.zoxide = {
     enable = true;
     enableBashIntegration = true;

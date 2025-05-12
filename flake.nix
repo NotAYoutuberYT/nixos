@@ -4,8 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module.git";
+    lix.url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+    lix.flake = false;
+
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
+    lix-module.inputs.lix.follows = "lix";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

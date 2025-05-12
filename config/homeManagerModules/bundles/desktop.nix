@@ -1,7 +1,6 @@
-{ customModules, name }:
-{ config, lib, ... }:
+{ customModules, lib, ... }:
 
-customModules.homeManagerBundle { inherit name config; } {
+customModules.bundle {
   homeManagerConfig.gtk.enable = lib.mkDefault true;
   homeManagerConfig.xdg.enable = lib.mkDefault true;
 }

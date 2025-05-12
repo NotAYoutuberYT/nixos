@@ -11,7 +11,7 @@ let
   cfg = config.homeManagerConfig;
   ocfg = osConfig.nixosConfig;
 
-  modules = customLib.allModules ./homeManagerModules;
+  modules = customLib.allModules ./homeManagerModules "homeManagerConfig";
 in
 {
   imports = [

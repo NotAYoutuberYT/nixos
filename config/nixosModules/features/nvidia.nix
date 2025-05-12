@@ -1,7 +1,6 @@
-{ customModules, name }:
-{ config, ... }:
+{ customModules, config, ... }:
 
-customModules.withNixosEnableOption { inherit name config; } {
+customModules.withEnableOption {
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

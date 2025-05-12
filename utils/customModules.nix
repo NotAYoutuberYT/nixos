@@ -1,91 +1,46 @@
 { lib, customLib }:
+{
+  name,
+  configNamespace,
+  config,
+  osConfig ? null,
+}:
 
 rec {
-  # only enables the config of a module if true is passed in
   enableIf =
-    enable: module:
+    default: module:
     let
       cleanedModule = customLib.cleanModule module;
       baseConfig = cleanedModule.config or { };
       withoutConfig = builtins.removeAttrs cleanedModule [ "config" ];
-    in
-    withoutConfig // { config = lib.mkIf enable baseConfig; };
-
-  # adds an enable option to a module under config.nixosConfig. the enable option
-  # defaults to the value of enable (or false if not present)
-  withNixosEnableOption =
-    {
-      name,
-      config,
-      enable ? false,
-    }:
-    module:
-    let
-      cleanedModule = customLib.cleanModule module;
-      withOption = lib.recursiveUpdate cleanedModule {
-        options.nixosConfig.${name}.enable = lib.mkOption {
-          default = enable;
-          example = !enable;
+      withOption = lib.recursiveUpdate {
+        options.${configNamespace}.${name}.enable = lib.mkOption {
+          inherit default;
+          example = !default;
           description = "Whether to enable ${name}.";
           type = lib.types.bool;
         };
-      };
+      } withoutConfig;
     in
-    enableIf config.nixosConfig.${name}.enable withOption;
+    withOption // { config = lib.mkIf config.${configNamespace}.${name}.enable baseConfig; };
 
-  # adds an enable option to a module under config.homeManagerConfig. the enable option
-  # defaults to the value of enable (or false if not present)
-  withHomeManagerEnableOption =
-    {
-      name,
-      config,
-      enable ? false,
-    }:
-    module:
-    let
-      cleanedModule = customLib.cleanModule module;
-      withOption = lib.recursiveUpdate cleanedModule {
-        options.homeManagerConfig.${name}.enable = lib.mkOption {
-          default = enable;
-          example = !enable;
-          description = "Whether to enable ${name}.";
-          type = lib.types.bool;
-        };
-      };
-    in
-    enableIf config.homeManagerConfig.${name}.enable withOption;
+  withEnableOption = module: enableIf false module;
 
-  # enables a home manager module only if a corresponding module is enabled in nixos
-  ifEnabledInNixos =
-    { name, osConfig }: module: enableIf (osConfig.nixosConfig.${name}.enable or false) module;
+  ifEnabledInNixos = module: enableIf (osConfig.nixosConfig.${name}.enable) module;
 
   # adds an enable option under config.nixosConfig.bundles
-  nixosBundle =
-    { name, config }:
+  bundle =
     module:
     let
       cleanedModule = customLib.cleanModule module;
       withOption = lib.recursiveUpdate cleanedModule {
-        options.nixosConfig.bundles.${name}.enable = lib.mkEnableOption name;
+        options.${configNamespace}.bundles.${name}.enable = lib.mkEnableOption name;
       };
     in
-    enableIf config.nixosConfig.bundles.${name}.enable withOption;
-
-  # adds an enable option under config.homeManagerConfig.bundles
-  homeManagerBundle =
-    { name, config }:
-    module:
-    let
-      cleanedModule = customLib.cleanModule module;
-      withOption = lib.recursiveUpdate cleanedModule {
-        options.homeManagerConfig.bundles.${name}.enable = lib.mkEnableOption name;
-      };
-    in
-    enableIf config.homeManagerConfig.bundles.${name}.enable withOption;
+    enableIf config.${configNamespace}.bundles.${name}.enable withOption;
 
   # creates options to toggle each package on and off
   optionalPackages =
-    { config }:
     packages:
     let
       optionsList = map (

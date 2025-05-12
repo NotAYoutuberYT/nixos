@@ -1,7 +1,6 @@
-{ customModules, name }:
-{ osConfig, pkgs, ... }:
+{ customModules, pkgs, ... }:
 
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   xdg.configFile."lf/icons".source = ./icons;
 
   programs.lf = {

@@ -1,10 +1,9 @@
-{ customModules, name }:
-{ config, ... }:
+{ customModules, config, ... }:
 
 let
   homeDirectory = directory: "${config.home.homeDirectory}/${directory}";
 in
-customModules.withHomeManagerEnableOption { inherit name config; } {
+customModules.withEnableOption {
   xdg.enable = true;
   xdg.userDirs = {
     enable = true;

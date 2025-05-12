@@ -1,12 +1,11 @@
-{ customModules, name }:
 {
+  customModules,
   pkgs,
-  config,
   inputs,
   ...
 }:
 
-customModules.withNixosEnableOption { inherit name config; } {
+customModules.withEnableOption {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

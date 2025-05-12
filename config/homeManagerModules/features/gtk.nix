@@ -1,5 +1,5 @@
-{ customModules, name }:
 {
+  customModules,
   config,
   inputs,
   pkgs,
@@ -9,7 +9,7 @@
 let
   nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
 in
-customModules.withHomeManagerEnableOption { inherit name config; } {
+customModules.withEnableOption {
   gtk.enable = true;
 
   gtk.theme = {

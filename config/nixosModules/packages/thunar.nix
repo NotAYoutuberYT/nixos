@@ -1,6 +1,5 @@
-{ customModules, name }:
-{ config, ... }:
+{ customModules, ... }:
 
-customModules.withNixosEnableOption { inherit name config; } {
+customModules.withEnableOption {
   programs.thunar.enable = true;
 }

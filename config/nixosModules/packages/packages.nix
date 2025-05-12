@@ -1,7 +1,6 @@
-{ customModules, ... }:
-{ pkgs, config, ... }:
+{ customModules, pkgs, ... }:
 
-customModules.optionalPackages { inherit config; } (
+customModules.optionalPackages (
   with pkgs;
   [
     alacritty

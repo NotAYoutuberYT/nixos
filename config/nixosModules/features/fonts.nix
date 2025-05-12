@@ -1,5 +1,5 @@
-{ customModules, name }:
 {
+  customModules,
   config,
   lib,
   pkgs,
@@ -9,7 +9,7 @@
 let
   cfg = config.nixosConfig;
 in
-customModules.withNixosEnableOption { inherit name config; } {
+customModules.withEnableOption {
   options.nixosConfig = {
     monospaceFont = lib.mkOption {
       default = {

@@ -1,5 +1,9 @@
-{ customModules, name }:
-{ config, osConfig, ... }:
+{
+  customModules,
+  config,
+  osConfig,
+  ...
+}:
 
 let
   mainWaybarConfig = {
@@ -89,7 +93,7 @@ let
         }
   '';
 in
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   programs.waybar = {
     enable = true;
     style = css;

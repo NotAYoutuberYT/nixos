@@ -1,7 +1,6 @@
-{ customModules, name }:
-{ pkgs, config, ... }:
+{ customModules, pkgs, ... }:
 
-customModules.withNixosEnableOption { inherit config name; } {
+customModules.withEnableOption {
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 

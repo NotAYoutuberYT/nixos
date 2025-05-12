@@ -1,5 +1,5 @@
-{ customModules, name }:
 {
+  customModules,
   pkgs,
   osConfig,
   config,
@@ -21,7 +21,7 @@ let
     Status = "locked";
   };
 in
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   options.homeManagerConfig.firefox = {
     wayland = lib.mkOption {
       type = lib.types.bool;

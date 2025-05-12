@@ -1,6 +1,5 @@
-{ customModules, name }:
-{ config, ... }:
+{ customModules, ... }:
 
-customModules.withNixosEnableOption { inherit config name; } {
+customModules.withEnableOption {
   services.pcscd.enable = true;
 }

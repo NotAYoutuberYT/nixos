@@ -1,7 +1,6 @@
-{ customModules, name }:
-{ lib, config, ... }:
+{ customModules, lib, ... }:
 
-customModules.withNixosEnableOption { inherit name config; } {
+customModules.withEnableOption {
   config = {
     networking.networkmanager.enable = true;
     networking.enableIPv6 = lib.mkDefault false;

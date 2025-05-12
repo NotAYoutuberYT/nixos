@@ -1,8 +1,7 @@
-{ customModules, name }:
 {
+  customModules,
   lib,
   config,
-  osConfig,
   pkgs,
   inputs,
   ...
@@ -11,7 +10,7 @@
 let
   nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
 in
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   programs.zsh = {
     enable = true;
 

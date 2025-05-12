@@ -1,10 +1,14 @@
-{ customModules, name }:
-{ config, osConfig, ... }:
+{
+  customModules,
+  config,
+  osConfig,
+  ...
+}:
 
 let
   hex = color: "#${color}";
 in
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   programs.alacritty = {
     enable = true;
 

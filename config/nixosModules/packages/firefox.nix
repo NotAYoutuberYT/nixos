@@ -1,6 +1,5 @@
-{ customModules, name }:
-{ config, ... }:
+{ customModules, ... }:
 
-customModules.withNixosEnableOption { inherit name config; } {
+customModules.withEnableOption {
   programs.firefox.enable = true;
 }

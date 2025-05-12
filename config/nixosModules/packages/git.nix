@@ -1,7 +1,6 @@
-{ customModules, name }:
-{ config, pkgs, ... }:
+{ customModules, pkgs, ... }:
 
-customModules.withNixosEnableOption { inherit name config; } {
+customModules.withEnableOption {
   environment.systemPackages = [
     pkgs.git
     pkgs.gh

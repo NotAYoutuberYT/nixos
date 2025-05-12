@@ -1,7 +1,6 @@
-{ customModules, name }:
-{ osConfig, ... }:
+{ customModules, ... }:
 
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   programs.gh.enable = true;
 
   programs.git = {

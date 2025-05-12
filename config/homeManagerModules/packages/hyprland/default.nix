@@ -1,5 +1,6 @@
-{ customModules, name }:
 {
+  customModules,
+  name,
   pkgs,
   lib,
   config,
@@ -26,7 +27,7 @@ let
   rgb = color: "rgb(${color})";
   rgba = color: alpha: "rgba(${color}${alpha})";
 in
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   options.homeManagerConfig.${name} = {
     monitors = lib.mkOption {
       type = lib.types.listOf lib.types.str;

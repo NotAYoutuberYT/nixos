@@ -1,5 +1,5 @@
-{ customModules, name }:
 {
+  customModules,
   pkgs,
   inputs,
   config,
@@ -7,7 +7,7 @@
   ...
 }:
 
-customModules.ifEnabledInNixos { inherit name osConfig; } {
+customModules.ifEnabledInNixos {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;

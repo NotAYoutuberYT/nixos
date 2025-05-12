@@ -1,7 +1,12 @@
-{ customModules, name }:
-{ lib, config, ... }:
+{
+  customModules,
+  name,
+  lib,
+  config,
+  ...
+}:
 
-customModules.withNixosEnableOption { inherit config name; } {
+customModules.withEnableOption {
   options.nixosConfig.${name}.jack = lib.mkEnableOption "pipewire jack emulation";
 
   config = {
