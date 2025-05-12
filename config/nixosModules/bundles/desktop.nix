@@ -3,6 +3,7 @@
 customModules.bundle {
   nixosConfig.usb-disks.enable = lib.mkDefault true;
   nixosConfig.usb-keys.enable = lib.mkDefault true;
+  nixosConfig.gopass.enable = lib.mkDefault true;
   nixosConfig.bluetooth.enable = lib.mkDefault true;
   nixosConfig.spotify.enable = lib.mkDefault true;
   nixosConfig.sound.enable = lib.mkDefault true;
