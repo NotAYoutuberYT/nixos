@@ -11,5 +11,6 @@ customModules.optionalPackages (
     vscodium
     waybar
     zoxide
+    thefuck
   ]
 )

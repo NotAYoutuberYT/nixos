@@ -26,11 +26,11 @@ customModules.ifEnabledInNixos {
       ignoreAllDups = true;
       ignoreSpace = true;
       share = true;
+    };
 
-      ignorePatterns = [
-        "clear"
-        "ls"
-      ];
+    shellAliases = {
+      ls = "${pkgs.eza}/bin/eza";
+      cat = "${pkgs.bat}/bin/bat";
     };
 
     initContent = lib.concatStringsSep "\n" [

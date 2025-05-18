@@ -11,7 +11,7 @@
       "ignorespace"
     ];
     historyIgnore = [
-      "cd"
+      "clear"
       "ls"
       "exit"
     ];
