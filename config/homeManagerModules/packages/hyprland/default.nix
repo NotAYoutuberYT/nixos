@@ -186,7 +186,7 @@ customModules.ifEnabledInNixos {
 
         bind = [
           "$mainMod, RETURN, exec, $terminal"
-          "$mainMod SHIFT, Q, killactive,"
+          "$mainMod, Q, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, D, exec, $menu"
