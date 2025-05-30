@@ -3,6 +3,7 @@
 customModules.optionalPackages (
   with pkgs;
   [
+    helix
     alacritty
     lf
     pavucontrol
