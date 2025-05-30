@@ -182,11 +182,11 @@ customModules.ifEnabledInNixos {
           workspace_swipe = "false";
         };
 
-        "$mainMod" = "ALT";
+        "$mainMod" = "SUPER";
 
         bind = [
           "$mainMod, RETURN, exec, $terminal"
-          "$mainMod, Q, killactive,"
+          "$mainMod, F, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, D, exec, $menu"
