@@ -8,17 +8,17 @@
 }:
 
 let
-  cfg = config.homeManagerConfig;
-  ocfg = osConfig.nixosConfig;
+  cfg = config.specialConfig;
+  ocfg = osConfig.specialConfig;
 
-  modules = customLib.allModules ./homeManagerModules "homeManagerConfig";
+  modules = customLib.allModules ./homeManagerModules;
 in
 {
   imports = [
     inputs.nix-colors.homeManagerModules.default
   ] ++ modules;
 
-  options.homeManagerConfig = {
+  options.specialConfig = {
     colorScheme = lib.mkOption {
       default = inputs.nix-colors.colorSchemes.default-dark;
 

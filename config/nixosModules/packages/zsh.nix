@@ -1,10 +1,14 @@
 {
-  customModules,
   config,
   pkgs,
+  lib,
   ...
 }:
 
-customModules.enableIf (config.nixosConfig.shell == pkgs.zsh) {
-  programs.zsh.enable = true;
+{
+  options.specialConfig.zsh.enable = lib.mkEnableOption "zsh";
+
+  config = {
+    programs.zsh.enable = true;
+  };
 }

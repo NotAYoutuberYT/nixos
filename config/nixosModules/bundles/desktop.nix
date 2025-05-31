@@ -1,20 +1,27 @@
-{ customModules, lib, ... }:
+{ lib, pkgs, ... }:
 
-customModules.bundle {
-  nixosConfig.usb-disks.enable = lib.mkDefault true;
-  nixosConfig.usb-keys.enable = lib.mkDefault true;
-  nixosConfig.gopass.enable = lib.mkDefault true;
-  nixosConfig.bluetooth.enable = lib.mkDefault true;
-  nixosConfig.spotify.enable = lib.mkDefault true;
-  nixosConfig.sound.enable = lib.mkDefault true;
-  nixosConfig.pavucontrol.enable = lib.mkDefault true;
-  nixosConfig.hyprland.enable = lib.mkDefault true;
-  nixosConfig.waybar.enable = lib.mkDefault true;
-  nixosConfig.firefox.enable = lib.mkDefault true;
-  nixosConfig.vscodium.enable = lib.mkDefault true;
-  nixosConfig.alacritty.enable = lib.mkDefault true;
-  nixosConfig.lf.enable = lib.mkDefault true;
-  nixosConfig.git.enable = lib.mkDefault true;
-  nixosConfig.fonts.enable = lib.mkDefault true;
-  nixosConfig.thunar.enable = lib.mkDefault true;
+{
+  options.specialConfig.bundles.desktop.enable = lib.mkEnableOption "desktop bundle";
+
+  config = {
+    specialConfig.usb-disks.enable = lib.mkDefault true;
+    specialConfig.usb-keys.enable = lib.mkDefault true;
+    specialConfig.gopass.enable = lib.mkDefault true;
+    specialConfig.bluetooth.enable = lib.mkDefault true;
+    specialConfig.sound.enable = lib.mkDefault true;
+    specialConfig.hyprland.enable = lib.mkDefault true;
+    specialConfig.firefox.enable = lib.mkDefault true;
+    specialConfig.git.enable = lib.mkDefault true;
+    specialConfig.fonts.enable = lib.mkDefault true;
+    specialConfig.thunar.enable = lib.mkDefault true;
+
+    environment.systemPackages = with pkgs; [
+      waybar
+      vscodium
+      spotify
+      pavucontrol
+      lf
+      alacritty
+    ];
+  };
 }

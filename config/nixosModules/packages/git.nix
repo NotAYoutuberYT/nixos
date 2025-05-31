@@ -1,8 +1,12 @@
-{ customModules, pkgs, ... }:
+{ pkgs, lib, ... }:
 
-customModules.withEnableOption {
-  environment.systemPackages = [
-    pkgs.git
-    pkgs.gh
-  ];
+{
+  options.specialConfig.git.enable = lib.mkEnableOption "git";
+
+  config = {
+    environment.systemPackages = [
+      pkgs.git
+      pkgs.gh
+    ];
+  };
 }

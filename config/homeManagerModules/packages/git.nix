@@ -1,6 +1,6 @@
-{ customModules, ... }:
+{ ... }:
 
-customModules.ifEnabledInNixos {
+{
   programs.gh.enable = true;
 
   programs.git = {

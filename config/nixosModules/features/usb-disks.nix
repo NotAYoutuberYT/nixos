@@ -1,12 +1,16 @@
-{ customModules, pkgs, ... }:
+{ pkgs, lib, ... }:
 
-customModules.withEnableOption {
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
+{
+  options.specialConfig.usb-disks.enable = lib.mkEnableOption "usb-disks";
 
-  environment.systemPackages = with pkgs; [
-    usbutils
-    udiskie
-    udisks
-  ];
+  config = {
+    services.gvfs.enable = true;
+    services.udisks2.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      usbutils
+      udiskie
+      udisks
+    ];
+  };
 }

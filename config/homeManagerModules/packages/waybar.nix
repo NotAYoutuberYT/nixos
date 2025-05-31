@@ -1,5 +1,4 @@
 {
-  customModules,
   config,
   osConfig,
   ...
@@ -53,7 +52,7 @@ let
   css = with config.colorScheme.palette; ''
         * {
           font-size: 20px;
-    	    font-family: ${osConfig.nixosConfig.monospaceFont.name};
+    	    font-family: ${osConfig.specialConfig.monospaceFont.name};
         }
 
         window#waybar {
@@ -93,7 +92,7 @@ let
         }
   '';
 in
-customModules.ifEnabledInNixos {
+{
   programs.waybar = {
     enable = true;
     style = css;

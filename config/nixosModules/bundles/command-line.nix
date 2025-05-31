@@ -1,9 +1,16 @@
-{ customModules, lib, ... }:
+{ lib, pkgs, ... }:
 
-customModules.bundle {
-  nixosConfig.zoxide.enable = lib.mkDefault true;
-  nixosConfig.starship.enable = lib.mkDefault true;
-  nixosConfig.thefuck.enable = lib.mkDefault true;
-  nixosConfig.helix.enable = lib.mkDefault true;
-  nixosConfig.sops.enablePackage = lib.mkDefault true;
+{
+  options.specialConfig.bundles.command-line.enable = lib.mkEnableOption "command-line bundle";
+
+  config = {
+    specialConfig.sops.enablePackage = lib.mkDefault true;
+
+    environment.systemPackages = with pkgs; [
+      zoxide
+      starship
+      thefuck
+      helix
+    ];
+  };
 }

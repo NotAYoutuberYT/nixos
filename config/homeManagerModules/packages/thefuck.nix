@@ -1,9 +1,9 @@
-{ customModules, osConfig, ... }:
+{ osConfig, ... }:
 
 let
-  ocfg = osConfig.nixosConfig;
+  ocfg = osConfig.specialConfig;
 in
-customModules.ifEnabledInNixos {
+{
   programs.thefuck = {
     enable = true;
     enableBashIntegration = true;

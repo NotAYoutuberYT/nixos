@@ -5,7 +5,7 @@
   ...
 }:
 let
-  modules = customLib.allModules ./nixosModules "nixosConfig";
+  modules = customLib.allModules ./nixosModules;
 in
 {
   imports = [

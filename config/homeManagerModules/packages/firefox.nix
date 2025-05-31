@@ -1,5 +1,4 @@
 {
-  customModules,
   pkgs,
   osConfig,
   config,
@@ -8,8 +7,8 @@
 }:
 
 let
-  ocfg = osConfig.nixosConfig;
-  cfg = config.homeManagerConfig.firefox;
+  ocfg = osConfig.specialConfig;
+  cfg = config.specialConfig.firefox;
 
   lock-false = {
     Value = false;
@@ -21,8 +20,8 @@ let
     Status = "locked";
   };
 in
-customModules.ifEnabledInNixos {
-  options.homeManagerConfig.firefox = {
+{
+  options.specialConfig.firefox = {
     wayland = lib.mkOption {
       type = lib.types.bool;
       default = true;

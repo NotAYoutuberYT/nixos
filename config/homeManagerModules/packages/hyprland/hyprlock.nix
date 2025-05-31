@@ -6,13 +6,14 @@
 }:
 
 let
-  cfg = config.homeManagerConfig.hyprlock;
+  cfg = config.specialConfig.hyprlock;
 
   rgb = color: "rgb(${color})";
   rgba = color: alpha: "rgba(${color}${alpha})";
 in
 {
-  options.homeManagerConfig.hyprlock.enable = lib.mkEnableOption "hyprlock";
+  options.specialConfig.hyprlock.enable = lib.mkEnableOption "hyprlock";
+
   config = lib.mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;
@@ -45,7 +46,7 @@ in
             valign = "center";
             text = "hi, $USER";
             font_size = 25;
-            font_family = osConfig.nixosConfig.monospaceFont.name;
+            font_family = osConfig.specialConfig.monospaceFont.name;
             font_color = rgb base05;
           }
         ];
@@ -63,7 +64,7 @@ in
             fade_timeout = 1000;
             placeholder_text = "";
 
-            font_family = osConfig.nixosConfig.monospaceFont.name;
+            font_family = osConfig.specialConfig.monospaceFont.name;
             font_color = rgb base05;
             inner_color = rgba base01 "20";
             outer_color = rgba base00 "30";

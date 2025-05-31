@@ -1,10 +1,11 @@
 { ... }:
+
 {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  nixosConfig = {
+  specialConfig = {
     homeConfigModule = ./home.nix;
 
     bundles.desktop.enable = true;

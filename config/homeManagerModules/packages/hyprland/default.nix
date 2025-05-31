@@ -1,15 +1,13 @@
 {
-  customModules,
   name,
   pkgs,
   lib,
   config,
-  osConfig,
   ...
 }:
 
 let
-  cfg = config.homeManagerConfig.hyprland;
+  cfg = config.specialConfig.hyprland;
 
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
@@ -27,8 +25,8 @@ let
   rgb = color: "rgb(${color})";
   rgba = color: alpha: "rgba(${color}${alpha})";
 in
-customModules.ifEnabledInNixos {
-  options.homeManagerConfig.${name} = {
+{
+  options.specialConfig.hyprland = {
     monitors = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ", preferred, auto, 1" ];
@@ -64,7 +62,7 @@ customModules.ifEnabledInNixos {
   ];
 
   config = {
-    homeManagerConfig.hyprlock.enable = true;
+    specialConfig.hyprlock.enable = true;
     wayland.windowManager.hyprland = {
       enable = true;
 

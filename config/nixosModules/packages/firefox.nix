@@ -1,5 +1,9 @@
-{ customModules, ... }:
+{ lib, ... }:
 
-customModules.withEnableOption {
-  programs.firefox.enable = true;
+{
+  options.specialConfig.firefox.enable = lib.mkEnableOption "firefox";
+  
+  config = {
+    programs.firefox.enable = true;
+  };
 }

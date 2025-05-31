@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  homeManagerConfig = {
+  specialConfig = {
     hyprland.sensitivity = "-0.65";
     hyprland.no-hardware-cursor = true;
     hyprland.monitors = [

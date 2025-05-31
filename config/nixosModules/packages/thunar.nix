@@ -1,5 +1,9 @@
-{ customModules, ... }:
+{ lib, ... }:
 
-customModules.withEnableOption {
-  programs.thunar.enable = true;
+{
+  options.specialConfig.thunar.enable = lib.mkEnableOption "thunar";
+
+  config = {
+    programs.thunar.enable = true;
+  };
 }

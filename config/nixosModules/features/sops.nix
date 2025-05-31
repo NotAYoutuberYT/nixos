@@ -1,12 +1,6 @@
+{ lib, pkgs, ... }:
 {
-  name,
-  lib,
-  pkgs,
-  ...
-}:
-
-{
-  options.nixosConfig.${name}.enablePackage = lib.mkEnableOption "sops package";
+  options.specialConfig.sops.enablePackage = lib.mkEnableOption "sops package";
 
   config = {
     environment.systemPackages = [ pkgs.sops ];

@@ -1,10 +1,14 @@
-{ customModules, ... }:
+{ lib, ... }:
 
-customModules.withEnableOption {
-  programs = {
-    steam.enable = true;
-    steam.gamescopeSession.enable = true;
+{
+  options.specialConfig.steam.enable = lib.mkEnableOption "steam";
 
-    gamescope.enable = true;
+  config = {
+    programs = {
+      steam.enable = true;
+      steam.gamescopeSession.enable = true;
+
+      gamescope.enable = true;
+    };
   };
 }

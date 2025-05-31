@@ -9,10 +9,10 @@
 }:
 
 let
-  cfg = config.nixosConfig;
+  cfg = config.specialConfig;
 in
 {
-  options.nixosConfig = {
+  options.specialConfig = {
     username = lib.mkOption {
       default = "equi";
       type = lib.types.str;

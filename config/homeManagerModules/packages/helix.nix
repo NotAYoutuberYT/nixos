@@ -1,6 +1,6 @@
-{ customModules, ... }:
+{ ... }:
 
-customModules.ifEnabledInNixos {
+{
   programs.helix = {
     enable = true;
     defaultEditor = true;
@@ -13,7 +13,11 @@ customModules.ifEnabledInNixos {
         line-number = "relative";
         true-color = true;
 
-        lsp.display-messages = true;
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics = {
+          cursor-line = "warning";
+          other-lines = "disable";
+        };
 
         statusline = {
           left = [

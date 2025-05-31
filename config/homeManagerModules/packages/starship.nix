@@ -1,5 +1,4 @@
 {
-  customModules,
   osConfig,
   config,
   lib,
@@ -7,9 +6,9 @@
 }:
 
 let
-  ocfg = osConfig.nixosConfig;
+  ocfg = osConfig.specialConfig;
 in
-customModules.ifEnabledInNixos {
+{
   programs.starship = with config.colorScheme.palette; {
     enable = true;
 

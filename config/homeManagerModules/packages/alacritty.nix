@@ -1,78 +1,82 @@
 {
-  customModules,
   config,
   osConfig,
+  lib,
   ...
 }:
 
 let
   hex = color: "#${color}";
 in
-customModules.ifEnabledInNixos {
-  programs.alacritty = {
-    enable = true;
+{
+  options.specialConfig.alacritty.enable = lib.mkEnableOption "alacritty";
 
-    settings = with config.colorScheme.palette; {
-      window.opacity = 0.8;
-      window.dimensions = {
-        lines = 0;
-        columns = 0;
-      };
+  config = {
+    programs.alacritty = {
+      enable = true;
 
-      font.normal = {
-        family = osConfig.nixosConfig.monospaceFont.name;
-        style = "Regular";
-      };
-
-      cursor = {
-        style = "Beam";
-        thickness = 0.2;
-      };
-
-      colors = {
-        primary = {
-          background = hex base00;
-          foreground = hex base05;
-          dim_foreground = hex base04;
+      settings = with config.colorScheme.palette; {
+        window.opacity = 0.8;
+        window.dimensions = {
+          lines = 0;
+          columns = 0;
         };
 
-        selection = {
-          text = hex base00;
-          background = hex base05;
+        font.normal = {
+          family = osConfig.specialConfig.monospaceFont.name;
+          style = "Regular";
         };
 
         cursor = {
-          text = hex base00;
-          cursor = hex base05;
+          style = "Beam";
+          thickness = 0.2;
         };
 
-        hints = {
-          start = {
-            foreground = hex base0E;
-            background = hex base0E;
+        colors = {
+          primary = {
+            background = hex base00;
+            foreground = hex base05;
+            dim_foreground = hex base04;
           };
-        };
 
-        normal = {
-          black = hex base01;
-          white = hex base06;
-          red = hex base08;
-          green = hex base0B;
-          yellow = hex base0A;
-          blue = hex base0D;
-          magenta = hex base0E;
-          cyan = hex base0C;
-        };
+          selection = {
+            text = hex base00;
+            background = hex base05;
+          };
 
-        bright = {
-          black = hex base01;
-          white = hex base06;
-          red = hex base08;
-          green = hex base0B;
-          yellow = hex base0A;
-          blue = hex base0D;
-          magenta = hex base0E;
-          cyan = hex base0C;
+          cursor = {
+            text = hex base00;
+            cursor = hex base05;
+          };
+
+          hints = {
+            start = {
+              foreground = hex base0E;
+              background = hex base0E;
+            };
+          };
+
+          normal = {
+            black = hex base01;
+            white = hex base06;
+            red = hex base08;
+            green = hex base0B;
+            yellow = hex base0A;
+            blue = hex base0D;
+            magenta = hex base0E;
+            cyan = hex base0C;
+          };
+
+          bright = {
+            black = hex base01;
+            white = hex base06;
+            red = hex base08;
+            green = hex base0B;
+            yellow = hex base0A;
+            blue = hex base0D;
+            magenta = hex base0E;
+            cyan = hex base0C;
+          };
         };
       };
     };

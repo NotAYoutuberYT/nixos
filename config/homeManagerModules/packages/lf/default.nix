@@ -1,6 +1,6 @@
-{ customModules, pkgs, ... }:
+{ pkgs, ... }:
 
-customModules.ifEnabledInNixos {
+{
   xdg.configFile."lf/icons".source = ./icons;
 
   programs.lf = {

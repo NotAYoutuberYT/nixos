@@ -1,5 +1,4 @@
 {
-  customModules,
   config,
   lib,
   pkgs,
@@ -7,10 +6,10 @@
 }:
 
 let
-  cfg = config.nixosConfig;
+  cfg = config.specialConfig;
 in
-customModules.withEnableOption {
-  options.nixosConfig = {
+{
+  options.specialConfig = {
     monospaceFont = lib.mkOption {
       default = {
         package = pkgs.nerd-fonts.jetbrains-mono;

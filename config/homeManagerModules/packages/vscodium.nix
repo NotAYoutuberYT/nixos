@@ -1,5 +1,4 @@
 {
-  customModules,
   pkgs,
   inputs,
   config,
@@ -7,7 +6,7 @@
   ...
 }:
 
-customModules.ifEnabledInNixos {
+{
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
@@ -28,7 +27,7 @@ customModules.ifEnabledInNixos {
 
       userSettings = {
         "workbench.iconTheme" = "vscode-icons";
-        "editor.fontFamily" = osConfig.nixosConfig.monospaceFont.name;
+        "editor.fontFamily" = osConfig.specialConfig.monospaceFont.name;
         "files.autoSave" = "afterDelay";
         "[nix]"."editor.tabSize" = 2;
 
@@ -74,7 +73,8 @@ customModules.ifEnabledInNixos {
             "nixos" = {
               # the exact system pinned to isn't relevant, what's shown below is just a setup I know
               # will always be active, available, and as up to date as I need
-              "expr" = "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").nixosConfigurations.desktop.options";
+              "expr" =
+                "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").specialConfigurations.desktop.options";
             };
           };
         };

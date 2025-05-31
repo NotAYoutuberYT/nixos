@@ -1,20 +1,24 @@
-{ customModules, config, ... }:
+{ config, lib, ... }:
 
-customModules.withEnableOption {
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+{
+  options.specialConfig.nvidia.enable = lib.mkEnableOption "nvidia";
 
-  # nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
+  config = {
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+    # nvidia driver for Xorg and Wayland
+    services.xserver.videoDrivers = [ "nvidia" ];
 
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    hardware.nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
 }
