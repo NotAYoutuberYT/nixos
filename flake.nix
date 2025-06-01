@@ -33,22 +33,26 @@
 
   outputs =
     { nixpkgs, flake-utils, ... }@inputs:
-    flake-utils.lib.eachDefaultSystemPassThrough (
+    let
+      customLib = import ./utils/customLib.nix { inherit inputs; };
+      makeSystem = import ./hosts/builder.nix { inherit inputs customLib; };
+    in
+    {
+      homeManagerModules.default = ./config/baseHomeManager.nix;
+      nixosModules.default = ./config/baseNixos.nix;
+
+      nixosConfigurations = {
+        desktop = makeSystem ./hosts/desktop/configuration.nix;
+        envy = makeSystem ./hosts/envy/configuration.nix;
+      };
+    }
+    // flake-utils.lib.eachDefaultSystem (
       system:
       let
-        customLib = import ./utils/customLib.nix { inherit inputs; };
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        formatter.${system} = pkgs.nixfmt-tree;
-
-        homeManagerModules.default = ./config/baseHomeManager.nix;
-        nixosModules.default = ./config/baseNixos.nix;
-
-        nixosConfigurations = with customLib; {
-          desktop = makeSystem ./config/hosts/desktop/configuration.nix;
-          envy = makeSystem ./config/hosts/envy/configuration.nix;
-        };
+        formatter = pkgs.nixfmt-tree;
       }
     );
 }

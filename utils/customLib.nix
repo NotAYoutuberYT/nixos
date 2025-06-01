@@ -1,9 +1,6 @@
 { inputs }:
 let
   lib = inputs.nixpkgs.lib;
-  outputs = inputs.self.outputs;
-
-  customLib = (import ./customLib.nix) { inherit inputs; };
 in
 rec {
   # ====================== Filesystem Helpers ====================== #
@@ -26,29 +23,7 @@ rec {
     else
       lib.flatten (
         lib.mapAttrsToList (
-          file: type:
-          if (type == "directory") then
-            allModules (fullPath file)
-          else
-            (import (fullPath file))
+          file: type: if (type == "directory") then allModules (fullPath file) else (import (fullPath file))
         ) (builtins.readDir dir)
       );
-
-  # =========================== Builders =========================== #
-
-  makeSystem =
-    config:
-    inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit
-          inputs
-          outputs
-          customLib
-          ;
-      };
-      modules = [
-        config
-        outputs.nixosModules.default
-      ];
-    };
 }

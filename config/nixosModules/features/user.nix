@@ -54,6 +54,8 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
 
+      backupFileExtension = "bak";
+
       extraSpecialArgs = {
         inherit inputs customLib;
         outputs = inputs.self.outputs;

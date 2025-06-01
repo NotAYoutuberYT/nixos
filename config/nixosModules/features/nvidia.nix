@@ -3,7 +3,7 @@
 {
   options.specialConfig.nvidia.enable = lib.mkEnableOption "nvidia";
 
-  config = {
+  config = lib.mkIf config.specialConfig.nvidia.enable {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;

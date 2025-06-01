@@ -1,9 +1,14 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   options.specialConfig.bundles.desktop.enable = lib.mkEnableOption "desktop bundle";
 
-  config = {
+  config = lib.mkIf config.specialConfig.bundles.desktop.enable {
     specialConfig.usb-disks.enable = lib.mkDefault true;
     specialConfig.usb-keys.enable = lib.mkDefault true;
     specialConfig.gopass.enable = lib.mkDefault true;

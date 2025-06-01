@@ -1,4 +1,4 @@
-{lib, config, ...}:
+{ lib, config, ... }:
 
 {
   options.specialConfig.sound = {
@@ -6,7 +6,7 @@
     jack = lib.mkEnableOption "pipewire jack emulation";
   };
 
-  config = {
+  config = lib.mkIf config.specialConfig.sound.enable {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

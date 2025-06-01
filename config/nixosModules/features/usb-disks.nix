@@ -1,9 +1,14 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   options.specialConfig.usb-disks.enable = lib.mkEnableOption "usb-disks";
 
-  config = {
+  config = lib.mkIf config.specialConfig.usb-disks.enable {
     services.gvfs.enable = true;
     services.udisks2.enable = true;
 

@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 let
   pinentry-flavor = pkgs.pinentry-curses;
@@ -6,7 +11,7 @@ in
 {
   options.specialConfig.gopass.enable = lib.mkEnableOption "gopass";
 
-  config = {
+  config = lib.mkIf config.specialConfig.gopass.enable {
     environment.systemPackages = with pkgs; [
       gopass
       pinentry-flavor

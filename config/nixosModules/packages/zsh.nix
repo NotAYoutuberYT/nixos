@@ -1,14 +1,16 @@
 {
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }:
 
 {
-  options.specialConfig.zsh.enable = lib.mkEnableOption "zsh";
+  options.specialConfig.zsh.enable = lib.mkEnableOption "zsh" // {
+    default = config.specialConfig.shell == pkgs.zsh;
+  };
 
-  config = {
+  config = lib.mkIf config.specialConfig.zsh.enable {
     programs.zsh.enable = true;
   };
 }
