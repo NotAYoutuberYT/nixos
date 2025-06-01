@@ -84,8 +84,8 @@ customModules.ifEnabledInNixos {
         cursor.no_hardware_cursors = cfg.no-hardware-cursor;
 
         general = {
-          gaps_in = "4";
-          gaps_out = "16";
+          gaps_in = "2";
+          gaps_out = "4";
 
           border_size = "2";
 
@@ -96,7 +96,7 @@ customModules.ifEnabledInNixos {
           ];
           "col.inactive_border" = rgb base03;
 
-          resize_on_border = "false";
+          resize_on_border = "true";
           allow_tearing = "false";
           layout = "dwindle";
         };
