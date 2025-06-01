@@ -1,12 +1,10 @@
-{
-  customModules,
-  lib,
-  config,
-  ...
-}:
+{lib, config, ...}:
 
-customModules.withEnableOption {
-  options.specialConfig.sound.jack = lib.mkEnableOption "pipewire jack emulation";
+{
+  options.specialConfig.sound = {
+    enable = lib.mkEnableOption "sound";
+    jack = lib.mkEnableOption "pipewire jack emulation";
+  };
 
   config = {
     security.rtkit.enable = true;

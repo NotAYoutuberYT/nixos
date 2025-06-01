@@ -12,7 +12,6 @@
     specialConfig.hyprland.enable = lib.mkDefault true;
     specialConfig.firefox.enable = lib.mkDefault true;
     specialConfig.git.enable = lib.mkDefault true;
-    specialConfig.fonts.enable = lib.mkDefault true;
     specialConfig.thunar.enable = lib.mkDefault true;
 
     environment.systemPackages = with pkgs; [
