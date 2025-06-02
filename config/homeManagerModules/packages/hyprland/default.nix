@@ -1,5 +1,4 @@
 {
-  name,
   pkgs,
   lib,
   config,
@@ -10,9 +9,7 @@ let
   cfg = config.specialConfig.hyprland;
 
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.waybar}/bin/waybar &
-    ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
-    ${pkgs.hyprlock}/bin/hyprlock --immediate
+    ${pkgs.waybar}/bin/waybar
   '';
 
   wallpaperInit = pkgs.pkgs.writeShellScriptBin "wallpaper" ''

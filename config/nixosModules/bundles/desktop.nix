@@ -15,6 +15,7 @@
     specialConfig.bluetooth.enable = lib.mkDefault true;
     specialConfig.sound.enable = lib.mkDefault true;
     specialConfig.hyprland.enable = lib.mkDefault true;
+    specialConfig.ly.enable = lib.mkDefault true;
     specialConfig.firefox.enable = lib.mkDefault true;
     specialConfig.git.enable = lib.mkDefault true;
     specialConfig.thunar.enable = lib.mkDefault true;
