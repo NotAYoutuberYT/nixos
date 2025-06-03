@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   options.specialConfig.sound = {
@@ -15,5 +20,9 @@
       pulse.enable = true;
       jack.enable = config.specialConfig.sound.jack;
     };
+
+    environment.systemPackages = with pkgs; [
+      pavucontrol
+    ];
   };
 }

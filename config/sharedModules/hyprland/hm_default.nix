@@ -2,21 +2,22 @@
   pkgs,
   lib,
   config,
+  osConfig,
   ...
 }:
 
 let
   cfg = config.specialConfig.hyprland;
 
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.waybar}/bin/waybar
+  wallpaperInit = pkgs.pkgs.writeShellScriptBin "wallpaper" ''
+    ${lib.getExe pkgs.swww} init
+    sleep 1
+    ${lib.getExe pkgs.swww} img --transition-type wipe ${./wallpaper.png}
   '';
 
-  wallpaperInit = pkgs.pkgs.writeShellScriptBin "wallpaper" ''
-    ${pkgs.swww}/bin/swww init
-    sleep 1
-
-    ${pkgs.swww}/bin/swww img --transition-type wipe ${./wallpaper.png}
+  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
+    ${pkgs.waybar}/bin/waybar &
+    ${wallpaperInit}/bin/wallpaper
   '';
 
   rgb = color: "rgb(${color})";
@@ -54,27 +55,21 @@ in
     };
   };
 
-  imports = [
-    ./hyprlock.nix
-  ];
+  imports = lib.optional osConfig.specialConfig.hyprland.enable ./hm_hyprlock.nix;
 
-  config = {
-    specialConfig.hyprlock.enable = true;
+  config = lib.mkIf osConfig.specialConfig.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
 
       settings = with config.colorScheme.palette; {
-        "$terminal" = "${pkgs.alacritty}/bin/alacritty";
-        "$fileManager" = "${pkgs.alacritty}/bin/alacritty --command ${pkgs.lf}/bin/lf";
-        "$menu" = "rofi -show drun -show-icons";
-        "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
+        "$terminal" = "${lib.getExe pkgs.alacritty}";
+        "$fileManager" = "${lib.getExe pkgs.alacritty} --command ${lib.getExe pkgs.lf}";
+        "$menu" = "${lib.getExe pkgs.rofi} -show drun -show-icons";
+        "$lock" = "${lib.getExe pkgs.hyprlock}";
 
         monitor = cfg.monitors;
         workspace = cfg.workspaces;
-        exec-once = [
-          "${startupScript}/bin/start"
-          "${wallpaperInit}/bin/wallpaper"
-        ];
+        exec-once = [ "${lib.getExe startupScript}" ];
 
         cursor.no_hardware_cursors = cfg.no-hardware-cursor;
 

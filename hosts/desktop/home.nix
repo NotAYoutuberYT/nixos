@@ -13,6 +13,9 @@
       "2, monitor:DP-4"
     ];
 
-    bundles.desktop.enable = true;
+    bundles = {
+      desktop.enable = true;
+      command-line.enable = true;
+    };
   };
 }

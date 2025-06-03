@@ -1,8 +1,9 @@
 {
+  inputs,
+  pkgs,
   lib,
   config,
-  pkgs,
-  inputs,
+  osConfig,
   ...
 }:
 
@@ -10,30 +11,32 @@ let
   nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
 in
 {
-  programs.zsh = {
-    enable = true;
+  config = lib.mkIf (osConfig.specialConfig.shell == pkgs.zsh) {
+    programs.zsh = {
+      enable = true;
 
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
 
-    autosuggestion.enable = true;
+      autosuggestion.enable = true;
 
-    history = {
-      size = 1000;
-      path = "${config.xdg.dataHome}/.zsh/history";
+      history = {
+        size = 1000;
+        path = "${config.xdg.dataHome}/.zsh/history";
 
-      ignoreAllDups = true;
-      ignoreSpace = true;
-      share = true;
+        ignoreAllDups = true;
+        ignoreSpace = true;
+        share = true;
+      };
+
+      shellAliases = {
+        ls = "${pkgs.eza}/bin/eza";
+        cat = "${pkgs.bat}/bin/bat";
+      };
+
+      initContent = lib.concatStringsSep "\n" [
+        "${nix-colors-lib.shellThemeFromScheme { scheme = config.colorScheme; }}"
+      ];
     };
-
-    shellAliases = {
-      ls = "${pkgs.eza}/bin/eza";
-      cat = "${pkgs.bat}/bin/bat";
-    };
-
-    initContent = lib.concatStringsSep "\n" [
-      "${nix-colors-lib.shellThemeFromScheme { scheme = config.colorScheme; }}"
-    ];
   };
 }

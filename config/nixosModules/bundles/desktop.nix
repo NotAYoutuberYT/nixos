@@ -1,6 +1,6 @@
 {
-  lib,
   pkgs,
+  lib,
   config,
   ...
 }:
@@ -16,17 +16,10 @@
     specialConfig.sound.enable = lib.mkDefault true;
     specialConfig.hyprland.enable = lib.mkDefault true;
     specialConfig.ly.enable = lib.mkDefault true;
-    specialConfig.firefox.enable = lib.mkDefault true;
-    specialConfig.git.enable = lib.mkDefault true;
     specialConfig.thunar.enable = lib.mkDefault true;
 
     environment.systemPackages = with pkgs; [
-      waybar
-      vscodium
       spotify
-      pavucontrol
-      lf
-      alacritty
     ];
   };
 }

@@ -1,31 +1,35 @@
-{ ... }:
+{ lib, config, ... }:
 
 {
-  programs.gh.enable = true;
+  options.specialConfig.git.enable = lib.mkEnableOption "git";
 
-  programs.git = {
-    enable = true;
+  config = lib.mkIf config.specialConfig.git.enable {
+    programs.gh.enable = true;
 
-    userName = "bryce";
-    userEmail = "utbryceh@gmail.com";
+    programs.git = {
+      enable = true;
 
-    aliases = {
-      aa = "add -A";
-      lo = "log --oneline";
-      cm = "commit -m";
-    };
+      userName = "bryce";
+      userEmail = "utbryceh@gmail.com";
 
-    extraConfig = {
-      core = {
-        editor = "codium --wait";
+      aliases = {
+        aa = "add -A";
+        lo = "log --oneline";
+        cm = "commit -m";
       };
 
-      init = {
-        defaultbranch = "main";
-      };
+      extraConfig = {
+        core = {
+          editor = "codium --wait";
+        };
 
-      pull = {
-        rebase = true;
+        init = {
+          defaultbranch = "main";
+        };
+
+        pull = {
+          rebase = true;
+        };
       };
     };
   };

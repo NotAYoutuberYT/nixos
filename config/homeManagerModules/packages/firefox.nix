@@ -1,15 +1,12 @@
 {
   pkgs,
-  osConfig,
-  config,
   lib,
+  config,
+  osConfig,
   ...
 }:
 
 let
-  ocfg = osConfig.specialConfig;
-  cfg = config.specialConfig.firefox;
-
   lock-false = {
     Value = false;
     Status = "locked";
@@ -22,6 +19,8 @@ let
 in
 {
   options.specialConfig.firefox = {
+    enable = lib.mkEnableOption "firefox";
+
     wayland = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -29,8 +28,8 @@ in
     };
   };
 
-  config = {
-    home.sessionVariables = lib.mkIf cfg.wayland {
+  config = lib.mkIf config.specialConfig.firefox.enable {
+    home.sessionVariables = lib.mkIf config.specialConfig.firefox.wayland {
       MOZ_ENABLE_WAYLAND = "1";
     };
 
@@ -40,7 +39,7 @@ in
         "en-US"
       ];
 
-      profiles.${ocfg.username} = {
+      profiles.${osConfig.specialConfig.username} = {
         id = 0;
         isDefault = true;
 

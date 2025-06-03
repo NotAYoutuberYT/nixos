@@ -1,43 +1,52 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
-  xdg.configFile."lf/icons".source = ./icons;
+  options.specialConfig.lf.enable = lib.mkEnableOption "lf";
 
-  programs.lf = {
-    enable = true;
+  config = lib.mkIf config.specialConfig.lf.enable {
+    xdg.configFile."lf/icons".source = ./icons;
 
-    commands = {
-      dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
-      editor-open = ''$$EDITOR $F'';
+    programs.lf = {
+      enable = true;
 
-      mkdir = ''
-        ''${{
-          clear
-          printf "directory name: "
-          read DIR
-          mkdir $DIR
-        }}
-      '';
+      commands = {
+        dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
+        editor-open = ''$$EDITOR $F'';
 
-      touch = ''
-        ''${{
-          clear
-          printf "file name: "
-          read FILENAME
-          touch $FILENAME
-        }}
-      '';
-    };
+        mkdir = ''
+          ''${{
+            clear
+            printf "directory name: "
+            read DIR
+            mkdir $DIR
+          }}
+        '';
 
-    keybindings = {
-      o = "dragon-out";
+        touch = ''
+          ''${{
+            clear
+            printf "file name: "
+            read FILENAME
+            touch $FILENAME
+          }}
+        '';
+      };
 
-      m = "mkdir";
-      t = "touch";
-    };
+      keybindings = {
+        o = "dragon-out";
 
-    settings = {
-      icons = true;
+        m = "mkdir";
+        t = "touch";
+      };
+
+      settings = {
+        icons = true;
+      };
     };
   };
 }

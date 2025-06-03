@@ -1,16 +1,10 @@
 {
   lib,
   config,
-  inputs,
-  outputs,
-  customLib,
   pkgs,
   ...
 }:
 
-let
-  cfg = config.specialConfig;
-in
 {
   options.specialConfig = {
     username = lib.mkOption {
@@ -19,7 +13,7 @@ in
       description = "system-wide username";
     };
 
-    homeConfigModule = lib.mkOption {
+    hostHomeConfigModule = lib.mkOption {
       type = lib.types.path;
       description = ''
         home module location  
@@ -50,34 +44,17 @@ in
   };
 
   config = {
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-
-      backupFileExtension = "bak";
-
-      extraSpecialArgs = {
-        inherit inputs customLib;
-        outputs = inputs.self.outputs;
-      };
-
-      users.${cfg.username}.imports = [
-        cfg.homeConfigModule
-        outputs.homeManagerModules.default
-      ];
-    };
-
     users.mutableUsers = false;
-    users.users.${cfg.username} =
+    users.users.${config.specialConfig.username} =
       {
         isNormalUser = true;
-        shell = cfg.shell;
-        description = cfg.username;
+        shell = config.specialConfig.shell;
+        description = config.specialConfig.username;
         extraGroups = [
           "wheel"
         ];
       }
-      // cfg.passwordAttrset
-      // cfg.extraSettings;
+      // config.specialConfig.passwordAttrset
+      // config.specialConfig.extraSettings;
   };
 }

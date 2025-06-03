@@ -1,48 +1,52 @@
-{ ... }:
+{ lib, config, ... }:
 
 {
-  programs.helix = {
-    enable = true;
-    defaultEditor = true;
+  options.specialConfig.helix.enable = lib.mkEnableOption "helix";
 
-    settings = {
-      theme = "base16_default";
+  config = lib.mkIf config.specialConfig.helix.enable {
+    programs.helix = {
+      enable = true;
+      defaultEditor = true;
 
-      editor = {
-        cursorline = true;
-        line-number = "relative";
-        true-color = true;
+      settings = {
+        theme = "base16_default";
 
-        end-of-line-diagnostics = "hint";
-        inline-diagnostics = {
-          cursor-line = "warning";
-          other-lines = "disable";
+        editor = {
+          cursorline = true;
+          line-number = "relative";
+          true-color = true;
+
+          end-of-line-diagnostics = "hint";
+          inline-diagnostics = {
+            cursor-line = "warning";
+            other-lines = "disable";
+          };
+
+          statusline = {
+            left = [
+              "mode"
+              "spinner"
+              "version-control"
+              "file-name"
+            ];
+          };
+
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
         };
 
-        statusline = {
-          left = [
-            "mode"
-            "spinner"
-            "version-control"
-            "file-name"
-          ];
+        keys.normal = {
+          A-x = "extend_to_line_bounds";
+          X = "select_line_above";
         };
 
-        cursor-shape = {
-          insert = "bar";
-          normal = "block";
-          select = "underline";
+        keys.select = {
+          A-x = "extend_to_line_bounds";
+          X = "select_line_above";
         };
-      };
-
-      keys.normal = {
-        A-x = "extend_to_line_bounds";
-        X = "select_line_above";
-      };
-
-      keys.select = {
-        A-x = "extend_to_line_bounds";
-        X = "select_line_above";
       };
     };
   };

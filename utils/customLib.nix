@@ -24,6 +24,31 @@ rec {
       lib.flatten (
         lib.mapAttrsToList (
           file: type: if (type == "directory") then allModules (fullPath file) else (import (fullPath file))
-        ) (builtins.readDir dir)
+        ) contents
+      );
+
+  allSharedModules =
+    dir:
+    let
+      contents = builtins.readDir dir;
+      fullPath = fullyQualifiedPath dir;
+    in
+    if (contents ? "hm_default.nix" || contents ? "os_default.nix") then
+      [
+        {
+          homeManagerModule = import (fullPath "hm_default.nix");
+          nixosModule = import (fullPath "os_default.nix");
+        }
+      ]
+    else if (contents ? "default.nix") then
+      [
+        (import (fullPath "default.nix"))
+      ]
+    else
+      lib.flatten (
+        lib.mapAttrsToList (
+          file: type:
+          if (type == "directory") then allSharedModules (fullPath file) else (import (fullPath file))
+        ) contents
       );
 }

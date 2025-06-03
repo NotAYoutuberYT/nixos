@@ -6,7 +6,7 @@
   ];
 
   specialConfig = {
-    homeConfigModule = ./home.nix;
+    hostHomeConfigModule = ./home.nix;
 
     bundles.command-line.enable = true;
     bundles.desktop.enable = true;

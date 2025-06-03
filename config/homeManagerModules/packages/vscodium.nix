@@ -1,80 +1,85 @@
 {
-  pkgs,
   inputs,
+  pkgs,
+  lib,
   config,
   osConfig,
   ...
 }:
 
 {
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-    mutableExtensionsDir = false;
+  options.specialConfig.vscodium.enable = lib.mkEnableOption "vscodium";
 
-    profiles.default = {
-      extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}; [
-        open-vsx.vscode-icons-team.vscode-icons
-        open-vsx.jnoortheen.nix-ide
-        open-vsx.rust-lang.rust-analyzer
-        open-vsx.tamasfe.even-better-toml
-        open-vsx.james-yu.latex-workshop
-        open-vsx.bradlc.vscode-tailwindcss
-        open-vsx.myriad-dreamin.tinymist
-        vscode-marketplace.dioxuslabs.dioxus
-        vscode-marketplace.tintedtheming.base16-tinted-themes
-      ];
+  config = lib.mkIf config.specialConfig.vscodium.enable {
+    programs.vscode = {
+      enable = true;
+      package = pkgs.vscodium;
+      mutableExtensionsDir = false;
 
-      userSettings = {
-        "workbench.iconTheme" = "vscode-icons";
-        "editor.fontFamily" = osConfig.specialConfig.monospaceFont.name;
-        "files.autoSave" = "afterDelay";
-        "[nix]"."editor.tabSize" = 2;
+      profiles.default = {
+        extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}; [
+          open-vsx.vscode-icons-team.vscode-icons
+          open-vsx.jnoortheen.nix-ide
+          open-vsx.rust-lang.rust-analyzer
+          open-vsx.tamasfe.even-better-toml
+          open-vsx.james-yu.latex-workshop
+          open-vsx.bradlc.vscode-tailwindcss
+          open-vsx.myriad-dreamin.tinymist
+          vscode-marketplace.dioxuslabs.dioxus
+          vscode-marketplace.tintedtheming.base16-tinted-themes
+        ];
 
-        "terminal.integrated.enablePersistentSessions" = false;
-        "terminal.integrated.enableImages" = true;
-        "terminal.integrated.customGlyphs" = true;
-        "terminal.integrated.gpuAcceleration" = "on";
-        "terminal.integrated.sendKeybindingsToShell" = true;
+        userSettings = {
+          "workbench.iconTheme" = "vscode-icons";
+          "editor.fontFamily" = osConfig.specialConfig.monospaceFont.name;
+          "files.autoSave" = "afterDelay";
+          "[nix]"."editor.tabSize" = 2;
 
-        "files.autoSaveDelay" = 50;
+          "terminal.integrated.enablePersistentSessions" = false;
+          "terminal.integrated.enableImages" = true;
+          "terminal.integrated.customGlyphs" = true;
+          "terminal.integrated.gpuAcceleration" = "on";
+          "terminal.integrated.sendKeybindingsToShell" = true;
 
-        "vsicons.dontShowNewVersionMessage" = true;
+          "files.autoSaveDelay" = 50;
 
-        "workbench.colorTheme" = "base16-${config.colorScheme.slug}";
+          "vsicons.dontShowNewVersionMessage" = true;
 
-        "tailwindCSS.experimental.classRegex" = [ "class\\s*:\\s*\"([^\"]*)" ];
-        "tailwindCSS.includeLanguages" = {
-          "rust" = "html";
-        };
+          "workbench.colorTheme" = "base16-${config.colorScheme.slug}";
 
-        "tinymist.formatterMode" = "typstyle";
-        "[typst]" = {
-          "editor.formatOnSave" = true;
-        };
+          "tailwindCSS.experimental.classRegex" = [ "class\\s*:\\s*\"([^\"]*)" ];
+          "tailwindCSS.includeLanguages" = {
+            "rust" = "html";
+          };
 
-        "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
-        "nix.enableLanguageServer" = true;
-        "nix.serverSettings" = {
-          "nixd" = {
-            "formatting" = {
-              "command" = [
-                "nix"
-                "fmt"
-                "--"
-                "-"
-              ];
-            };
+          "tinymist.formatterMode" = "typstyle";
+          "[typst]" = {
+            "editor.formatOnSave" = true;
+          };
 
-            "nixpkgs" = {
-              "expr" = "import <nixpkgs> { }";
-            };
+          "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
+          "nix.enableLanguageServer" = true;
+          "nix.serverSettings" = {
+            "nixd" = {
+              "formatting" = {
+                "command" = [
+                  "nix"
+                  "fmt"
+                  "--"
+                  "-"
+                ];
+              };
 
-            "nixos" = {
-              # the exact system pinned to isn't relevant, what's shown below is just a setup I know
-              # will always be active, available, and as up to date as I need
-              "expr" =
-                "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").specialConfigurations.desktop.options";
+              "nixpkgs" = {
+                "expr" = "import <nixpkgs> { }";
+              };
+
+              "nixos" = {
+                # the exact system pinned to isn't relevant, what's shown below is just a setup I know
+                # will always be active, available, and as up to date as I need
+                "expr" =
+                  "(builtins.getFlake \"github:NotAYoutuberYT/nixos\").specialConfigurations.desktop.options";
+              };
             };
           };
         };

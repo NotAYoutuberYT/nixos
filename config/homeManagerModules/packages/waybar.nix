@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   osConfig,
   ...
@@ -93,11 +94,13 @@ let
   '';
 in
 {
-  programs.waybar = {
-    enable = true;
-    style = css;
-    settings = {
-      mainBar = mainWaybarConfig;
+  options.specialConfig.waybar.enable = lib.mkEnableOption "waybar";
+
+  config = lib.mkIf config.specialConfig.waybar.enable {
+    programs.waybar = {
+      enable = true;
+      style = css;
+      settings.mainBar = mainWaybarConfig;
     };
   };
 }

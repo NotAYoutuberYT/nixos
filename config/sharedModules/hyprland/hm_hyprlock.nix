@@ -1,20 +1,15 @@
 {
   config,
-  lib,
   osConfig,
   ...
 }:
 
 let
-  cfg = config.specialConfig.hyprlock;
-
   rgb = color: "rgb(${color})";
   rgba = color: alpha: "rgba(${color}${alpha})";
 in
 {
-  options.specialConfig.hyprlock.enable = lib.mkEnableOption "hyprlock";
-
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.hyprlock = {
       enable = true;
 

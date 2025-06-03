@@ -1,10 +1,16 @@
-{ lib, ... }:
+{ lib, config, ... }:
 
 {
   options.specialConfig.bundles.desktop.enable = lib.mkEnableOption "desktop bundle";
 
-  config = {
-    specialConfig.gtk.enable = lib.mkDefault true;
-    specialConfig.xdg.enable = lib.mkDefault true;
+  config.specialConfig = lib.mkIf config.specialConfig.bundles.desktop.enable {
+    gtk.enable = lib.mkDefault true;
+    xdg.enable = lib.mkDefault true;
+
+    alacritty.enable = lib.mkDefault true;
+    vscodium.enable = lib.mkDefault true;
+    firefox.enable = lib.mkDefault true;
+
+    waybar.enable = lib.mkDefault true;
   };
 }

@@ -1,7 +1,7 @@
 {
+  lib,
   config,
   osConfig,
-  lib,
   ...
 }:
 
@@ -11,7 +11,7 @@ in
 {
   options.specialConfig.alacritty.enable = lib.mkEnableOption "alacritty";
 
-  config = {
+  config = lib.mkIf config.specialConfig.alacritty.enable {
     programs.alacritty = {
       enable = true;
 
