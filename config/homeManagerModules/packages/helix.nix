@@ -16,6 +16,8 @@
           line-number = "relative";
           true-color = true;
 
+          rulers = [120];
+
           end-of-line-diagnostics = "hint";
           inline-diagnostics = {
             cursor-line = "warning";
