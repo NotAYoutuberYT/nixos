@@ -10,9 +10,8 @@ let
   cfg = config.specialConfig.hyprland;
 
   wallpaperInit = pkgs.pkgs.writeShellScriptBin "wallpaper" ''
-    ${lib.getExe pkgs.swww} init
-    sleep 1
-    ${lib.getExe pkgs.swww} img --transition-type wipe ${./wallpaper.png}
+    ${lib.getExe' pkgs.swww "swww-daemon"} &
+    ${lib.getExe' pkgs.swww "swww"} img --transition-type none ${./wallpaper.png}
   '';
 
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
