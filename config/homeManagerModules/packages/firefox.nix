@@ -216,7 +216,7 @@ in
 
         # ---- PREFERENCES ----
         # Check about:config for options.
-        Preferences = {
+        settings = {
           "browser.contentblocking.category" = {
             Value = "strict";
             Status = "locked";

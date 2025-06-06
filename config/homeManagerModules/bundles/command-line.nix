@@ -7,7 +7,8 @@
     git.enable = lib.mkDefault true;
     helix.enable = lib.mkDefault true;
     starship.enable = lib.mkDefault true;
-
     zoxide.enable = lib.mkDefault true;
+
+    zellij.enable = true;
   };
 }

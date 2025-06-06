@@ -11,6 +11,8 @@
     vscodium.enable = lib.mkDefault true;
     firefox.enable = lib.mkDefault true;
 
+    ncspot.enable = lib.mkDefault true;
+
     waybar.enable = lib.mkDefault true;
   };
 }

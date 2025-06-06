@@ -114,7 +114,7 @@ in
           rounding = "6";
 
           active_opacity = "1.0";
-          inactive_opacity = "0.9";
+          inactive_opacity = "1.0";
 
           shadow = {
             enabled = "true";
@@ -148,8 +148,8 @@ in
         };
 
         dwindle = {
-          pseudotile = "true";
-          preserve_split = "true";
+          pseudotile = "false";
+          preserve_split = "false";
         };
 
         master = {
@@ -179,7 +179,7 @@ in
           workspace_swipe = "false";
         };
 
-        "$mainMod" = "SUPER";
+        "$mainMod" = "ALT";
 
         bind = [
           "$mainMod, RETURN, exec, $terminal"
