@@ -3,7 +3,7 @@
 {
   specialConfig = {
     hyprland.sensitivity = "-0.65";
-    hyprland.no-hardware-cursor = true;
+    hyprland.hw-cursor-cpu-buffer = true;
     hyprland.monitors = [
       "DP-6, 3840x2160@144, 0x0, 1"
       "DP-4, 2560x1440@170, 3840x0, 1"

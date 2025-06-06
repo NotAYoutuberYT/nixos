@@ -48,7 +48,7 @@ in
       description = "mouse acceleration";
     };
 
-    no-hardware-cursor = lib.mkOption {
+    hw-cursor-cpu-buffer = lib.mkOption {
       type = lib.types.bool;
       default = false;
     };
@@ -70,7 +70,15 @@ in
         workspace = cfg.workspaces;
         exec-once = [ "${lib.getExe startupScript}" ];
 
-        cursor.no_hardware_cursors = cfg.no-hardware-cursor;
+        cursor = {
+          use_cpu_buffer = cfg.hw-cursor-cpu-buffer;
+          inactive_timeout = 6;
+        };
+
+        ecosystem = {
+          no_update_news = true;
+          no_donation_nag = true;
+        };
 
         general = {
           gaps_in = "2";
