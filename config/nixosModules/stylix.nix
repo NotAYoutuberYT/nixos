@@ -61,6 +61,11 @@ in
       enable = true;
       base16Scheme = config.specialConfig.stylix.theme;
       image = tinted-wallpaper;
+      cursor = {
+        name = "rose-pine-hyprcursor";
+        package = pkgs.rose-pine-hyprcursor;
+        size = 24;
+      };
 
       fonts = {
         serif = {
