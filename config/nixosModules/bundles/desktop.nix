@@ -20,6 +20,8 @@
 
     environment.systemPackages = with pkgs; [
       spotify
+      pkgs.cm_unicode
+      pkgs.corefonts
     ];
   };
 }
