@@ -10,7 +10,7 @@ let
   cfg = config.specialConfig.hyprland;
 
   startupScript = pkgs.pkgs.writeShellScriptBin "startup" ''
-    ${pkgs.waybar}/bin/waybar
+    ${pkgs.waybar}/bin/waybar & ${lib.getExe pkgs.wbg} ${config.stylix.image}
   '';
 in
 {
