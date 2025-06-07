@@ -33,6 +33,8 @@ in
       MOZ_ENABLE_WAYLAND = "1";
     };
 
+    stylix.targets.firefox.profileNames = [ "${osConfig.specialConfig.username}" ];
+
     programs.firefox = {
       enable = true;
       languagePacks = [

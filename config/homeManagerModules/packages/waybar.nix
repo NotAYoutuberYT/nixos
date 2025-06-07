@@ -50,15 +50,15 @@ let
     };
   };
 
-  css = with config.colorScheme.palette; ''
+  css = with config.lib.stylix.colors.withHashtag; ''
         * {
           font-size: 20px;
-    	    font-family: ${osConfig.specialConfig.monospaceFont.name};
+    	    font-family: ${config.stylix.fonts.monospace.name};
         }
 
         window#waybar {
-    	    background: #${base01};
-    	    color: #${base04};
+    	    background: ${base01};
+    	    color: ${base04};
           padding: 1px 0;
         }
 
@@ -69,27 +69,27 @@ let
         #clock {
           padding: 0 6px;
           border-radius: 8px;
-          background: #${base00};
+          background: ${base00};
         }
 
         #workspaces {
           padding: 0 6px;
-          background-color: #${base01};
+          background-color: ${base01};
         }
 
         #workspaces button {
           padding: 0 2px;
-          color: #${base04};
+          color: ${base04};
           border-radius: 8px;
         }
 
         #workspaces button.visible {
-    	    background-color: #${base02};
+    	    background-color: ${base02};
         }
 
         #workspaces button.active {
-    	    background-color: #${base04};
-          color: #${base00};
+    	    background-color: ${base04};
+          color: ${base00};
         }
   '';
 in
@@ -97,6 +97,7 @@ in
   options.specialConfig.waybar.enable = lib.mkEnableOption "waybar";
 
   config = lib.mkIf config.specialConfig.waybar.enable {
+    stylix.targets.waybar.enable = false;
     programs.waybar = {
       enable = true;
       style = css;

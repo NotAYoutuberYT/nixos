@@ -3,7 +3,6 @@
   pkgs,
   lib,
   config,
-  osConfig,
   ...
 }:
 
@@ -26,12 +25,10 @@
           open-vsx.bradlc.vscode-tailwindcss
           open-vsx.myriad-dreamin.tinymist
           vscode-marketplace.dioxuslabs.dioxus
-          vscode-marketplace.tintedtheming.base16-tinted-themes
         ];
 
         userSettings = {
           "workbench.iconTheme" = "vscode-icons";
-          "editor.fontFamily" = osConfig.specialConfig.monospaceFont.name;
           "files.autoSave" = "afterDelay";
           "[nix]"."editor.tabSize" = 2;
 
@@ -44,8 +41,6 @@
           "files.autoSaveDelay" = 50;
 
           "vsicons.dontShowNewVersionMessage" = true;
-
-          "workbench.colorTheme" = "base16-${config.colorScheme.slug}";
 
           "tailwindCSS.experimental.classRegex" = [ "class\\s*:\\s*\"([^\"]*)" ];
           "tailwindCSS.includeLanguages" = {

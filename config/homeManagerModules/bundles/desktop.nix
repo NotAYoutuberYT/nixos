@@ -4,7 +4,6 @@
   options.specialConfig.bundles.desktop.enable = lib.mkEnableOption "desktop bundle";
 
   config.specialConfig = lib.mkIf config.specialConfig.bundles.desktop.enable {
-    gtk.enable = lib.mkDefault true;
     xdg.enable = lib.mkDefault true;
 
     alacritty.enable = lib.mkDefault true;

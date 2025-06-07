@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   config,
@@ -7,9 +6,6 @@
   ...
 }:
 
-let
-  nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
-in
 {
   config = lib.mkIf (osConfig.specialConfig.shell == pkgs.zsh) {
     programs.zsh = {
@@ -33,10 +29,6 @@ in
         ls = "${pkgs.eza}/bin/eza";
         cat = "${pkgs.bat}/bin/bat";
       };
-
-      initContent = lib.concatStringsSep "\n" [
-        "${nix-colors-lib.shellThemeFromScheme { scheme = config.colorScheme; }}"
-      ];
     };
   };
 }

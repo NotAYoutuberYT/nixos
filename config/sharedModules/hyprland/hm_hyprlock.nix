@@ -1,19 +1,11 @@
-{
-  config,
-  osConfig,
-  ...
-}:
+{ config, ... }:
 
-let
-  rgb = color: "rgb(${color})";
-  rgba = color: alpha: "rgba(${color}${alpha})";
-in
 {
   config = {
     programs.hyprlock = {
       enable = true;
 
-      settings = with config.colorScheme.palette; {
+      settings = {
         general = {
           disable_loading_bar = true;
 
@@ -26,13 +18,11 @@ in
           ignore_empty_input = true;
         };
 
-        background = [
-          {
-            path = "${./wallpaper.png}";
-            blur_passes = 2;
-            blur_size = 4;
-          }
-        ];
+        background = {
+          path = "${./wallpaper.png}";
+          blur_passes = 2;
+          blur_size = 4;
+        };
 
         label = [
           {
@@ -41,36 +31,27 @@ in
             valign = "center";
             text = "hi, $USER";
             font_size = 25;
-            font_family = osConfig.specialConfig.monospaceFont.name;
-            font_color = rgb base05;
+            font_family = config.stylix.fonts.monospace.name;
           }
         ];
 
-        input-field = [
-          {
-            size = "180, 45";
-            position = "0, 120";
-            dots_center = true;
-            dots_size = 0.15;
-            rounding = 5;
-            outline_thickness = 3;
-            shadow_passes = 2;
-            fade_on_empty = true;
-            fade_timeout = 1000;
-            placeholder_text = "";
+        input-field = {
+          size = "180, 45";
+          position = "0, 120";
+          dots_center = true;
+          dots_size = 0.15;
+          rounding = 5;
+          outline_thickness = 3;
+          shadow_passes = 2;
+          fade_on_empty = true;
+          fade_timeout = 1000;
+          placeholder_text = "";
+          font_family = config.stylix.fonts.monospace.name;
 
-            font_family = osConfig.specialConfig.monospaceFont.name;
-            font_color = rgb base05;
-            inner_color = rgba base01 "20";
-            outer_color = rgba base00 "30";
-            fail_color = rgba base08 "25";
-            check_color = rgba base0A "25";
-
-            fail_text = "";
-            fail_timeout = 2000;
-            fail_transition = 300;
-          }
-        ];
+          fail_text = "";
+          fail_timeout = 2000;
+          fail_transition = 300;
+        };
       };
     };
   };

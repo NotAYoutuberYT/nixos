@@ -18,9 +18,6 @@ let
     ${pkgs.waybar}/bin/waybar &
     ${wallpaperInit}/bin/wallpaper
   '';
-
-  rgb = color: "rgb(${color})";
-  rgba = color: alpha: "rgba(${color}${alpha})";
 in
 {
   options.specialConfig.hyprland = {
@@ -60,7 +57,7 @@ in
     wayland.windowManager.hyprland = {
       enable = true;
 
-      settings = with config.colorScheme.palette; {
+      settings = {
         "$terminal" = "${lib.getExe pkgs.alacritty}";
         "$fileManager" = "${lib.getExe pkgs.alacritty} --command ${lib.getExe pkgs.lf}";
         "$menu" = "${lib.getExe pkgs.rofi} -show drun -show-icons";
@@ -86,28 +83,9 @@ in
 
           border_size = "2";
 
-          "col.active_border" = lib.concatStringsSep " " [
-            (rgb base0D)
-            (rgb base0E)
-            "60deg"
-          ];
-          "col.inactive_border" = rgb base03;
-
-          resize_on_border = "true";
-          allow_tearing = "false";
+          resize_on_border = true;
+          allow_tearing = false;
           layout = "dwindle";
-        };
-
-        group = {
-          "col.border_inactive" = rgb base03;
-          "col.border_active" = rgb base0D;
-          "col.border_locked_active" = rgb base0C;
-
-          groupbar = {
-            text_color = rgb base05;
-            "col.active" = rgb base0D;
-            "col.inactive" = rgb base03;
-          };
         };
 
         decoration = {
@@ -117,14 +95,13 @@ in
           inactive_opacity = "1.0";
 
           shadow = {
-            enabled = "true";
+            enabled = true;
             range = "4";
             render_power = "3";
-            color = rgba base00 "99";
           };
 
           blur = {
-            enabled = "true";
+            enabled = true;
             size = "3";
             passes = "1";
 
@@ -133,7 +110,7 @@ in
         };
 
         animations = {
-          enabled = "true";
+          enabled = true;
 
           bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
 
@@ -148,8 +125,8 @@ in
         };
 
         dwindle = {
-          pseudotile = "false";
-          preserve_split = "false";
+          pseudotile = false;
+          preserve_split = false;
         };
 
         master = {
@@ -157,10 +134,9 @@ in
         };
 
         misc = {
-          background_color = rgb base00;
           force_default_wallpaper = "-1";
-          disable_hyprland_logo = "true";
-          vfr = "true";
+          disable_hyprland_logo = true;
+          vfr = true;
         };
 
         input = {
@@ -171,15 +147,15 @@ in
           sensitivity = cfg.sensitivity;
 
           touchpad = {
-            natural_scroll = "true";
+            natural_scroll = true;
           };
         };
 
         gestures = {
-          workspace_swipe = "false";
+          workspace_swipe = false;
         };
 
-        "$mainMod" = "ALT";
+        "$mainMod" = "SUPER";
 
         bind = [
           "$mainMod, RETURN, exec, $terminal"

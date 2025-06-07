@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   config,
@@ -30,7 +29,7 @@
       mako
       swww
       rofi-wayland
-      inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+      pkgs.rose-pine-hyprcursor
     ];
 
     programs.hyprlock.enable = true;

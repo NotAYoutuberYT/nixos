@@ -12,7 +12,7 @@ in
   options.specialConfig.starship.enable = lib.mkEnableOption "starship";
 
   config = lib.mkIf config.specialConfig.starship.enable {
-    programs.starship = with config.colorScheme.palette; {
+    programs.starship = {
       enable = true;
 
       enableBashIntegration = true;
@@ -28,25 +28,23 @@ in
           "$directory"
           "$git_branch"
           "$git_state"
-          "$rust"
           "$nix_shell"
           "$character"
         ];
 
-        directory.style = "bold #${base0D}";
-        git_branch.style = "bold #${base0E}";
-        git_state.style = "bold #${base0A}";
-        rust.style = "bold #${base08}";
+        directory.style = "bold blue";
+        git_branch.style = "bold magenta";
+        git_state.style = "bold orange";
 
         nix_shell = {
-          style = "bold #${base0C}";
+          style = "bold cyan";
           format = "via [$symbol]($style) ";
           symbol = "❄️";
         };
 
         character = {
-          success_symbol = "[➜](bold #${base0B})";
-          error_symbol = "[➜](bold #${base08})";
+          success_symbol = "[➜](bold green)";
+          error_symbol = "[➜](bold red)";
         };
       };
     };

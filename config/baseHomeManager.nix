@@ -7,9 +7,7 @@
 }:
 
 {
-  imports = [
-    inputs.nix-colors.homeManagerModules.default
-  ];
+  imports = [ ];
 
   options.specialConfig = {
     colorScheme = lib.mkOption {
@@ -33,8 +31,6 @@
   config = {
     home.username = osConfig.specialConfig.username;
     home.homeDirectory = lib.mkForce config.specialConfig.homeDirectory;
-
-    colorScheme = config.specialConfig.colorScheme;
 
     programs.home-manager.enable = true;
     home.stateVersion = "25.05";
