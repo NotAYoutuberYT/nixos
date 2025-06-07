@@ -52,8 +52,8 @@ in
       enable = true;
 
       settings = {
-        "$terminal" = "${lib.getExe pkgs.alacritty}";
-        "$fileManager" = "${lib.getExe pkgs.alacritty} --command ${lib.getExe pkgs.yazi}";
+        "$terminal" = "${lib.getExe pkgs.kitty}";
+        "$fileManager" = "${lib.getExe pkgs.kitty} ${lib.getExe pkgs.yazi}";
         "$menu" = "${lib.getExe pkgs.rofi} -show drun -show-icons";
         "$lock" = "${lib.getExe pkgs.hyprlock}";
 

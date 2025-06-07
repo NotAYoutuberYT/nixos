@@ -6,17 +6,6 @@
   ...
 }:
 
-let
-  lock-false = {
-    Value = false;
-    Status = "locked";
-  };
-
-  lock-true = {
-    Value = true;
-    Status = "locked";
-  };
-in
 {
   options.specialConfig.firefox = {
     enable = lib.mkEnableOption "firefox";
@@ -45,82 +34,87 @@ in
         id = 0;
         isDefault = true;
 
-        search.default = "ddg";
-        search.force = true;
-        search.engines = {
-          "Nix Packages" = {
-            urls = [
-              {
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "type";
-                    value = "packages";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+        search = {
+          default = "ddg";
+          force = true;
+          engines = {
+            "Nix Packages" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
 
-            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "@np" ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@np" ];
+            };
+
+            "Nix Options" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    {
+                      name = "type";
+                      value = "options";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@no" ];
+            };
+
+            "Home Manager Options" = {
+              urls = [
+                {
+                  template = "https://home-manager-options.extranix.com/";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@ho" ];
+            };
+
+            "bing".metaData.hidden = true;
+            "ddg".metaData.alias = "@d";
+            "google".metaData.alias = "@g";
           };
-
-          "Nix Options" = {
-            urls = [
-              {
-                template = "https://search.nixos.org/options";
-                params = [
-                  {
-                    name = "type";
-                    value = "options";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-
-            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "@no" ];
-          };
-
-          "Home Manager Options" = {
-            urls = [
-              {
-                template = "https://home-manager-options.extranix.com/";
-                params = [
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-
-            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "@ho" ];
-          };
-
-          "bing".metaData.hidden = true;
-          "ddg".metaData.alias = "@d";
-          "google".metaData.alias = "@g";
         };
 
-        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-        ];
+        extensions = {
+          force = true;
+          packages = with pkgs.nur.repos.rycee.firefox-addons; [
+            ublock-origin
+          ];
+        };
 
         bookmarks = {
           force = true;
           settings = [
             {
-              name = "University of Utah";
+              name = "Nix Bookmarks";
               toolbar = true;
               bookmarks = [
                 {
@@ -131,12 +125,6 @@ in
                   name = "Gradescope";
                   url = "https://gradescope.com/";
                 }
-              ];
-            }
-            {
-              name = "AMES";
-              toolbar = true;
-              bookmarks = [
                 {
                   name = "Canvas";
                   url = "https://ames.instructure.com/";
@@ -145,12 +133,6 @@ in
                   name = "Aspire";
                   url = "https://ames.usoe-dcs.org/Login/";
                 }
-              ];
-            }
-            {
-              name = "Google";
-              toolbar = true;
-              bookmarks = [
                 {
                   name = "Gmail";
                   url = "https://mail.google.com/";
@@ -164,8 +146,45 @@ in
           ];
         };
 
+        # ---- PREFERENCES ----
+        # Check about:config for options.
         settings = {
+          "browser.contentblocking.category" = {
+            Value = "strict";
+            Status = "locked";
+          };
+
+          "extensions.pocket.enabled" = false;
+          "extensions.screenshots.disabled" = true;
           "extensions.autoDisableScopes" = 0;
+          "browser.topsites.contile.enabled" = false;
+
+          "browser.formfill.enable" = false;
+          "extensions.formautofill.addresses.enabled" = false;
+          "extensions.formautofill.creditCards.enabled" = false;
+          "signon.rememberSignons" = false;
+          "signon.passwordEditCapture.enabled" = false;
+          "signon.privateBrowsingCapture.enabled" = false;
+
+          "browser.search.suggest.enabled" = false;
+          "browser.search.suggest.enabled.private" = false;
+          "browser.urlbar.suggest.searches" = false;
+          "browser.urlbar.showSearchSuggestionsFirst" = false;
+          "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
+          "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+          "browser.urlbar.suggest.topsites" = false;
+          "browser.urlbar.suggest.trending" = false;
+          "browser.urlbar.suggest.history" = false;
+          "browser.urlbar.suggest.pocket" = false;
+          "browser.urlbar.suggest.weather" = false;
+          "browser.urlbar.suggest.yelp" = false;
+          "browser.urlbar.suggest.bookmark" = false;
+
+          "browser.newtabpage.enabled" = false;
+          "browser.startup.blankWindow" = true;
+          "browser.startup.page" = 0;
+
+          "browser.aboutConfig.showWarning" = false;
         };
       };
 
@@ -214,49 +233,6 @@ in
           SiteSettings = false;
           OfflineApps = true;
           Locked = true;
-        };
-
-        # ---- PREFERENCES ----
-        # Check about:config for options.
-        settings = {
-          "browser.contentblocking.category" = {
-            Value = "strict";
-            Status = "locked";
-          };
-
-          "extensions.pocket.enabled" = lock-false;
-          "extensions.screenshots.disabled" = lock-true;
-          "browser.topsites.contile.enabled" = lock-false;
-
-          "browser.formfill.enable" = lock-false;
-          "extensions.formautofill.addresses.enabled" = lock-false;
-          "extensions.formautofill.creditCards.enabled" = lock-false;
-          "signon.rememberSignons" = lock-false;
-          "signon.passwordEditCapture.enabled" = lock-false;
-          "signon.privateBrowsingCapture.enabled" = lock-false;
-
-          "browser.search.suggest.enabled" = lock-false;
-          "browser.search.suggest.enabled.private" = lock-false;
-          "browser.urlbar.suggest.searches" = lock-false;
-          "browser.urlbar.showSearchSuggestionsFirst" = lock-false;
-          "browser.urlbar.suggest.quicksuggest.nonsponsored" = lock-false;
-          "browser.urlbar.suggest.quicksuggest.sponsored" = lock-false;
-          "browser.urlbar.suggest.topsites" = lock-false;
-          "browser.urlbar.suggest.trending" = lock-false;
-          "browser.urlbar.suggest.history" = lock-false;
-          "browser.urlbar.suggest.pocket" = lock-false;
-          "browser.urlbar.suggest.weather" = lock-false;
-          "browser.urlbar.suggest.yelp" = lock-false;
-          "browser.urlbar.suggest.bookmark" = lock-false;
-
-          "browser.newtabpage.enabled" = lock-false;
-          "browser.startup.blankWindow" = lock-true;
-          "browser.startup.page" = {
-            Value = 0;
-            Status = "locked";
-          };
-
-          "browser.aboutConfig.showWarning" = lock-false;
         };
       };
     };

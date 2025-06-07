@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -11,7 +10,7 @@
   config.specialConfig = lib.mkIf config.specialConfig.bundles.desktop.enable {
     xdg.enable = lib.mkDefault true;
 
-    alacritty.enable = lib.mkDefault true;
+    kitty.enable = lib.mkDefault true;
     vscodium.enable = lib.mkDefault true;
     firefox.enable = lib.mkDefault true;
 
