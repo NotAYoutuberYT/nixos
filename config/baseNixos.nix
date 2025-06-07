@@ -24,6 +24,7 @@ in
       inputs.nur.modules.nixos.default
       inputs.sops-nix.nixosModules.sops
       inputs.stylix.nixosModules.stylix
+      ./stylix.nix
     ]
     ++ nixosModules
     ++ sharedNixosModules;

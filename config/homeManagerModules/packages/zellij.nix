@@ -10,9 +10,9 @@
   config = lib.mkIf config.specialConfig.zellij.enable {
     programs.zellij = {
       enable = true;
-      settings = {
 
-      };
+      # zellij's defaults really are that good
+      settings = {};
     };
   };
 }

@@ -41,18 +41,18 @@ let
 in
 {
   options.specialConfig.stylix = {
-    # realistically, these options should only ever change if overridden by
-    # a different user in home manager
+    # realistically, these options should never change, but this
+    # is the most logical spot to put these things
     theme = lib.mkOption {
       default = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     };
 
     base-wallpaper = lib.mkOption {
-      default = ./../../wallpapers/linewaves.png;
+      default = ./../wallpapers/nixos.png;
     };
 
     tint-wallpaper = lib.mkEnableOption "wallpaper tinting" // {
-      default = false;
+      default = true;
     };
   };
 
