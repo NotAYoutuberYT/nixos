@@ -44,35 +44,7 @@ in
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "24.11";
 
-    stylix = {
-      enable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      image = sharedModules/hyprland/wallpaper.png;
-
-      fonts = {
-        serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
-        };
-
-        sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
-        };
-
-        monospace = {
-          package = pkgs.jetbrains-mono;
-          name = "JetBrains Mono";
-        };
-
-        emoji = {
-          package = pkgs.noto-fonts-emoji;
-          name = "Noto Color Emoji";
-        };
-
-        sizes.terminal = 11.25;
-      };
-    };
+    environment.systemPackages = [ pkgs.corefonts ];
 
     home-manager = {
       useGlobalPkgs = true;

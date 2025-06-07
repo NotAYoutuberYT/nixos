@@ -12,6 +12,7 @@
           lines = 0;
           columns = 0;
         };
+
         cursor = {
           style = "Beam";
           thickness = 0.2;

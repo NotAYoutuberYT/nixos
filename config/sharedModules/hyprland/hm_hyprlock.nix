@@ -19,7 +19,6 @@
         };
 
         background = {
-          path = "${./wallpaper.png}";
           blur_passes = 2;
           blur_size = 4;
         };

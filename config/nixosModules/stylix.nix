@@ -1,0 +1,90 @@
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+
+let
+  base-wallpaper = config.specialConfig.stylix.base-wallpaper;
+
+  jsonTheme = pkgs.writers.writeJSON "theme.json" {
+    name = "nixTheme";
+    colors = with config.lib.stylix.colors.withHashtag; [
+      base00
+      base01
+      base02
+      base03
+      base04
+      base05
+      base06
+      base07
+      base08
+      base09
+      base0A
+      base0B
+      base0C
+      base0D
+      base0E
+      base0F
+    ];
+  };
+
+  tinted-wallpaper =
+    if config.specialConfig.stylix.tint-wallpaper then
+      pkgs.runCommand "wallpaper.png" { } ''
+        export HOME=$(${lib.getExe pkgs.mktemp} -d)
+        ${lib.getExe pkgs.gowall} convert ${base-wallpaper} -t ${jsonTheme} --output $out
+      ''
+    else
+      base-wallpaper;
+in
+{
+  options.specialConfig.stylix = {
+    # realistically, these options should only ever change if overridden by
+    # a different user in home manager
+    theme = lib.mkOption {
+      default = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    };
+
+    base-wallpaper = lib.mkOption {
+      default = ./../../wallpapers/linewaves.png;
+    };
+
+    tint-wallpaper = lib.mkEnableOption "wallpaper tinting" // {
+      default = false;
+    };
+  };
+
+  config = {
+    stylix = {
+      enable = true;
+      base16Scheme = config.specialConfig.stylix.theme;
+      image = tinted-wallpaper;
+
+      fonts = {
+        serif = {
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Serif";
+        };
+
+        sansSerif = {
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Sans";
+        };
+
+        monospace = {
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font";
+        };
+
+        emoji = {
+          package = pkgs.noto-fonts-emoji;
+          name = "Noto Color Emoji";
+        };
+
+        sizes.terminal = 11.25;
+      };
+    };
+  };
+}

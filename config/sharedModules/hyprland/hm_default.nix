@@ -9,14 +9,8 @@
 let
   cfg = config.specialConfig.hyprland;
 
-  wallpaperInit = pkgs.pkgs.writeShellScriptBin "wallpaper" ''
-    ${lib.getExe' pkgs.swww "swww-daemon"} &
-    ${lib.getExe' pkgs.swww "swww"} img --transition-type none ${./wallpaper.png}
-  '';
-
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.waybar}/bin/waybar &
-    ${wallpaperInit}/bin/wallpaper
+  startupScript = pkgs.pkgs.writeShellScriptBin "startup" ''
+    ${pkgs.waybar}/bin/waybar
   '';
 in
 {
@@ -59,7 +53,7 @@ in
 
       settings = {
         "$terminal" = "${lib.getExe pkgs.alacritty}";
-        "$fileManager" = "${lib.getExe pkgs.alacritty} --command ${lib.getExe pkgs.lf}";
+        "$fileManager" = "${lib.getExe pkgs.alacritty} --command ${lib.getExe pkgs.yazi}";
         "$menu" = "${lib.getExe pkgs.rofi} -show drun -show-icons";
         "$lock" = "${lib.getExe pkgs.hyprlock}";
 
@@ -112,15 +106,17 @@ in
         animations = {
           enabled = true;
 
-          bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+          bezier = [
+            "overshootBezier, 0.05, 0.9, 0.2, 1.02"
+            "stableBezier, 0.05, 0.9, 0.2, 1.0"
+          ];
 
           animation = [
-            "windows, 1, 7, myBezier"
-            "windowsOut, 1, 7, default, popin 80%"
-            "border, 1, 10, default"
-            "borderangle, 1, 8, default"
-            "fade, 1, 7, default"
-            "workspaces, 1, 6, default"
+            "windows, 1, 4, overshootBezier"
+            "border, 1, 10, overshootBezier"
+            "borderangle, 1, 8, overshootBezier"
+            "fade, 1, 4, stableBezier"
+            "workspaces, 1, 6, overshootBezier"
           ];
         };
 
