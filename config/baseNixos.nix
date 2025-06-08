@@ -62,6 +62,7 @@ in
         [
           config.specialConfig.hostHomeConfigModule
           outputs.homeManagerModules.default
+          inputs.nixcord.homeModules.nixcord
         ]
         ++ homeManagerModules
         ++ sharedHomeManagerModules;

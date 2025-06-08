@@ -12,7 +12,7 @@
       enable = true;
 
       # zellij's defaults really are that good
-      settings = {};
+      settings = { };
     };
   };
 }

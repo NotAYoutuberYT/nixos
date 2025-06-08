@@ -41,6 +41,8 @@ let
 in
 {
   options.specialConfig.stylix = {
+    enable = lib.mkEnableOption "stylix theming";
+
     # realistically, these options should never change, but this
     # is the most logical spot to put these things
     theme = lib.mkOption {
@@ -56,40 +58,40 @@ in
     };
   };
 
-  config = {
-    stylix = {
-      enable = true;
-      base16Scheme = config.specialConfig.stylix.theme;
-      image = tinted-wallpaper;
-      cursor = {
-        name = "rose-pine-hyprcursor";
-        package = pkgs.rose-pine-hyprcursor;
-        size = 24;
+  config.stylix = lib.mkIf config.specialConfig.stylix.enable {
+    enable = true;
+
+    base16Scheme = config.specialConfig.stylix.theme;
+    image = tinted-wallpaper;
+
+    cursor = {
+      name = "rose-pine-hyprcursor";
+      package = pkgs.rose-pine-hyprcursor;
+      size = 24;
+    };
+
+    fonts = {
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
       };
 
-      fonts = {
-        serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
-        };
-
-        sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
-        };
-
-        monospace = {
-          package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font";
-        };
-
-        emoji = {
-          package = pkgs.noto-fonts-emoji;
-          name = "Noto Color Emoji";
-        };
-
-        sizes.terminal = 11.25;
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
       };
+
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
+      };
+
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+
+      sizes.terminal = 11.25;
     };
   };
 }

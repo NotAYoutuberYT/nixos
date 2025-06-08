@@ -10,6 +10,8 @@
 
     bundles.desktop.enable = true;
     bundles.command-line.enable = true;
+    stylix.enable = true;
+
     nvidia.enable = true;
   };
 

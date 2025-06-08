@@ -15,6 +15,7 @@
     firefox.enable = lib.mkDefault true;
     yazi.enable = lib.mkDefault true;
     rofi.enable = lib.mkDefault true;
+    nixcord.enable = lib.mkDefault true;
 
     ncspot.enable = lib.mkDefault true;
 

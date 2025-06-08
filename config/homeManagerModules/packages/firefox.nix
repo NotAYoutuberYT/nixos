@@ -35,8 +35,9 @@
         isDefault = true;
 
         search = {
-          default = "ddg";
+          default = "Startpage";
           force = true;
+
           engines = {
             "Nix Packages" = {
               urls = [
@@ -97,9 +98,21 @@
               definedAliases = [ "@ho" ];
             };
 
+            "Startpage" = {
+              urls = [
+                {
+                  template = "https://www.startpage.com/sp/search";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+            };
+
             "bing".metaData.hidden = true;
-            "ddg".metaData.alias = "@d";
-            "google".metaData.alias = "@g";
           };
         };
 
@@ -149,10 +162,7 @@
         # ---- PREFERENCES ----
         # Check about:config for options.
         settings = {
-          "browser.contentblocking.category" = {
-            Value = "strict";
-            Status = "locked";
-          };
+          "browser.contentblocking.category" = "strict";
 
           "extensions.pocket.enabled" = false;
           "extensions.screenshots.disabled" = true;
