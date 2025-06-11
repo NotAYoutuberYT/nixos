@@ -61,6 +61,9 @@ in
   config.stylix = lib.mkIf config.specialConfig.stylix.enable {
     enable = true;
 
+    targets.grub.enable = true;
+    targets.grub.useWallpaper = true;
+
     base16Scheme = config.specialConfig.stylix.theme;
     image = tinted-wallpaper;
 
@@ -82,8 +85,8 @@ in
       };
 
       monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font";
+        package = pkgs.maple-mono.truetype;
+        name = "Maple Mono";
       };
 
       emoji = {
