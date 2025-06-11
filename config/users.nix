@@ -22,9 +22,9 @@
 
     passwordAttrset = lib.mkOption {
       default = {
-        password = "temp";
-        # hashedPasswordFile = config.sops.secrets.hashed-password.path;
+        hashedPasswordFile = config.sops.secrets.hashed-password.path;
       };
+      
       description = "user password settings";
     };
 
