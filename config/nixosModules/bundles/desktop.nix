@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 
 {
   options.specialConfig.bundles.desktop.enable = lib.mkEnableOption "desktop bundle";
@@ -17,11 +12,5 @@
     specialConfig.hyprland.enable = lib.mkDefault true;
     specialConfig.ly.enable = lib.mkDefault true;
     specialConfig.thunar.enable = lib.mkDefault true;
-
-    environment.systemPackages = with pkgs; [
-      spotify
-      pkgs.cm_unicode
-      pkgs.corefonts
-    ];
   };
 }
