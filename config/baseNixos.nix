@@ -25,6 +25,8 @@ in
       inputs.sops-nix.nixosModules.sops
       inputs.stylix.nixosModules.stylix
       ./stylix.nix
+      ./sops.nix
+      ./users.nix
     ]
     ++ nixosModules
     ++ sharedNixosModules;
@@ -37,10 +39,6 @@ in
 
     time.timeZone = "America/Denver";
     i18n.defaultLocale = "en_US.UTF-8";
-
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.grub.useOSProber = lib.mkDefault false;
 
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "24.11";

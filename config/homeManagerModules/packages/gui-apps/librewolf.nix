@@ -89,7 +89,7 @@
         "browser.search.widget.removeAfterDaysUnused" = 0;
 
         "network.http.referer.XOriginPolicy" = 2;
-        "network.http.sendRefererHeader" = 2;
+        "network.http.sendRefererHeader" = 0;
 
         "privacy.clearHistory.cache" = true;
         "privacy.clearHistory.cookiesAndStorage" = true;
@@ -114,8 +114,6 @@
         "privacy.clearOnShutdown.sessions" = true;
 
         "privacy.donottrackheader.enabled" = true;
-
-        "privacy.resistFingerprinting.letterboxing" = true;
 
         "privacy.globalprivacycontrol.enabled" = true;
         "privacy.globalprivacycontrol.was_ever_enabled" = true;

@@ -61,9 +61,6 @@ in
   config.stylix = lib.mkIf config.specialConfig.stylix.enable {
     enable = true;
 
-    targets.grub.enable = true;
-    targets.grub.useWallpaper = true;
-
     base16Scheme = config.specialConfig.stylix.theme;
     image = tinted-wallpaper;
 

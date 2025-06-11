@@ -43,6 +43,8 @@
       nixosConfigurations = {
         desktop = makeSystem ./hosts/desktop/configuration.nix;
         envy = makeSystem ./hosts/envy/configuration.nix;
+
+        poco = makeSystem ./hosts/poco/configuration.nix;
       };
     }
     // flake-utils.lib.eachDefaultSystem (

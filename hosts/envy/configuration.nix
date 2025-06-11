@@ -16,6 +16,9 @@
     steam.enable = true;
   };
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   system.name = "envy";
   networking.hostName = "envy";
 }
