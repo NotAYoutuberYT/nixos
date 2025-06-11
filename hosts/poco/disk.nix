@@ -3,7 +3,7 @@
 {
   disko.devices = {
     disk.disk1 = {
-      device = "/dev/nvme0n1";
+      device = "/dev/sda";
       type = "disk";
 
       content = {

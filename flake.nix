@@ -31,10 +31,20 @@
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+    deploy-rs.inputs.utils.follows = "flake-utils";
   };
 
   outputs =
-    { nixpkgs, flake-utils, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      deploy-rs,
+      ...
+    }@inputs:
     let
       customLib = import ./utils/customLib.nix { inherit inputs; };
       makeSystem = import ./hosts/builder.nix { inherit inputs customLib; };
@@ -49,6 +59,25 @@
 
         poco = makeSystem ./hosts/poco/configuration.nix;
       };
+
+      deploy.nodes = {
+        poco = {
+          hostname = "poco.bryceh.com";
+          profiles.system = {
+            sshUser = "equi";
+            sshOpts = [
+              "-i"
+              "~/.ssh/poco"
+            ];
+            remoteBuild = false;
+
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.poco;
+          };
+        };
+      };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     }
     // flake-utils.lib.eachDefaultSystem (
       system:

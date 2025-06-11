@@ -3,7 +3,7 @@
 {
   options.specialConfig.services.blocky = {
     enable = lib.mkEnableOption "blocky";
-    
+
     upstream-dns = lib.mkOption {
       default = [
         "tcp-tls:9.9.9.9"
@@ -18,7 +18,7 @@
       enable = true;
 
       settings = {
-        upstreams.groups."default" = config.specialConfig.services.blocky.upsteam-dns;
+        upstreams.groups."default" = config.specialConfig.services.blocky.upstream-dns;
 
         ports.dns = 53;
         ports.https = 3002;
