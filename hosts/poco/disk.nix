@@ -3,14 +3,21 @@
 {
   disko.devices = {
     disk.disk1 = {
-      device = "/dev/sda";
+      device = "/dev/nvme0n1";
       type = "disk";
 
       content = {
         type = "gpt";
 
         partitions = {
+          boot = {
+            name = "boot";
+            type = "EF02";
+            size = "1M";
+          };
+
           ESP = {
+            name = "ESP";
             type = "EF00";
             size = "500M";
             content = {

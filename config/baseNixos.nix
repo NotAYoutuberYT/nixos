@@ -2,7 +2,6 @@
   inputs,
   outputs,
   pkgs,
-  lib,
   customLib,
   config,
   ...
@@ -24,6 +23,7 @@ in
       inputs.nur.modules.nixos.default
       inputs.sops-nix.nixosModules.sops
       inputs.stylix.nixosModules.stylix
+      inputs.disko.nixosModules.disko
       ./stylix.nix
       ./sops.nix
       ./users.nix
@@ -35,6 +35,12 @@ in
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
+    ];
+
+    nixpkgs.overlays = [
+      (final: super: {
+        nginxStable = super.nginxStable.override { openssl = super.pkgs.libressl; };
+      })
     ];
 
     time.timeZone = "America/Denver";

@@ -24,7 +24,7 @@
       default = {
         hashedPasswordFile = config.sops.secrets.hashed-password.path;
       };
-      
+
       description = "user password settings";
     };
 

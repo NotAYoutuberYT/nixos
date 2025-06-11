@@ -11,7 +11,8 @@ Setup *should* be painless. Feel free to install NixOS headless.
 
 ## TODO
 
-- write configurations for homelab machines
+- write more services for homelab machines
+- setup fail2ban for service web portals
 - give everything a sanity check (this involves going through EVERYTHING)
 - improve modularity
     - make things such as notification daemons, terminals, editors, compositors, and shells a bit more modular
@@ -19,3 +20,4 @@ Setup *should* be painless. Feel free to install NixOS headless.
     - this probably involves making one or more "options" modules which just defines global options (i.e. default terminal or file manager)
 - get a proper widget system (ewww or astal, depends on how much I value performance)
 - allow for multiple users and generaly handle users better (remember to allow stylix overrides!)
+- provide type information for all custom options

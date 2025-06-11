@@ -11,6 +11,7 @@
       age.keyFile = "/var/lib/sops-nix/key.txt";
 
       secrets.hashed-password.neededForUsers = true;
+      secrets.cloudflare-ddns-key = { };
     };
   };
 }
