@@ -11,9 +11,9 @@ Setup *should* be painless. Feel free to install NixOS headless.
 
 ## TODO
 
+- give everything a sanity check (this involves going through all the todos and fixmes)
 - write more services for homelab machines
 - setup fail2ban for service web portals
-- give everything a sanity check (this involves going through EVERYTHING)
 - improve modularity
     - make things such as notification daemons, terminals, editors, compositors, and shells a bit more modular
     - it should be trivial to swap between sway/hyprland, alacritty/kitty, etc.

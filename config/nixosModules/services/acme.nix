@@ -10,7 +10,7 @@
       acceptTerms = true;
       defaults.email = "utbryceh@gmail.com";
 
-      certs."poco.bryceh.com" =
+      certs."bryceh.com" =
         let
           env = builtins.toFile "cloudflare" ''
             CLOUDFLARE_DNS_API_TOKEN_FILE=${config.sops.secrets.cloudflare-dns-edit-key.path}
@@ -18,9 +18,11 @@
         in
         {
           # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-          webroot = null;
+          extraDomainNames = [
+            "poco.bryceh.com"
+            "forgejo.bryceh.com"
+          ];
 
-          domain = "poco.bryceh.com";
           dnsProvider = "cloudflare";
           dnsPropagationCheck = true;
           environmentFile = env;

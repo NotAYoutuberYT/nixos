@@ -1,5 +1,8 @@
 { lib, config, ... }:
 
+let
+  srv = config.services.forgejo.settings.server;
+in
 {
   options.specialConfig.services.forgejo.enable = lib.mkEnableOption "forgejo";
 
@@ -13,13 +16,27 @@
       dump.enable = true;
 
       settings = {
-        server.DOMAIN = "poco.bryceh.com";
-        server.ROOT_URL = "https://${config.services.forgejo.settings.server.DOMAIN}";
+        server.DOMAIN = "forgejo.bryceh.com";
+        server.ROOT_URL = "https://${srv.DOMAIN}";
         server.HTTP_PORT = 3000;
+        server.DISABLE_SSH = true;
+
+        # I *could* declaritively manage the admin user, but it's easier and less
+        # janky to just make this false for 10 seconds on a new deployment.
+        service.DISABLE_REGISTRATION = true;
 
         session.COOKIE_SECURE = true;
+
+        DEFAULT.APP_NAME = "Forgejo";
+        DEFAULT.APP_SLOGAN = "Hosted at ${srv.DOMAIN}.";
       };
     };
+
+    networking.firewall.allowedUDPPorts = [ ];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
 
     # TODO: fix acme and improve network domain modularity
     specialConfig.services.acme.enable = true;
@@ -30,11 +47,14 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
-      virtualHosts."poco.bryceh.com" = {
+      virtualHosts."${srv.DOMAIN}" = {
         enableACME = true;
         forceSSL = true;
-        locations."/forgejo".proxyPass =
-          "http://127.0.0.1:${toString config.services.forgejo.settings.server.HTTP_PORT}";
+        extraConfig = ''
+          client_max_body_size 512M;
+        '';
+
+        locations."/".proxyPass = "http://127.0.0.1:${toString srv.HTTP_PORT}";
       };
     };
   };

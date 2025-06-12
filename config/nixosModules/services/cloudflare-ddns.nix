@@ -7,8 +7,8 @@
     lib.mkIf config.specialConfig.services.cloudflare-dyndns.enable
       {
         enable = true;
-        apiTokenFile = config.sops.secrets.cloudflare-ddns-edit-key.path;
-
-        # TODO: still need domains and such
+        apiTokenFile = config.sops.secrets.cloudflare-dns-edit-key.path;
+        proxied = true;
+        domains = [ "bryceh.com" ];
       };
 }

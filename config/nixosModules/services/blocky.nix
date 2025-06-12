@@ -34,6 +34,11 @@
         caching.minTime = "5m";
         caching.maxTime = "60m";
 
+        # TODO: make this more modular
+        customDNS.mapping = {
+          "forgejo.bryceh.com" = "192.168.1.11";
+        };
+
         blocking.denylists = {
           default = [
             "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/pro.txt"

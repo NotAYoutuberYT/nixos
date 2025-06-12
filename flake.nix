@@ -64,12 +64,12 @@
         poco = {
           hostname = "poco.bryceh.com";
           profiles.system = {
+            # TODO: just move to root ffs
             sshUser = "equi";
             sshOpts = [
               "-i"
               "~/.ssh/poco"
             ];
-            remoteBuild = false;
 
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.poco;
