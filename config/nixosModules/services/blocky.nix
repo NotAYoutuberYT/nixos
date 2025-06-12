@@ -5,10 +5,16 @@
     enable = lib.mkEnableOption "blocky";
 
     upstream-dns = lib.mkOption {
+      /*
+        This list is a good choice for something like a vps
+        [
+          "tcp-tls:9.9.9.9"
+          "tcp-tls:194.242.2.4"
+          "tcp-tls:193.110.81.0"
+        ]
+      */
       default = [
-        "tcp-tls:9.9.9.9"
-        "tcp-tls:194.242.2.4"
-        "tcp-tls:193.110.81.0"
+        "192.168.1.1"
       ];
     };
   };
@@ -18,19 +24,18 @@
       enable = true;
 
       settings = {
-        upstreams.groups."default" = config.specialConfig.services.blocky.upstream-dns;
+        upstreams.groups.default = config.specialConfig.services.blocky.upstream-dns;
 
         ports.dns = 53;
-        ports.https = 3002;
 
-        log.level = "critical";
+        log.level = "warn";
         log.privacy = true;
 
         caching.minTime = "5m";
         caching.maxTime = "60m";
 
         blocking.denylists = {
-          "default" = [
+          default = [
             "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/pro.txt"
             "https://big.oisd.nl/domainswild"
             "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
@@ -50,11 +55,7 @@
       };
     };
 
-    # TODO: improve network domain modularity
-    specialConfig.services.acme.enable = true;
-    services.nginx.virtualHosts."blocky.bryceh.com".locations."/" = {
-      recommendedProxySettings = true;
-      proxyPass = "http://127.0.0.1:${toString config.services.blocky.settings.ports.https}";
-    };
+    networking.firewall.allowedUDPPorts = [ 53 ];
+    networking.firewall.allowedTCPPorts = [ ];
   };
 }

@@ -3,9 +3,28 @@
 {
   options.specialConfig.services.acme.enable = lib.mkEnableOption "acme";
 
-  config.security.acme = lib.mkIf config.specialConfig.services.acme.enable {
-    acceptTerms = true;
-    defaults.email = "utbryceh@gmail.com";
-    maxConcurrentRenewals = 3;
+  config = lib.mkIf config.specialConfig.services.acme.enable {
+    users.users.nginx.extraGroups = [ "acme" ];
+
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "utbryceh@gmail.com";
+
+      certs."poco.bryceh.com" =
+        let
+          env = builtins.toFile "cloudflare" ''
+            CLOUDFLARE_DNS_API_TOKEN_FILE=${config.sops.secrets.cloudflare-dns-edit-key.path}
+          '';
+        in
+        {
+          # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+          webroot = null;
+
+          domain = "poco.bryceh.com";
+          dnsProvider = "cloudflare";
+          dnsPropagationCheck = true;
+          environmentFile = env;
+        };
+    };
   };
 }

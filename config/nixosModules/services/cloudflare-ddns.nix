@@ -7,7 +7,7 @@
     lib.mkIf config.specialConfig.services.cloudflare-dyndns.enable
       {
         enable = true;
-        apiTokenFile = config.sops.secrets.cloudflare-ddns-key.path;
+        apiTokenFile = config.sops.secrets.cloudflare-ddns-edit-key.path;
 
         # TODO: still need domains and such
       };

@@ -11,7 +11,7 @@
       age.keyFile = "/var/lib/sops-nix/key.txt";
 
       secrets.hashed-password.neededForUsers = true;
-      secrets.cloudflare-ddns-key = { };
+      secrets.cloudflare-dns-edit-key.mode = "0444"; # TODO: remove this when I setup poco root login
     };
   };
 }
