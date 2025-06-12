@@ -17,6 +17,7 @@
   specialConfig.services = {
     blocky.enable = true;
     forgejo.enable = true;
+    vaultwarden.enable = true;
     cloudflare-dyndns.enable = true;
   };
 

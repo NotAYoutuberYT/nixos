@@ -9,11 +9,13 @@
       dbBackend = "sqlite";
       backupDir = "/var/backup/vaultwarden";
 
+      environmentFile = config.sops.secrets.vaultwarden-admin-token.path;
+
       config = {
         ROCKET_PORT = 8122;
         ROCKET_ADDRESS = "127.0.0.1";
 
-        DOMAIN = "https://poco.bryceh.com/vaultwarden";
+        DOMAIN = "https://vaultwarden.bryceh.com";
 
         SIGNUPS_ALLOWED = false;
         INVITATIONS_ALLOWED = false;
@@ -27,28 +29,24 @@
       443
     ];
 
-    # TODO: fix acme and improve network domain modularity
+    # TODO: improve network domain modularity
     specialConfig.services.acme.enable = true;
-    services.nginx =
-      let
-        host = "poco.bryceh.com";
-      in
-      {
-        enable = true;
-        recommendedGzipSettings = true;
-        recommendedOptimisation = true;
-        recommendedProxySettings = true;
-        recommendedTlsSettings = true;
+    services.nginx = {
+      enable = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
 
-        virtualHosts."${host}" = {
-          forceSSL = true;
-          enableACME = true;
+      virtualHosts."vaultwarden.bryceh.com" = {
+        forceSSL = true;
+        enableACME = true;
 
-          locations."/vaultwarden" = {
-            proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
-            # proxyWebsockets = true;
-          };
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
+          # proxyWebsockets = true;
         };
       };
+    };
   };
 }

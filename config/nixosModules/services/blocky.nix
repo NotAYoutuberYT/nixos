@@ -37,6 +37,7 @@
         # TODO: make this more modular
         customDNS.mapping = {
           "forgejo.bryceh.com" = "192.168.1.11";
+          "vaultwarden.bryceh.com" = "192.168.1.11";
         };
 
         blocking.denylists = {

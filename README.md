@@ -12,7 +12,7 @@ Setup *should* be painless. Feel free to install NixOS headless.
 ## TODO
 
 - give everything a sanity check (this involves going through all the todos and fixmes)
-- write more services for homelab machines
+- write more services for homelab machines (smtp!!)
 - setup fail2ban for service web portals
 - improve modularity
     - make things such as notification daemons, terminals, editors, compositors, and shells a bit more modular

@@ -21,7 +21,7 @@ in
         server.HTTP_PORT = 3000;
         server.DISABLE_SSH = true;
 
-        # I *could* declaritively manage the admin user, but it's easier and less
+        # I could probably declaritively manage users, but it's easier and less
         # janky to just make this false for 10 seconds on a new deployment.
         service.DISABLE_REGISTRATION = true;
 
@@ -38,7 +38,7 @@ in
       443
     ];
 
-    # TODO: fix acme and improve network domain modularity
+    # TODO: improve network domain modularity
     specialConfig.services.acme.enable = true;
     services.nginx = {
       enable = true;
