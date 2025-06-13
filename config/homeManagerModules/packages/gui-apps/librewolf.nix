@@ -128,7 +128,6 @@
           bitwarden
         ];
 
-
         search.engines = {
           "Nix Packages" = {
             urls = [

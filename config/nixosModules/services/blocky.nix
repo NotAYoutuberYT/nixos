@@ -5,16 +5,9 @@
     enable = lib.mkEnableOption "blocky";
 
     upstream-dns = lib.mkOption {
-      /*
-        This list is a good choice for something like a vps
-        [
-          "tcp-tls:9.9.9.9"
-          "tcp-tls:194.242.2.4"
-          "tcp-tls:193.110.81.0"
-        ]
-      */
       default = [
-        "192.168.1.1"
+        "tcp-tls:9.9.9.9"
+        "tcp-tls:194.242.2.4"
       ];
     };
   };
@@ -36,6 +29,8 @@
 
         # TODO: make this more modular
         customDNS.mapping = {
+          "opnsense.bryceh.com" = "192.168.1.1";
+          "poco.bryceh.com" = "192.168.1.11";
           "forgejo.bryceh.com" = "192.168.1.11";
           "vaultwarden.bryceh.com" = "192.168.1.11";
         };
