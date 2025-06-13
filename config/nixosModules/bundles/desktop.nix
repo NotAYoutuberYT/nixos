@@ -6,7 +6,6 @@
   config = lib.mkIf config.specialConfig.bundles.desktop.enable {
     specialConfig.usb-disks.enable = lib.mkDefault true;
     specialConfig.usb-keys.enable = lib.mkDefault true;
-    specialConfig.gopass.enable = lib.mkDefault true;
     specialConfig.bluetooth.enable = lib.mkDefault true;
     specialConfig.sound.enable = lib.mkDefault true;
     specialConfig.hyprland.enable = lib.mkDefault true;
