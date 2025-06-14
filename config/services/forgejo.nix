@@ -11,23 +11,25 @@ in
   options.specialConfig.services.forgejo = {
     hostingDevice = lib.mkOption {
       type = lib.types.nullOr lib.types.server;
+      default = null;
       description = "the device hosting the service";
     };
 
     proxyingDevice = lib.mkOption {
       type = lib.types.nullOr lib.types.server;
+      default = null;
       description = "the device proxying the service";
     };
 
     domain = lib.mkOption {
       type = lib.types.str;
-      default = "forgejo.bryceh.com";
+      default = "forgejo.${config.specialConfig.hosting.baseDomain}";
       description = "the domain of the service";
       example = "service.example.xyz";
     };
 
     port = lib.mkOption {
-      type = lib.types.ints.u16;
+      type = lib.types.port;
       default = 3000;
       description = "the port the service should bind to";
     };
@@ -83,6 +85,11 @@ in
           if isHosting then "127.0.0.1" else cfg.hostingDevice.ip
         }:${toString cfg.port}";
       };
+    };
+
+    specialConfig.hosting.serviceDNSRecords = lib.optional (!builtins.isNull cfg.proxyingDevice) {
+      domain = cfg.domain;
+      record = cfg.proxyingDevice.ip;
     };
   };
 }

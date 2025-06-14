@@ -26,6 +26,10 @@ in
         value = {
           hostname = d.ip;
 
+          # deploy-rs has a delightful way to include multiple deployments on one node.
+          # I don't use this functionality because I get full control of the devices
+          # (without any magic), I avoid vendor lock-in with deploy-rs, and my home-rolled
+          # service management is more than good enough for me.
           profiles.system = {
             user = "root";
             sshUser = "root";
@@ -40,10 +44,11 @@ in
                 specialArgs = { inherit inputs outputs lib; };
 
                 modules = [
-                  d.configuration
                   outputs.nixosModules.server
+                  (import ./service-layout.nix)
                   { config.specialConfig.hosting.device = d; }
                   { config.specialConfig.hosting.devices = import devices; }
+                  { imports = d.imports; }
                 ];
               }
             );

@@ -46,7 +46,7 @@
       ...
     }@inputs:
     let
-      lib = import ./utils/customLib.nix { inherit inputs; };
+      lib = import ./libExtension.nix { inherit inputs; };
       builders = import ./hosts/builders.nix { inherit inputs lib; };
     in
     {

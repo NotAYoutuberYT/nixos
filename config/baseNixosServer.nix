@@ -10,10 +10,8 @@ let
 in
 {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
     inputs.nur.modules.nixos.default
     inputs.sops-nix.nixosModules.sops
-    inputs.stylix.nixosModules.stylix
     inputs.disko.nixosModules.disko
     ./sops.nix
   ] ++ serviceModules;
@@ -36,6 +34,28 @@ in
       type = lib.types.str;
       default = "bryceh.com";
       description = "the base domain which resolves to (perhaps a proxy of) the hosted services";
+    };
+
+    serviceDNSRecords = lib.mkOption {
+      type = lib.types.listOf (
+        lib.types.submodule {
+          options = {
+            domain = lib.mkOption {
+              type = lib.types.str;
+              description = "the domain to resolve";
+              example = "service.example.xyz";
+            };
+
+            record = lib.mkOption {
+              type = lib.types.str;
+              description = "the ip to resolve";
+              example = "192.168.1.300";
+            };
+          };
+        }
+      );
+      default = [ ];
+      description = "service DNS records to use on any NixOS-powered DNS servers";
     };
   };
 

@@ -52,6 +52,7 @@ inputs.nixpkgs.lib.extend (
         );
 
     # ========================= Custom Types ========================== #
+
     types = super.recursiveUpdate super.types {
       server = super.types.submodule {
         options = {
@@ -88,12 +89,17 @@ inputs.nixpkgs.lib.extend (
             description = "the system type";
           };
 
-          configuration = super.mkOption {
-            type = super.types.path;
-            description = "a path to the device's configuration, which should include hardware configuration, services, etc.";
+          imports = super.mkOption {
+            type = super.types.listOf super.types.path;
+            description = "the module's imports";
           };
         };
       };
     };
+
+    # ======================== Device Helpers ========================= #
+
+    devices.getDevice =
+      devices: name: super.findFirst (d: d.name == name) (throw "device ${name} does not exist") devices;
   }
 )

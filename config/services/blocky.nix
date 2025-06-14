@@ -1,18 +1,28 @@
 { lib, config, ... }:
 
+let
+  cfg = config.specialConfig.services.blocky;
+  currentDevice = config.specialConfig.hosting.device;
+
+  isHosting = builtins.elem currentDevice cfg.hostingDevices;
+in
 {
   options.specialConfig.services.blocky = {
-    enable = lib.mkEnableOption "blocky";
-
     upstream-dns = lib.mkOption {
       default = [
         "tcp-tls:9.9.9.9"
         "tcp-tls:194.242.2.4"
       ];
     };
+
+    hostingDevices = lib.mkOption {
+      type = lib.types.listOf lib.types.server;
+      default = [ ];
+      description = "the devices hosting the service";
+    };
   };
 
-  config = lib.mkIf config.specialConfig.services.blocky.enable {
+  config = lib.mkIf isHosting {
     services.blocky = {
       enable = true;
 
@@ -27,7 +37,6 @@
         caching.minTime = "5m";
         caching.maxTime = "60m";
 
-        # TODO: make this more modular
         customDNS.mapping =
           let
             deviceRecords = builtins.listToAttrs (
@@ -36,13 +45,15 @@
                 value = d.ip;
               }) config.specialConfig.hosting.devices
             );
+
+            serviceRecords = builtins.listToAttrs (
+              map (r: {
+                name = r.domain;
+                value = r.record;
+              }) config.specialConfig.hosting.serviceDNSRecords
+            );
           in
-          {
-            "poco.bryceh.com" = "192.168.1.11";
-            "forgejo.bryceh.com" = "192.168.1.11";
-            "vaultwarden.bryceh.com" = "192.168.1.11";
-          }
-          // deviceRecords;
+          deviceRecords // serviceRecords;
 
         blocking.denylists = {
           default = [
