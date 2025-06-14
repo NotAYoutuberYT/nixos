@@ -85,7 +85,6 @@ inputs.nixpkgs.lib.extend (
 
           system = super.mkOption {
             type = super.types.str;
-            default = "x86_64-linux";
             description = "the system type";
           };
 

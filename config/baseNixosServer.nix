@@ -10,7 +10,6 @@ let
 in
 {
   imports = [
-    inputs.lix-module.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     inputs.nur.modules.nixos.default
     inputs.sops-nix.nixosModules.sops

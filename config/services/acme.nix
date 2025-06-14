@@ -20,7 +20,6 @@
           # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
           webroot = null;
           extraDomainNames = [
-            "poco.bryceh.com"
             "vaultwarden.bryceh.com"
             "forgejo.bryceh.com"
           ];

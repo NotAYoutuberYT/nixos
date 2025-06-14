@@ -24,7 +24,7 @@ in
         name = d.name;
 
         value = {
-          hostname = d.domain;
+          hostname = d.ip;
 
           profiles.system = {
             user = "root";
@@ -35,7 +35,7 @@ in
               d.sshKey
             ];
 
-            path = inputs.deploy-rs.lib.${d.system or "x86_64-linux"}.activate.nixos (
+            path = inputs.deploy-rs.lib.${d.system}.activate.nixos (
               lib.nixosSystem {
                 specialArgs = { inherit inputs outputs lib; };
 

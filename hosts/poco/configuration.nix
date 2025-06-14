@@ -17,5 +17,7 @@ in
 
     vaultwarden.hostingDevice = device;
     vaultwarden.proxyingDevice = device;
+
+    cloudflare-dyndns.enable = true;
   };
 }

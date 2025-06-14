@@ -51,7 +51,7 @@
     in
     {
       homeManagerModules.default = ./config/baseHomeManager.nix;
-      nixosModules.desktop = ./config/baseDesktopNixos.nix;
+      nixosModules.desktop = ./config/baseNixosDesktop.nix;
       nixosModules.server = ./config/baseNixosServer.nix;
 
       nixosConfigurations = {
