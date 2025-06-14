@@ -9,6 +9,6 @@
         enable = true;
         apiTokenFile = config.sops.secrets.cloudflare-dns-edit-key.path;
         proxied = true;
-        domains = [ "bryceh.com" ];
+        domains = [ config.specialConfig.hosting.baseDomain ];
       };
 }

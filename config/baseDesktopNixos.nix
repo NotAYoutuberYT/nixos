@@ -1,17 +1,16 @@
 {
   inputs,
   outputs,
-  pkgs,
-  customLib,
+  lib,
   config,
   ...
 }:
 
 let
-  nixosModules = customLib.allModules ./nixosModules;
-  homeManagerModules = customLib.allModules ./homeManagerModules;
+  nixosModules = lib.allModules ./nixos;
+  homeManagerModules = lib.allModules ./homeManager;
 
-  sharedModules = customLib.allSharedModules ./sharedModules;
+  sharedModules = lib.allSharedModules ./hybridModules;
   sharedNixosModules = map (sharedModule: sharedModule.nixosModule) sharedModules;
   sharedHomeManagerModules = map (sharedModule: sharedModule.homeManagerModule) sharedModules;
 in
@@ -37,19 +36,11 @@ in
       "flakes"
     ];
 
-    nixpkgs.overlays = [
-      (final: super: {
-        nginxStable = super.nginxStable.override { openssl = super.pkgs.libressl; };
-      })
-    ];
-
     time.timeZone = "America/Denver";
     i18n.defaultLocale = "en_US.UTF-8";
 
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "24.11";
-
-    environment.systemPackages = [ pkgs.corefonts ];
 
     home-manager = {
       useGlobalPkgs = true;
@@ -58,7 +49,8 @@ in
       backupFileExtension = "bak";
 
       extraSpecialArgs = {
-        inherit inputs customLib;
+        inherit inputs;
+        lib = lib.extend (_: _: inputs.home-manager.lib);
         outputs = inputs.self.outputs;
       };
 

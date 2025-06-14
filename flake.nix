@@ -46,36 +46,20 @@
       ...
     }@inputs:
     let
-      customLib = import ./utils/customLib.nix { inherit inputs; };
-      makeSystem = import ./hosts/builder.nix { inherit inputs customLib; };
+      lib = import ./utils/customLib.nix { inherit inputs; };
+      builders = import ./hosts/builders.nix { inherit inputs lib; };
     in
     {
       homeManagerModules.default = ./config/baseHomeManager.nix;
-      nixosModules.default = ./config/baseNixos.nix;
+      nixosModules.desktop = ./config/baseDesktopNixos.nix;
+      nixosModules.server = ./config/baseNixosServer.nix;
 
       nixosConfigurations = {
-        desktop = makeSystem ./hosts/desktop/configuration.nix;
-        envy = makeSystem ./hosts/envy/configuration.nix;
-
-        poco = makeSystem ./hosts/poco/configuration.nix;
+        desktop = builders.desktopSystem ./hosts/desktop/configuration.nix;
+        envy = builders.desktopSystem ./hosts/envy/configuration.nix;
       };
 
-      deploy.nodes = {
-        poco = {
-          hostname = "poco.bryceh.com";
-          profiles.system = {
-            # TODO: just move to root ffs
-            sshUser = "equi";
-            sshOpts = [
-              "-i"
-              "~/.ssh/poco"
-            ];
-
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.poco;
-          };
-        };
-      };
+      deploy.nodes = builders.deployNodes ./hosts/servers.nix;
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     }

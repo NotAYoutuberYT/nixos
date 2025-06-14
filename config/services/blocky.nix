@@ -28,12 +28,21 @@
         caching.maxTime = "60m";
 
         # TODO: make this more modular
-        customDNS.mapping = {
-          "opnsense.bryceh.com" = "192.168.1.1";
-          "poco.bryceh.com" = "192.168.1.11";
-          "forgejo.bryceh.com" = "192.168.1.11";
-          "vaultwarden.bryceh.com" = "192.168.1.11";
-        };
+        customDNS.mapping =
+          let
+            deviceRecords = builtins.listToAttrs (
+              map (d: {
+                name = d.domain;
+                value = d.ip;
+              }) config.specialConfig.hosting.devices
+            );
+          in
+          {
+            "poco.bryceh.com" = "192.168.1.11";
+            "forgejo.bryceh.com" = "192.168.1.11";
+            "vaultwarden.bryceh.com" = "192.168.1.11";
+          }
+          // deviceRecords;
 
         blocking.denylists = {
           default = [

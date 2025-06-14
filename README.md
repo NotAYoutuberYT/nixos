@@ -1,6 +1,6 @@
 # Personal NixOS Configuration
 
-## Initial Setup for Personal Devices
+## Initial Setup for Desktop
 
 Setup *should* be painless. Feel free to install NixOS headless.
 
