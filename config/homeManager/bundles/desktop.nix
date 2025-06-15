@@ -12,7 +12,7 @@
 
     kitty.enable = lib.mkDefault true;
     vscodium.enable = lib.mkDefault true;
-    librewolf.enable = lib.mkDefault true;
+    firefox.enable = lib.mkDefault true;
     yazi.enable = lib.mkDefault true;
     rofi.enable = lib.mkDefault true;
     nixcord.enable = lib.mkDefault true;

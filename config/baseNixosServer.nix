@@ -67,12 +67,6 @@ in
       "flakes"
     ];
 
-    nixpkgs.overlays = [
-      (final: super: {
-        nginxStable = super.nginxStable.override { openssl = super.pkgs.libressl; };
-      })
-    ];
-
     time.timeZone = "America/Denver";
     i18n.defaultLocale = "en_US.UTF-8";
 
