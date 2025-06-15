@@ -12,17 +12,14 @@
 
       certs."bryceh.com" =
         let
-          env = builtins.toFile "cloudflare" ''
+          env = builtins.toFile "acmeEnv" ''
             CLOUDFLARE_DNS_API_TOKEN_FILE=${config.sops.secrets.cloudflare-dns-edit-key.path}
           '';
         in
         {
           # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
           webroot = null;
-          extraDomainNames = [
-            "vaultwarden.bryceh.com"
-            "forgejo.bryceh.com"
-          ];
+          extraDomainNames = [ "*.${config.specialConfig.hosting.baseDomain}" ];
 
           dnsProvider = "cloudflare";
           dnsPropagationCheck = true;

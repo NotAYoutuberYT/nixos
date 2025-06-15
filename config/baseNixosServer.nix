@@ -2,6 +2,7 @@
   inputs,
   lib,
   config,
+  modulesPath,
   ...
 }:
 
@@ -13,6 +14,7 @@ in
     inputs.nur.modules.nixos.default
     inputs.sops-nix.nixosModules.sops
     inputs.disko.nixosModules.disko
+    "${modulesPath}/profiles/hardened.nix"
     ./sops.nix
   ] ++ serviceModules;
 
@@ -74,21 +76,8 @@ in
     time.timeZone = "America/Denver";
     i18n.defaultLocale = "en_US.UTF-8";
 
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfree = false;
     system.stateVersion = "24.11";
-
-    services.openssh = {
-      enable = true;
-
-      settings = {
-        PermitRootLogin = "prohibit-password";
-        PasswordAuthentication = false;
-      };
-    };
-
-    users.users.root.openssh.authorizedKeys.keys = [
-      config.specialConfig.hosting.device.sshPublicKey
-    ];
 
     boot.loader.grub = {
       enable = true;
@@ -98,5 +87,33 @@ in
 
     system.name = config.specialConfig.hosting.device.name;
     networking.hostName = config.specialConfig.hosting.device.name;
+
+    networking.firewall.enable = true;
+
+    services.openssh = {
+      enable = true;
+      allowSFTP = false;
+
+      extraConfig = ''
+        AllowAgentForwarding no
+        AllowStreamLocalForwarding no
+      '';
+
+      settings = {
+        PermitRootLogin = "prohibit-password";
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        X11Forwarding = false;
+      };
+    };
+
+    users.users.root.openssh.authorizedKeys.keys = [
+      config.specialConfig.hosting.device.sshPublicKey
+    ];
+
+    users.mutableUsers = false;
+    nix.settings.allowed-users = [ "root" ];
+    security.sudo.enable = false;
+    environment.defaultPackages = lib.mkForce [ ];
   };
 }

@@ -42,6 +42,8 @@ in
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "24.11";
 
+    networking.firewall.enable = true;
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
