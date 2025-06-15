@@ -88,6 +88,13 @@ in
     system.name = config.specialConfig.hosting.device.name;
     networking.hostName = config.specialConfig.hosting.device.name;
 
+    nix.gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 1d";
+      persistent = true;
+    };
+
     networking.firewall.enable = true;
 
     services.openssh = {
