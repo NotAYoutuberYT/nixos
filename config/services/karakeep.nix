@@ -1,14 +1,19 @@
-{ lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 let
-  cfg = config.specialConfig.services.forgejo;
+  cfg = config.specialConfig.services.karakeep;
   currentDevice = config.specialConfig.hosting.device;
 
   isHosting = currentDevice == cfg.hostingDevice;
   isProxying = (currentDevice == cfg.proxyingDevice) && !(builtins.isNull cfg.hostingDevice);
 in
 {
-  options.specialConfig.services.forgejo = {
+  options.specialConfig.services.karakeep = {
     hostingDevice = lib.mkOption {
       type = lib.types.nullOr lib.types.server;
       default = null;
@@ -23,39 +28,40 @@ in
 
     domain = lib.mkOption {
       type = lib.types.str;
-      default = "forgejo.${config.specialConfig.hosting.baseDomain}";
+      default = "karakeep.${config.specialConfig.hosting.baseDomain}";
       description = "the domain of the service";
       example = "service.example.xyz";
     };
 
     port = lib.mkOption {
       type = lib.types.port;
-      default = 3000;
+      default = 3002;
       description = "the port the service should bind to";
+    };
+
+    browserPort = lib.mkOption {
+      type = lib.types.port;
+      default = 4002;
+      description = "the port the browser service should bind to";
     };
   };
 
   config = {
-    services.forgejo = lib.mkIf isHosting {
+    services.karakeep = lib.mkIf isHosting {
       enable = true;
-      stateDir = "/var/lib/forgejo";
-      database.type = "postgres";
-      dump.enable = true;
+      meilisearch.enable = true;
 
-      settings = {
-        server.DOMAIN = cfg.domain;
-        server.ROOT_URL = "https://${cfg.domain}";
-        server.HTTP_PORT = cfg.port;
-        server.DISABLE_SSH = true;
+      browser.enable = true;
+      browser.exe = lib.getExe pkgs.ungoogled-chromium;
+      browser.port = cfg.browserPort;
 
-        service.DISABLE_REGISTRATION = true;
+      environmentFile = config.sops.secrets.karakeep-secret.path;
+      extraEnvironment = {
+        NEXTAUTH_URL = cfg.domain;
+        PORT = toString cfg.port;
 
-        session.COOKIE_SECURE = true;
-
-        other.SHOW_FOOTER_VERSION = false;
-
-        DEFAULT.APP_NAME = "Forgejo";
-        DEFAULT.APP_SLOGAN = "A self-hosted instance";
+        DISABLE_SIGNUPS = "true";
+        DISABLE_NEW_RELEASE_CHECK = "true";
       };
     };
 
@@ -76,9 +82,6 @@ in
         enableACME = true;
         acmeRoot = null;
         forceSSL = true;
-        extraConfig = ''
-          client_max_body_size 512M;
-        '';
 
         locations."/".proxyPass = "http://${
           if isHosting then "127.0.0.1" else cfg.hostingDevice.ip

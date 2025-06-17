@@ -11,8 +11,11 @@ in
     vaultwarden.hostingDevice = getDevice "poco";
     vaultwarden.proxyingDevice = getDevice "poco";
 
+    karakeep.hostingDevice = getDevice "poco";
+    karakeep.proxyingDevice = getDevice "poco";
+
     blocky.hostingDevices = [ (getDevice "poco") ];
 
-    cloudflare-dyndns.hostingDevices = [ (getDevice "poco") ];
+    # cloudflare-dyndns.hostingDevices = [ (getDevice "poco") ];
   };
 }

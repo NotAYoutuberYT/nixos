@@ -30,7 +30,7 @@ in
 
     port = lib.mkOption {
       type = lib.types.port;
-      default = 8122;
+      default = 3001;
       description = "the port the service should bind to";
     };
   };
@@ -69,14 +69,17 @@ in
       recommendedTlsSettings = true;
 
       virtualHosts."${cfg.domain}" = {
-        forceSSL = true;
         enableACME = true;
+        acmeRoot = null;
+        forceSSL = true;
 
         locations."/".proxyPass = "http://${
           if isHosting then "127.0.0.1" else cfg.hostingDevice.ip
         }:${toString cfg.port}";
       };
     };
+
+    specialConfig.services.acme.domains = [ cfg.domain ];
 
     specialConfig.hosting.serviceDNSRecords = lib.optional (!builtins.isNull cfg.proxyingDevice) {
       domain = cfg.domain;

@@ -148,6 +148,10 @@
                   url = "https://forgejo.bryceh.com";
                 }
                 {
+                  name = "Karakeep";
+                  url = "https://karakeep.bryceh.com";
+                }
+                {
                   name = "Vaultwarden";
                   url = "https://vaultwarden.bryceh.com";
                 }

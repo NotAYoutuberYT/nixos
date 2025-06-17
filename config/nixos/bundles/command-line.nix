@@ -12,7 +12,6 @@
     specialConfig.sops.enablePackage = lib.mkDefault true;
 
     environment.systemPackages = [
-      pkgs.deploy-rs
       pkgs.corefonts
     ];
   };
