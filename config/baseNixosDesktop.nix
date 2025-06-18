@@ -26,6 +26,7 @@ in
       ./stylix.nix
       ./sops.nix
       ./users.nix
+      ./desktopHardware.nix
     ]
     ++ nixosModules
     ++ sharedNixosModules;

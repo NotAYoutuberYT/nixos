@@ -8,6 +8,7 @@
 
 let
   cfg = config.specialConfig.hyprland;
+  hardware = osConfig.specialConfig.desktopHardware;
 
   startupScript = pkgs.pkgs.writeShellScriptBin "startup" ''
     ${pkgs.waybar}/bin/waybar & ${lib.getExe pkgs.wbg} ${config.stylix.image}
@@ -15,12 +16,6 @@ let
 in
 {
   options.specialConfig.hyprland = {
-    monitors = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ", preferred, auto, 1" ];
-      description = "monitors for hyprland";
-    };
-
     workspaces = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
@@ -57,9 +52,17 @@ in
         "$menu" = "${lib.getExe pkgs.rofi} -show drun -show-icons";
         "$lock" = "${lib.getExe pkgs.hyprlock}";
 
-        monitor = cfg.monitors;
         workspace = cfg.workspaces;
         exec-once = [ "${lib.getExe startupScript}" ];
+
+        monitor =
+          [ ", preferred, auto, 1" ]
+          ++ map (
+            m:
+            "${m.name}, ${toString m.resolution.x}x${toString m.resolution.y}@${toString m.refreshRate}, ${
+              if isNull m.position then "auto" else "${toString m.position.x}x${toString m.position.y}"
+            }, ${if isNull m.scale then "auto" else toString m.scale}"
+          ) hardware.monitors;
 
         cursor = {
           use_cpu_buffer = cfg.hw-cursor-cpu-buffer;
