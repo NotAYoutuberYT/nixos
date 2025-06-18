@@ -57,7 +57,7 @@ in
 
       environmentFile = config.sops.secrets.karakeep-secret.path;
       extraEnvironment = {
-        NEXTAUTH_URL = cfg.domain;
+        NEXTAUTH_URL = "https://${cfg.domain}";
         PORT = toString cfg.port;
 
         DISABLE_SIGNUPS = "true";
