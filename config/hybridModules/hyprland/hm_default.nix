@@ -49,7 +49,7 @@ in
       settings = {
         "$terminal" = "${lib.getExe pkgs.kitty}";
         "$fileManager" = "${lib.getExe pkgs.kitty} ${lib.getExe pkgs.yazi}";
-        "$menu" = "${lib.getExe pkgs.rofi} -show drun -show-icons";
+        "$menu" = "${lib.getExe pkgs.rofi-wayland} -show drun -show-icons";
         "$lock" = "${lib.getExe pkgs.hyprlock}";
 
         workspace = cfg.workspaces;
@@ -75,8 +75,8 @@ in
         };
 
         general = {
-          gaps_in = "2";
-          gaps_out = "4";
+          gaps_in = "4";
+          gaps_out = "8";
 
           border_size = "2";
 
