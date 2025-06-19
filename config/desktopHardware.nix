@@ -11,6 +11,12 @@
               example = "DP-1";
             };
 
+            primary = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = "if this is the primary monitor";
+            };
+
             resolution = lib.mkOption {
               type = lib.types.submodule {
                 options = {
@@ -28,7 +34,7 @@
             };
 
             refreshRate = lib.mkOption {
-              type = lib.types.ints.unsigned;
+              type = lib.types.float;
               example = 60;
             };
 
@@ -48,6 +54,7 @@
                   };
                 }
               );
+
               default = null;
               description = "the position of the top-left corner of the monitor. +x is to the right, +y is down. a value of null will let the compositor decide automatically.";
             };
@@ -61,5 +68,7 @@
         }
       );
     };
+
+    default = [ ];
   };
 }
