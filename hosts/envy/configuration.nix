@@ -14,8 +14,6 @@
     stylix.enable = true;
 
     steam.enable = true;
-
-    extraCaches = true;
   };
 
   boot.loader.systemd-boot.enable = true;

@@ -4,7 +4,7 @@
 
 Setup *should* be painless. Feel free to install NixOS headless.
 
-1. Clone this repository (`nix run --extra-experimental-features 'nix-command flakes' nixpkgs#git -- clone https://github.com/NotAYoutuberYT/nixos`)
+1. Clone this repository (`nix run --extra-experimental-features 'nix-command flakes' nixpkgs#git -- clone https://forgejo.bryceh.com/bryce/nixos`)
 1. Create a new host as needed (copy a pre-existing host, move hardware-configuration into new host, edit configuration.nix and home.nix, etc.)
 1. Rebuild and reboot (`sudo nixos-rebuild boot --flake /path/to/flake#hostname`)
 1. Sync secrets, logins, and such (sops-nix key is a good starting point; also consider ssh keys and git authentication)
@@ -21,11 +21,13 @@ simply setup SSH into root on an existing device
 
 ## TODO
 
-- add more stuff and change things around (I have an external list for this)
-- get a better solution for defining networks and desktop options
+- fix the janky server setup with hardcoded ips and domains and stuff (this involves going through all the todos and fixmes!)
+- give everything a sanity check 
+- setup more services and harden everything (I have a personal list of things for this)
 - improve modularity
     - make things such as notification daemons, terminals, editors, compositors, and shells a bit more modular
-    - it should be trivial to swap between sway/hyprland/niri/dwm, alacritty/kitty/wezterm, rofi/dmenu, etc.
-- get a proper widget system (make sure it can be swapped in/out for external solutions)
+    - it should be trivial to swap between sway/hyprland/niri, alacritty/kitty/wezterm, rofi/dmenu, etc.
+    - this probably involves making one or more "options" modules which just defines global options (i.e. default terminal or file manager)
+- get a proper widget system (ewww or astal, depends on how much I care about performance and avoiding gtk when I get around to this)
 - allow for multiple users and generaly handle users better (remember to allow stylix overrides!)
 - provide type information for all custom options

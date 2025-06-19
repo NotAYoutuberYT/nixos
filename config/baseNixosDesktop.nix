@@ -19,7 +19,6 @@ in
     [
       inputs.lix-module.nixosModules.default
       inputs.home-manager.nixosModules.home-manager
-      inputs.niri.nixosModules.niri
       inputs.nur.modules.nixos.default
       inputs.sops-nix.nixosModules.sops
       inputs.stylix.nixosModules.stylix
@@ -32,17 +31,11 @@ in
     ++ nixosModules
     ++ sharedNixosModules;
 
-  options.specialConfig = {
-    extraCaches = lib.mkEnableOption "third-party caches";
-  };
-
   config = {
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
     ];
-
-    nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
     time.timeZone = "America/Denver";
     i18n.defaultLocale = "en_US.UTF-8";
