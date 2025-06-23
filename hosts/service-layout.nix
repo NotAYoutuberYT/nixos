@@ -14,6 +14,9 @@ in
     karakeep.hostingDevice = getDevice "poco";
     karakeep.proxyingDevice = getDevice "poco";
 
+    vikunja.hostingDevice = getDevice "poco";
+    vikunja.proxyingDevice = getDevice "poco";
+
     blocky.hostingDevices = [ (getDevice "poco") ];
 
     # cloudflare-dyndns.hostingDevices = [ (getDevice "poco") ];

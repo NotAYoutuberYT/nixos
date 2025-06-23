@@ -8,12 +8,18 @@
 
     sops = {
       defaultSopsFile = ../secrets/primary.yaml;
+      defaultSopsFormat = "yaml";
       age.keyFile = "/var/lib/sops-nix/key.txt";
 
       secrets.hashed-password.neededForUsers = true;
-      secrets.cloudflare-dns-edit-key.mode = "0444"; # TODO: remove this when I setup poco root login
-      secrets.vaultwarden-admin-token = { };
-      secrets.karakeep-secret = { };
+      secrets.vaultwarden-admin-token.sopsFile = ../secrets/services/vaultwarden.yaml;
+      secrets.karakeep-secret.sopsFile = ../secrets/services/karakeep.yaml;
+      secrets.vikunja-jwt-secret.sopsFile = ../secrets/services/vikunja.yaml;
+
+      secrets.cloudflare-dns-edit-key = {
+        mode = "0444"; # TODO: fix this!!
+        sopsFile = ../secrets/api_keys.yaml;
+      };
     };
   };
 }
