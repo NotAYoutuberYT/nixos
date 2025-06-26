@@ -16,7 +16,8 @@
 
     desktopHardware.monitors = [
       {
-        name = "DP-5";
+        name = "Sony SDMU27M90*30 9519291";
+        primary = true;
         resolution.x = 3840;
         resolution.y = 2160;
         refreshRate = 144;
@@ -25,7 +26,8 @@
         scale = 1;
       }
       {
-        name = "DP-3";
+        name = "GIGA-BYTE TECHNOLOGY CO. LTD. M27Q 21010B002718";
+        primary = false;
         resolution.x = 2560;
         resolution.y = 1440;
         refreshRate = 170;

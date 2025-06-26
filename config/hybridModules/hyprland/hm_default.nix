@@ -16,12 +16,6 @@ let
 in
 {
   options.specialConfig.hyprland = {
-    workspaces = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      description = "hyprland workspaces";
-    };
-
     sensitivity = lib.mkOption {
       type = lib.types.str;
       default = "0.0";
@@ -52,17 +46,25 @@ in
         "$menu" = "${lib.getExe pkgs.rofi-wayland} -show drun -show-icons";
         "$lock" = "${lib.getExe pkgs.hyprlock}";
 
-        workspace = cfg.workspaces;
         exec-once = [ "${lib.getExe startupScript}" ];
 
         monitor =
           [ ", preferred, auto, 1" ]
           ++ map (
             m:
-            "${m.name}, ${toString m.resolution.x}x${toString m.resolution.y}@${toString m.refreshRate}, ${
+            "${
+              if isNull m.name then m.input else "desc:${m.name}"
+            }, ${toString m.resolution.x}x${toString m.resolution.y}@${toString m.refreshRate}, ${
               if isNull m.position then "auto" else "${toString m.position.x}x${toString m.position.y}"
             }, ${if isNull m.scale then "auto" else toString m.scale}"
           ) hardware.monitors;
+
+        workspace = lib.optional (!isNull hardware.primaryMonitor) "1, monitor:${
+          if isNull hardware.primaryMonitor.name then
+            hardware.primaryMonitor.input
+          else
+            "desc:${hardware.primaryMonitor.name}"
+        }";
 
         cursor = {
           use_cpu_buffer = cfg.hw-cursor-cpu-buffer;
