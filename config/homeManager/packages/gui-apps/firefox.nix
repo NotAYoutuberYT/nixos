@@ -155,6 +155,10 @@
                   name = "Vaultwarden";
                   url = "https://vaultwarden.bryceh.com";
                 }
+                {
+                  name = "Vikunja";
+                  url = "https://vikunja.bryceh.com";
+                }
               ];
             }
           ];

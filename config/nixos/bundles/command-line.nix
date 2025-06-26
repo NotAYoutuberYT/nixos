@@ -13,6 +13,7 @@
 
     environment.systemPackages = [
       pkgs.corefonts
+      pkgs.deploy-rs
     ];
   };
 }

@@ -6,8 +6,7 @@
     hyprland.hw-cursor-cpu-buffer = true;
 
     hyprland.workspaces = [
-      "1, monitor:DP-3"
-      "2, monitor:DP-1"
+      "1, monitor:DP-5"
     ];
 
     bundles = {

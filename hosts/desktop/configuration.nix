@@ -16,7 +16,7 @@
 
     desktopHardware.monitors = [
       {
-        name = "DP-3";
+        name = "DP-5";
         resolution.x = 3840;
         resolution.y = 2160;
         refreshRate = 144;
@@ -25,7 +25,7 @@
         scale = 1;
       }
       {
-        name = "DP-1";
+        name = "DP-3";
         resolution.x = 2560;
         resolution.y = 1440;
         refreshRate = 170;
