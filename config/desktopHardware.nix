@@ -80,7 +80,7 @@ in
     };
 
     primaryMonitor = lib.mkOption {
-      type = monitor;
+      type = lib.types.nullOr monitor;
       default = lib.findFirst (m: m.primary) null cfg.monitors;
       description = "the primary monitor";
     };
