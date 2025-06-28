@@ -24,6 +24,7 @@
           open-vsx.james-yu.latex-workshop
           open-vsx.bradlc.vscode-tailwindcss
           open-vsx.myriad-dreamin.tinymist
+          open-vsx.gleam.gleam
           vscode-marketplace.dioxuslabs.dioxus
         ];
 
