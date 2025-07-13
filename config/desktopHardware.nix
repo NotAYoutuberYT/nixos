@@ -10,7 +10,7 @@ let
         default = null;
         example = "Monitor Company LDHDTYGN";
       };
-      
+
       input = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = null;

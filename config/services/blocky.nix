@@ -55,24 +55,24 @@ in
           in
           deviceRecords // serviceRecords;
 
-        blocking.denylists = {
-          default = [
-            "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/pro.txt"
-            "https://big.oisd.nl/domainswild"
-            "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
-            "https://v.firebog.net/hosts/AdguardDNS.txt"
-            "https://v.firebog.net/hosts/Admiral.txt"
-            "https://v.firebog.net/hosts/Easylist.txt"
-            "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/popupads.txt"
-            "https://adaway.org/hosts.txt"
-            "https://v.firebog.net/hosts/Easyprivacy.txt"
-            "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/native.huawei.txt"
-            "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/native.roku.txt"
-            "https://v.firebog.net/hosts/RPiList-Malware.txt"
-            "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/tif.txt"
-            "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/fake.txt"
-          ];
-        };
+        blocking.denylists.full = [
+          "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/pro.txt"
+          "https://big.oisd.nl/domainswild"
+          "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+          "https://v.firebog.net/hosts/AdguardDNS.txt"
+          "https://v.firebog.net/hosts/Admiral.txt"
+          "https://v.firebog.net/hosts/Easylist.txt"
+          "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/popupads.txt"
+          "https://adaway.org/hosts.txt"
+          "https://v.firebog.net/hosts/Easyprivacy.txt"
+          "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/native.huawei.txt"
+          "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/native.roku.txt"
+          "https://v.firebog.net/hosts/RPiList-Malware.txt"
+          "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/tif.txt"
+          "https://codeberg.org/hagezi/mirror2/raw/branch/main/dns-blocklists/wildcard/fake.txt"
+        ];
+
+        blocking.clientGroupsBlock.default = [ "full" ];
       };
     };
 

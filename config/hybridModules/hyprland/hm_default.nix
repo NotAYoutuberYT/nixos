@@ -59,12 +59,14 @@ in
             }, ${if isNull m.scale then "auto" else toString m.scale}"
           ) hardware.monitors;
 
-        workspace = lib.optional (!isNull hardware.primaryMonitor) "1, monitor:${
-          if isNull hardware.primaryMonitor.name then
-            hardware.primaryMonitor.input
-          else
-            "desc:${hardware.primaryMonitor.name}"
-        }";
+        workspace =
+          lib.optional (!isNull hardware.primaryMonitor)
+            "1, monitor:${
+              if isNull hardware.primaryMonitor.name then
+                hardware.primaryMonitor.input
+              else
+                "desc:${hardware.primaryMonitor.name}"
+            }";
 
         cursor = {
           use_cpu_buffer = cfg.hw-cursor-cpu-buffer;
