@@ -11,5 +11,7 @@
     specialConfig.hyprland.enable = lib.mkDefault true;
     specialConfig.ly.enable = lib.mkDefault true;
     specialConfig.thunar.enable = lib.mkDefault true;
+
+    programs.noisetorch.enable = lib.mkDefault true;
   };
 }
