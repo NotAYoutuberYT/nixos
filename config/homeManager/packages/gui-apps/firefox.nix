@@ -143,22 +143,6 @@
                   name = "Github";
                   url = "https://github.com";
                 }
-                {
-                  name = "Forgejo";
-                  url = "https://forgejo.bryceh.com";
-                }
-                {
-                  name = "Karakeep";
-                  url = "https://karakeep.bryceh.com";
-                }
-                {
-                  name = "Vaultwarden";
-                  url = "https://vaultwarden.bryceh.com";
-                }
-                {
-                  name = "Vikunja";
-                  url = "https://vikunja.bryceh.com";
-                }
               ];
             }
           ];
