@@ -22,7 +22,6 @@ in
       inputs.nur.modules.nixos.default
       inputs.sops-nix.nixosModules.sops
       inputs.stylix.nixosModules.stylix
-      inputs.disko.nixosModules.disko
       ./stylix.nix
       ./sops.nix
       ./users.nix

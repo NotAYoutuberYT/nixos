@@ -50,56 +50,5 @@ inputs.nixpkgs.lib.extend (
             if (type == "directory") then allSharedModules (fullPath file) else (import (fullPath file))
           ) contents
         );
-
-    # ========================= Custom Types ========================== #
-
-    types = super.recursiveUpdate super.types {
-      server = super.types.submodule {
-        options = {
-          name = super.mkOption {
-            type = super.types.str;
-            description = "the name of the device";
-          };
-
-          ip = super.mkOption {
-            type = super.types.str;
-            description = "the ip of the device";
-            example = "192.168.1.130";
-          };
-
-          domain = super.mkOption {
-            type = super.types.str;
-            description = "the domain the device should be accessible at";
-            example = "server.example.xyz";
-          };
-
-          sshPublicKey = super.mkOption {
-            type = super.types.str;
-            description = "the public ssh key to be used for the device";
-          };
-
-          sshKey = super.mkOption {
-            type = super.types.str;
-            description = "the location of the private key to be used for the device";
-            example = "~/.ssh/server1";
-          };
-
-          system = super.mkOption {
-            type = super.types.str;
-            description = "the system type";
-          };
-
-          imports = super.mkOption {
-            type = super.types.listOf super.types.path;
-            description = "the module's imports";
-          };
-        };
-      };
-    };
-
-    # ======================== Device Helpers ========================= #
-
-    devices.getDevice =
-      devices: name: super.findFirst (d: d.name == name) (throw "device ${name} does not exist") devices;
   }
 )

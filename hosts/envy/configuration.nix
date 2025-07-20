@@ -19,6 +19,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  powerManagement.powertop.enable = true;
+
   system.name = "envy";
   networking.hostName = "envy";
 }
