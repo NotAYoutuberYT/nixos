@@ -50,7 +50,7 @@ in
     };
 
     base-wallpaper = lib.mkOption {
-      default = ./../wallpapers/nasa.png;
+      default = ./../wallpapers/onedark-black-hole.png;
     };
 
     tint-wallpaper = lib.mkEnableOption "wallpaper tinting" // {
