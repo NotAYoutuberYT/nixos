@@ -15,5 +15,8 @@
       pkgs.corefonts
       pkgs.deploy-rs
     ];
+
+    services.tailscale.enable = true;
+    services.tailscale.useRoutingFeatures = "both";
   };
 }
