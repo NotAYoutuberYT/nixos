@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  pkgs,
   lib,
   config,
   ...
@@ -23,12 +24,24 @@ in
       inputs.sops-nix.nixosModules.sops
       inputs.stylix.nixosModules.stylix
       ./stylix.nix
-      ./sops.nix
       ./users.nix
       ./desktopHardware.nix
     ]
     ++ nixosModules
     ++ sharedNixosModules;
+
+  options = {
+    users.users = lib.mkOption {
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options.homeManagerImports = lib.mkOption {
+            # TODO: use a good type
+            default = [ ];
+          };
+        }
+      );
+    };
+  };
 
   config = {
     nix.settings.experimental-features = [
@@ -44,6 +57,14 @@ in
 
     networking.firewall.enable = true;
 
+    environment.systemPackages = [ pkgs.sops ];
+    secrets.hashed-password.neededForUsers = true; # TODO: move this into the device configuration (where the user is configured)
+    sops = {
+      defaultSopsFile = ../secrets/primary.yaml;
+      defaultSopsFormat = "yaml";
+      age.keyFile = "/var/lib/sops-nix/key.txt";
+    };
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
@@ -56,6 +77,7 @@ in
         outputs = inputs.self.outputs;
       };
 
+      # TODO: build this from users.users.<name>.homeManagerImports
       users.${config.specialConfig.username}.imports =
         [
           config.specialConfig.hostHomeConfigModule
