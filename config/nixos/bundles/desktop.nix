@@ -13,5 +13,6 @@
     specialConfig.thunar.enable = lib.mkDefault true;
 
     programs.noisetorch.enable = lib.mkDefault true;
+    hardware.keyboard.zsa.enable = true;
   };
 }
