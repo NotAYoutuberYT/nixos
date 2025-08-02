@@ -10,6 +10,7 @@
 
   config = lib.mkIf config.specialConfig.bundles.command-line.enable {
     specialConfig.sops.enablePackage = lib.mkDefault true;
+    specialConfig.nebula.enable = lib.mkDefault true;
 
     environment.systemPackages = [
       pkgs.corefonts
