@@ -21,7 +21,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ pkgs.nebula ];
 
-    services.nebula.networks.primaryMesh = {
+    services.nebula.networks.mesh = {
       enable = true;
 
       ca = "/etc/nebula/ca.crt";
