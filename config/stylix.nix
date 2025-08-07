@@ -46,11 +46,11 @@ in
     # realistically, these options should never change, but this
     # is the most logical spot to put these things
     theme = lib.mkOption {
-      default = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
+      default = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
     };
 
     base-wallpaper = lib.mkOption {
-      default = ./../wallpapers/nixos.png;
+      default = ./../wallpapers/nasa.png;
     };
 
     tint-wallpaper = lib.mkEnableOption "wallpaper tinting" // {
